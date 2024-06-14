@@ -15,6 +15,7 @@
 		B62941C92C1B4040003AA4FA /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62941C82C1B4040003AA4FA /* Event.swift */; };
 		B62941CC2C1C5609003AA4FA /* VehicleRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62941CB2C1C5609003AA4FA /* VehicleRowView.swift */; };
 		B62941CE2C1C624A003AA4FA /* CreateVehicleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62941CD2C1C624A003AA4FA /* CreateVehicleView.swift */; };
+		B62941D02C1C8A10003AA4FA /* EditVehicleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62941CF2C1C8A10003AA4FA /* EditVehicleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		B62941C82C1B4040003AA4FA /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		B62941CB2C1C5609003AA4FA /* VehicleRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleRowView.swift; sourceTree = "<group>"; };
 		B62941CD2C1C624A003AA4FA /* CreateVehicleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateVehicleView.swift; sourceTree = "<group>"; };
+		B62941CF2C1C8A10003AA4FA /* EditVehicleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditVehicleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 				B62941B42C1B354B003AA4FA /* VehiclesListView.swift */,
 				B62941CB2C1C5609003AA4FA /* VehicleRowView.swift */,
 				B62941CD2C1C624A003AA4FA /* CreateVehicleView.swift */,
+				B62941CF2C1C8A10003AA4FA /* EditVehicleView.swift */,
 			);
 			path = vehicle;
 			sourceTree = "<group>";
@@ -206,6 +209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B62941C92C1B4040003AA4FA /* Event.swift in Sources */,
+				B62941D02C1C8A10003AA4FA /* EditVehicleView.swift in Sources */,
 				B62941CC2C1C5609003AA4FA /* VehicleRowView.swift in Sources */,
 				B62941C72C1B3F68003AA4FA /* Vehicle.swift in Sources */,
 				B62941B52C1B354B003AA4FA /* VehiclesListView.swift in Sources */,

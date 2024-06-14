@@ -19,7 +19,7 @@ struct CreateVehicleView: View {
     @State private var millage: Double? = nil
 
     var body: some View {
-        VStack {
+        NavigationStack {
             Form {
                 TextField("Brand", text: $brand)
                 TextField("Model", text: $model)
@@ -28,6 +28,9 @@ struct CreateVehicleView: View {
                     .keyboardType(.numberPad)
             }
             .keyboardType(.asciiCapable)
+            .navigationTitle("Create Vehicle")
+            .navigationBarTitleDisplayMode(.inline)
+
             Button("Create") {
                 createVehicle()
             }
@@ -62,12 +65,8 @@ struct CreateVehicleView: View {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: Vehicle.self, migrationPlan: .none, configurations: config)
 
-        return NavigationStack {
-            CreateVehicleView()
-                .navigationTitle("Create Vehicle")
-                .navigationBarTitleDisplayMode(.inline)
-        }
-        .modelContainer(container)
+        return CreateVehicleView()
+                .modelContainer(container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
     }

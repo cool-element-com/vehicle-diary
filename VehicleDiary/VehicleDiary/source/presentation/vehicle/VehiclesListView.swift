@@ -13,7 +13,7 @@ struct VehiclesListView: View {
     @Query(sort: \Vehicle.brand) var vehicles: [Vehicle]
     @State private var isShowingCreateVehicle = false
     @State private var isShowingDeleteAlert = false
-    @State private var vehicleToDelete: Vehicle?
+    @State private var targetVehicle: Vehicle?
 
     var body: some View {
         NavigationStack() {
@@ -24,7 +24,7 @@ struct VehiclesListView: View {
                     }
                     .swipeActions(edge: .leading, allowsFullSwipe: true) {
                         Button {
-                            /// go to edit vehicle
+                            targetVehicle = vehicle
                         } label: {
                             Label("Edit Vehicle", systemImage: "square.and.pencil")
                         }
@@ -32,7 +32,7 @@ struct VehiclesListView: View {
                     }
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                         Button {
-                            vehicleToDelete = vehicle
+                            targetVehicle = vehicle
                             isShowingDeleteAlert = true
                         } label: {
                             Label("Delete Vehicle", systemImage: "trash")
@@ -66,7 +66,7 @@ struct VehiclesListView: View {
             .alert("Delete Vehicle", isPresented: $isShowingDeleteAlert) {
                 Button("Cancel", role: .cancel, action: {})
                 Button("Delete", role: .destructive, action: {
-                    deleteVehicle(vehicleToDelete)
+                    deleteVehicle(targetVehicle)
                 })
             } message: {
                 Text("All events associated with that vehicle will be deleted. Are you sure?")
