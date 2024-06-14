@@ -11,17 +11,90 @@ import SwiftData
 struct VehiclesListView: View {
     @Environment(\.modelContext) var modelContext
     @Query(sort: \Vehicle.brand) var vehicles: [Vehicle]
-    @State private var path = [Vehicle]()
+    @State private var isShowingCreateVehicle = false
+    @State private var isShowingDeleteAlert = false
+    @State private var vehicleToDelete: Vehicle?
 
     var body: some View {
-        NavigationStack(path: $path) {
+        NavigationStack() {
             List {
                 ForEach(vehicles) { vehicle in
-                    VehicleRowView(vehicle: vehicle)
+                    NavigationLink(value: vehicle) {
+                        VehicleRowView(vehicle: vehicle)
+                    }
+                    .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                        Button {
+                            /// go to edit vehicle
+                        } label: {
+                            Label("Edit Vehicle", systemImage: "square.and.pencil")
+                        }
+                        .tint(.green)
+                    }
+                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                        Button {
+                            vehicleToDelete = vehicle
+                            isShowingDeleteAlert = true
+                        } label: {
+                            Label("Delete Vehicle", systemImage: "trash")
+                        }
+                        .tint(.red)
+                    }
                 }
+            }
+            .navigationDestination(for: Vehicle.self) { vehicle in
+                /// go to events of the vehicle
+            }
+            .listStyle(.plain)
+            .navigationTitle("Vehicles")
+            .toolbar {
+                Button("Create Vehicle", systemImage: "plus") {
+                    isShowingCreateVehicle.toggle()
+                }
+            }
+            #if DEBUG
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Create Sample Data") {
+                        createSampleData()
+                    }
+                }
+            }
+            #endif
+            .sheet(isPresented: $isShowingCreateVehicle) {
+                CreateVehicleView()
+            }
+            .alert("Delete Vehicle", isPresented: $isShowingDeleteAlert) {
+                Button("Cancel", role: .cancel, action: {})
+                Button("Delete", role: .destructive, action: {
+                    deleteVehicle(vehicleToDelete)
+                })
+            } message: {
+                Text("All events associated with that vehicle will be deleted. Are you sure?")
             }
         }
     }
+
+    private func deleteVehicle(_ vehicle: Vehicle?) {
+        guard let vehicle else {
+            return
+        }
+        modelContext.delete(vehicle)
+    }
+
+    #if DEBUG
+    private func createSampleData() {
+        for number in 0..<20 {
+            let vehicle = Vehicle(
+                brand: "Subaru",
+                model: "Outback",
+                comment: number.isMultiple(of: 2) ? "Comment \(number)" : nil ,
+                millage: 14503 + 1234 * Double(number),
+                id: UUID().uuidString
+            )
+            modelContext.insert(vehicle)
+        }
+    }
+    #endif
 }
 
 #Preview {

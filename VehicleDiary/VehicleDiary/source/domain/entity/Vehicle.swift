@@ -35,6 +35,7 @@ class Vehicle {
     }
 }
 
+// MARK: - Property utils
 extension Vehicle {
     var unwrappedEvents: [Event] {
         events ?? []
