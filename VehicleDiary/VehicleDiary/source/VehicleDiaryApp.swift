@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct VehicleDiaryApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            VehiclesListView()
+                .modelContainer(for: Vehicle.self)
         }
     }
 }

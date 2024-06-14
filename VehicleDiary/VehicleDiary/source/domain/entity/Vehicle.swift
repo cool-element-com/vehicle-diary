@@ -10,23 +10,41 @@ import SwiftData
 
 @Model
 class Vehicle {
-    var name: String = "Unknown Vehicle"
-    var millage: Int = 0
-    var id: UUID = UUID()
+    var brand: String = "Unknown brand"
+    var model: String = "Unknown model"
+    var comment: String?
+    var millage: Double = 0
+    var id: String = UUID().uuidString
 
     @Relationship(deleteRule: .cascade) var events: [Event]? = [Event]()
 
+    init(
+        brand: String,
+        model: String,
+        comment: String? = nil,
+        millage: Double,
+        id: String,
+        events: [Event]? = nil
+    ) {
+        self.brand = brand
+        self.model = model
+        self.comment = comment
+        self.millage = millage
+        self.id = id
+        self.events = events
+    }
+}
+
+extension Vehicle {
     var unwrappedEvents: [Event] {
         events ?? []
     }
 
-    init(
-        name: String,
-        millage: Int,
-        id: UUID
-    ) {
-        self.name = name
-        self.millage = millage
-        self.id = id
+    var unwrappedComment: String {
+        comment ?? ""
+    }
+
+    var millageMeasurement: Measurement<UnitLength> {
+        Measurement(value: millage, unit: UnitLength.kilometers)
     }
 }

@@ -14,8 +14,8 @@ class Event {
     var comment: String = "Unknown description"
     var date: Date = Date.now
     var nextDate: Date = Date.now
-    var millage: Int = 0
-    var nextMillage: Int = 0
+    var millage: Double = 0
+    var nextMillage: Double = 0
     var vehicle: Vehicle?
 
     init(
@@ -23,8 +23,8 @@ class Event {
         comment: String,
         date: Date,
         nextDate: Date,
-        millage: Int,
-        nextMillage: Int,
+        millage: Double,
+        nextMillage: Double,
         vehicle: Vehicle? = nil
     ) {
         self.name = name
@@ -34,5 +34,15 @@ class Event {
         self.millage = millage
         self.nextMillage = nextMillage
         self.vehicle = vehicle
+    }
+}
+
+extension Event {
+    var millageMeasurement: Measurement<UnitLength> {
+        Measurement(value: millage, unit: UnitLength.kilometers)
+    }
+
+    var nextMillageMeasurement: Measurement<UnitLength> {
+        Measurement(value: nextMillage, unit: UnitLength.kilometers)
     }
 }
