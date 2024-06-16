@@ -60,5 +60,4 @@ struct EditVehicleView: View {
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
     }
-
 }

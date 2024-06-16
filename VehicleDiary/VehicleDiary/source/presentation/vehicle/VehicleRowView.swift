@@ -41,7 +41,7 @@ struct VehicleRowView: View {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: Vehicle.self, migrationPlan: .none, configurations: config)
         return List {
-            ForEach(0..<20, id:\.self) { number in
+            ForEach(0..<20, id: \.self) { number in
                 let vehicle = Vehicle(
                     brand: "Subaru",
                     model: "Outback",
@@ -57,5 +57,4 @@ struct VehicleRowView: View {
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
     }
-
 }

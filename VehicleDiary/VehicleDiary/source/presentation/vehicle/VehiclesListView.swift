@@ -56,7 +56,7 @@ struct VehiclesListView: View {
             #if DEBUG
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button("Create Sample Data") {
+                    Button("Sample Data") {
                         createSampleData()
                     }
                 }

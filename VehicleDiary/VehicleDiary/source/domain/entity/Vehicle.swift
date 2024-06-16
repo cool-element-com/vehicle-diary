@@ -16,7 +16,7 @@ class Vehicle {
     var millage: Double?
     var id: String = UUID().uuidString
 
-    @Relationship(deleteRule: .cascade) var events: [Event]? = [Event]()
+    @Relationship(deleteRule: .cascade) var events: [VEvent]? = [VEvent]()
 
     init(
         brand: String,
@@ -24,7 +24,7 @@ class Vehicle {
         comment: String? = nil,
         millage: Double? = nil,
         id: String,
-        events: [Event]? = nil
+        events: [VEvent]? = nil
     ) {
         self.brand = brand
         self.model = model
@@ -37,7 +37,7 @@ class Vehicle {
 
 // MARK: - Property utils
 extension Vehicle {
-    var unwrappedEvents: [Event] {
+    var unwrappedEvents: [VEvent] {
         events ?? []
     }
 

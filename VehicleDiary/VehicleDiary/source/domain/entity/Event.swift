@@ -9,22 +9,22 @@ import Foundation
 import SwiftData
 
 @Model
-class Event {
+class VEvent {
     var name: String = "Unknown event"
-    var comment: String = "Unknown description"
+    var comment: String?
     var date: Date = Date.now
-    var nextDate: Date = Date.now
-    var millage: Double = 0
-    var nextMillage: Double = 0
+    var nextDate: Date?
+    var millage: Double?
+    var nextMillage: Double?
     var vehicle: Vehicle?
 
     init(
         name: String,
-        comment: String,
+        comment: String? = nil,
         date: Date,
-        nextDate: Date,
-        millage: Double,
-        nextMillage: Double,
+        nextDate: Date? = nil,
+        millage: Double? = nil,
+        nextMillage: Double? = nil,
         vehicle: Vehicle? = nil
     ) {
         self.name = name
@@ -37,12 +37,37 @@ class Event {
     }
 }
 
-extension Event {
+// MARK: - Property utils
+extension VEvent {
+    var unwrappedComment: String {
+        comment ?? ""
+    }
+
+    var unwrappedMilage: Double {
+        millage ?? 0
+    }
+
+    var unwrappedNextMillage: Double {
+        nextMillage ?? 0
+    }
+
+    var unwrappedNextDate: Date {
+        nextDate ?? Date.now
+    }
+
     var millageMeasurement: Measurement<UnitLength> {
-        Measurement(value: millage, unit: UnitLength.kilometers)
+        Measurement(value: unwrappedMilage, unit: UnitLength.kilometers)
     }
 
     var nextMillageMeasurement: Measurement<UnitLength> {
-        Measurement(value: nextMillage, unit: UnitLength.kilometers)
+        Measurement(value: unwrappedNextMillage, unit: UnitLength.kilometers)
+    }
+
+    func dateString(using formatter: DateFormatter = Constants.dateFormatter()) -> String {
+        formatter.string(from: date)
+    }
+
+    func nextDateString(using formatter: DateFormatter = Constants.dateFormatter()) -> String {
+        formatter.string(from: unwrappedNextDate)
     }
 }
