@@ -13,7 +13,7 @@ class Vehicle {
     var brand: String = "Unknown brand"
     var model: String = "Unknown model"
     var comment: String?
-    var millage: Double = 0
+    var millage: Double?
     var id: String = UUID().uuidString
 
     @Relationship(deleteRule: .cascade) var events: [Event]? = [Event]()
@@ -22,7 +22,7 @@ class Vehicle {
         brand: String,
         model: String,
         comment: String? = nil,
-        millage: Double,
+        millage: Double? = nil,
         id: String,
         events: [Event]? = nil
     ) {
@@ -45,7 +45,11 @@ extension Vehicle {
         comment ?? ""
     }
 
+    var unwrappedMillage: Double {
+        millage ?? 0
+    }
+
     var millageMeasurement: Measurement<UnitLength> {
-        Measurement(value: millage, unit: UnitLength.kilometers)
+        Measurement(value: unwrappedMillage, unit: UnitLength.kilometers)
     }
 }

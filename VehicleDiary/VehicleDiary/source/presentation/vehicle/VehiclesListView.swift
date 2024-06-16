@@ -11,9 +11,11 @@ import SwiftData
 struct VehiclesListView: View {
     @Environment(\.modelContext) var modelContext
     @Query(sort: \Vehicle.brand) var vehicles: [Vehicle]
+    
     @State private var isShowingCreateVehicle = false
     @State private var isShowingDeleteAlert = false
-    @State private var targetVehicle: Vehicle?
+    @State private var deleteVehicle: Vehicle?
+    @State private var editVehicle: Vehicle?
 
     var body: some View {
         NavigationStack() {
@@ -24,7 +26,7 @@ struct VehiclesListView: View {
                     }
                     .swipeActions(edge: .leading, allowsFullSwipe: true) {
                         Button {
-                            targetVehicle = vehicle
+                            editVehicle = vehicle
                         } label: {
                             Label("Edit Vehicle", systemImage: "square.and.pencil")
                         }
@@ -32,7 +34,7 @@ struct VehiclesListView: View {
                     }
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                         Button {
-                            targetVehicle = vehicle
+                            deleteVehicle = vehicle
                             isShowingDeleteAlert = true
                         } label: {
                             Label("Delete Vehicle", systemImage: "trash")
@@ -63,10 +65,13 @@ struct VehiclesListView: View {
             .sheet(isPresented: $isShowingCreateVehicle) {
                 CreateVehicleView()
             }
+            .sheet(item: $editVehicle) { value in
+                EditVehicleView(vehicle: value)
+            }
             .alert("Delete Vehicle", isPresented: $isShowingDeleteAlert) {
                 Button("Cancel", role: .cancel, action: {})
                 Button("Delete", role: .destructive, action: {
-                    deleteVehicle(targetVehicle)
+                    deleteVehicle(deleteVehicle)
                 })
             } message: {
                 Text("All events associated with that vehicle will be deleted. Are you sure?")
