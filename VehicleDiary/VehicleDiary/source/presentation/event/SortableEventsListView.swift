@@ -12,16 +12,30 @@ struct SortableEventsListView: View {
     @Bindable var vehicle: Vehicle
     @State private var isShowingCreateVehicleView = false
     @Query var events: [VEvent]
+    @State private var searchText = ""
+
+    var searchResults: [VEvent] {
+        if searchText.isEmpty {
+            return events
+        } else {
+            return events.filter { event in
+                event.name.localizedCaseInsensitiveContains(searchText)
+                ||
+                event.comment?.localizedCaseInsensitiveContains(searchText) ?? false
+            }
+        }
+    }
 
     var body: some View {
         List {
-            ForEach(events) { event in
+            ForEach(searchResults) { event in
                 EventRowView(event: event)
             }
         }
         .listStyle(.plain)
         .navigationTitle("\(vehicle.brand) \(vehicle.model)")
         .navigationBarTitleDisplayMode(.inline)
+        .searchable(text: $searchText)
         .sheet(isPresented: $isShowingCreateVehicleView, content: {
             CreateEventView(vehicle: vehicle)
         })
@@ -63,7 +77,7 @@ struct SortableEventsListView: View {
                     SortDescriptor(\VEvent.nextDate)
                 ]
             )
-                    .modelContainer(container)
+            .modelContainer(container)
         }
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
