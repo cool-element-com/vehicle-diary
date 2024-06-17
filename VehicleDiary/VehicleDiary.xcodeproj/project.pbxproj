@@ -12,7 +12,7 @@
 		B62941B72C1B354D003AA4FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B62941B62C1B354D003AA4FA /* Assets.xcassets */; };
 		B62941BA2C1B354D003AA4FA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B62941B92C1B354D003AA4FA /* Preview Assets.xcassets */; };
 		B62941C72C1B3F68003AA4FA /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62941C62C1B3F68003AA4FA /* Vehicle.swift */; };
-		B62941C92C1B4040003AA4FA /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62941C82C1B4040003AA4FA /* Event.swift */; };
+		B62941C92C1B4040003AA4FA /* VEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62941C82C1B4040003AA4FA /* VEvent.swift */; };
 		B62941CC2C1C5609003AA4FA /* VehicleRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62941CB2C1C5609003AA4FA /* VehicleRowView.swift */; };
 		B62941CE2C1C624A003AA4FA /* CreateVehicleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62941CD2C1C624A003AA4FA /* CreateVehicleView.swift */; };
 		B62941D02C1C8A10003AA4FA /* EditVehicleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62941CF2C1C8A10003AA4FA /* EditVehicleView.swift */; };
@@ -28,7 +28,7 @@
 		B62941B62C1B354D003AA4FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B62941B92C1B354D003AA4FA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B62941C62C1B3F68003AA4FA /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
-		B62941C82C1B4040003AA4FA /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		B62941C82C1B4040003AA4FA /* VEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VEvent.swift; sourceTree = "<group>"; };
 		B62941CB2C1C5609003AA4FA /* VehicleRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleRowView.swift; sourceTree = "<group>"; };
 		B62941CD2C1C624A003AA4FA /* CreateVehicleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateVehicleView.swift; sourceTree = "<group>"; };
 		B62941CF2C1C8A10003AA4FA /* EditVehicleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditVehicleView.swift; sourceTree = "<group>"; };
@@ -130,7 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				B62941C62C1B3F68003AA4FA /* Vehicle.swift */,
-				B62941C82C1B4040003AA4FA /* Event.swift */,
+				B62941C82C1B4040003AA4FA /* VEvent.swift */,
 			);
 			path = entity;
 			sourceTree = "<group>";
@@ -225,7 +225,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B62941C92C1B4040003AA4FA /* Event.swift in Sources */,
+				B62941C92C1B4040003AA4FA /* VEvent.swift in Sources */,
 				B62941D02C1C8A10003AA4FA /* EditVehicleView.swift in Sources */,
 				B62941CC2C1C5609003AA4FA /* VehicleRowView.swift in Sources */,
 				B62941D52C1F87D3003AA4FA /* Constants.swift in Sources */,

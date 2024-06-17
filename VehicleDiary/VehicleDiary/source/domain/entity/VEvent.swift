@@ -1,5 +1,5 @@
 //
-//  Event.swift
+//  VEvent.swift
 //  VehicleDiary
 //
 //  Created by boyan.yankov on 2024-06-13.
@@ -12,26 +12,26 @@ import SwiftData
 class VEvent {
     var name: String = "Unknown event"
     var comment: String?
-    var date: Date = Date.now
+    var recordedDate: Date = Date.now
     var nextDate: Date?
-    var millage: Double?
+    var recordedMillage: Double?
     var nextMillage: Double?
     var vehicle: Vehicle?
 
     init(
         name: String,
         comment: String? = nil,
-        date: Date,
+        recordedDate: Date,
         nextDate: Date? = nil,
-        millage: Double? = nil,
+        recordedMillage: Double? = nil,
         nextMillage: Double? = nil,
         vehicle: Vehicle? = nil
     ) {
         self.name = name
         self.comment = comment
-        self.date = date
+        self.recordedDate = recordedDate
         self.nextDate = nextDate
-        self.millage = millage
+        self.recordedMillage = recordedMillage
         self.nextMillage = nextMillage
         self.vehicle = vehicle
     }
@@ -43,8 +43,8 @@ extension VEvent {
         comment ?? ""
     }
 
-    var unwrappedMilage: Double {
-        millage ?? 0
+    var unwrappedRecordedMillage: Double {
+        recordedMillage ?? 0
     }
 
     var unwrappedNextMillage: Double {
@@ -55,16 +55,16 @@ extension VEvent {
         nextDate ?? Date.now
     }
 
-    var millageMeasurement: Measurement<UnitLength> {
-        Measurement(value: unwrappedMilage, unit: UnitLength.kilometers)
+    var recordedMillageMeasurement: Measurement<UnitLength> {
+        Measurement(value: unwrappedRecordedMillage, unit: UnitLength.kilometers)
     }
 
     var nextMillageMeasurement: Measurement<UnitLength> {
         Measurement(value: unwrappedNextMillage, unit: UnitLength.kilometers)
     }
 
-    func dateString(using formatter: DateFormatter = Constants.dateFormatter()) -> String {
-        formatter.string(from: date)
+    func recordedDateString(using formatter: DateFormatter = Constants.dateFormatter()) -> String {
+        formatter.string(from: recordedDate)
     }
 
     func nextDateString(using formatter: DateFormatter = Constants.dateFormatter()) -> String {

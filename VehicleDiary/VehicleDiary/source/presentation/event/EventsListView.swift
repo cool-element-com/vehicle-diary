@@ -39,9 +39,9 @@ struct EventsListView: View {
             let event = VEvent(
                 name: "Event \(number)",
                 comment: number.isMultiple(of: 2) ? "Comment \(number)" : nil,
-                date: Date.init(timeIntervalSinceNow: 100 * numberDouble),
+                recordedDate: Date.init(timeIntervalSinceNow: 100 * numberDouble),
                 nextDate: Date(timeIntervalSinceNow: 100_000_000 + 1000 * numberDouble),
-                millage: 1234 + 123 * numberDouble,
+                recordedMillage: 1234 + 123 * numberDouble,
                 nextMillage: 10000 + 123 * numberDouble
             )
             events.append(event)

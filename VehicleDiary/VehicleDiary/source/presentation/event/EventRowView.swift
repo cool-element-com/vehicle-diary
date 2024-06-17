@@ -39,21 +39,27 @@ struct EventRowView: View {
                     Text("Recorded".uppercased())
                         .padding(.vertical, 2)
                         .font(.caption2)
-                    VStack(alignment: .leading) {
+                    HStack(alignment: .firstTextBaseline) {
+                        Text("date".uppercased())
+                            .font(.caption)
+                        Spacer()
                         Text(event.dateString())
-                        if event.millage != nil {
-                            Text(event.millageMeasurement.formatted(
+                    }
+                    HStack(alignment: .firstTextBaseline) {
+                        Text("millage".uppercased())
+                            .font(.caption)
+                        Spacer()
+                        if event.recordedMillage != nil {
+                            Text(event.recordedMillageMeasurement.formatted(
                                 .measurement(
                                     width: .abbreviated,
                                     usage: .road
                                 ).locale(locale)
                             ))
                         } else {
-                            Spacer()
+                            Text("-")
                         }
                     }
-                    .font(.callout)
-                    .fontWeight(.medium)
                 }
                 .frame(height: 60)
                 .padding(8)
@@ -62,42 +68,49 @@ struct EventRowView: View {
                         .fill(.blue.opacity(0.25))
                 })
 
-                Spacer()
 
-                if event.nextDate != nil
-                    || event.nextMillage != nil
-                {
-                    VStack(alignment: .trailing) {
-                        Text("Next occurrence".uppercased())
-                            .font(.caption2)
-                            .padding(.vertical, 2)
+                VStack(alignment: .trailing) {
+                    Text("Next".uppercased())
+                        .font(.caption2)
+                        .padding(.vertical, 2)
+                    HStack(alignment: .firstTextBaseline) {
+                        Text("date".uppercased())
+                            .font(.caption)
+                        Spacer()
                         VStack(alignment: .trailing) {
                             if event.nextDate != nil {
                                 Text(event.nextDateString())
                             } else {
-                                Spacer()
-                            }
-                            if event.nextMillage != nil {
-                                Text(event.nextMillageMeasurement.formatted(
-                                    .measurement(
-                                        width: .abbreviated,
-                                        usage: .road
-                                    ).locale(locale)
-                                ))
+                                Text("-")
                             }
                         }
-                        .font(.callout)
-                        .fontWeight(.medium)
                     }
-                    .frame(height: 60)
-                    .padding(8)
+                    HStack(alignment: .firstTextBaseline) {
+                        Text("millage".uppercased())
+                            .font(.caption)
+                        Spacer()
+                        if event.nextMillage != nil {
+                            Text(event.nextMillageMeasurement.formatted(
+                                .measurement(
+                                    width: .abbreviated,
+                                    usage: .road
+                                ).locale(locale)
+                            ))
+                        } else {
+                            Text("-")
+                        }
+                    }
+
+                }
+                .frame(height: 60)
+                .padding(8)
                     .background(content: {
                         RoundedRectangle(cornerRadius: 10)
                             .fill(.orange.opacity(0.25))
                     })
-                }
             }
         }
+        .dynamicTypeSize(...DynamicTypeSize.large)
     }
 }
 
@@ -111,9 +124,9 @@ struct EventRowView: View {
                 let event = VEvent(
                     name: "Event \(number)",
                     comment: number.isMultiple(of: 2) ? "Comment \(number)" : nil,
-                    date: Date.init(timeIntervalSinceNow: 100 * numberDouble),
+                    recordedDate: Date.init(timeIntervalSinceNow: 100 * numberDouble),
                     nextDate: /*number.isMultiple(of: 3) ? Date(timeIntervalSinceNow: 100_000_000 + 1000 * numberDouble) : */nil,
-                    millage: number.isMultiple(of: 4) ? (1234 + 123 * numberDouble) : nil,
+                    recordedMillage: number.isMultiple(of: 4) ? (1234 + 123 * numberDouble) : nil,
                     nextMillage: number.isMultiple(of: 5) ? 10000 + 123 * numberDouble : nil)
                 return EventRowView(event: event)
                     .modelContainer(container)
@@ -123,5 +136,4 @@ struct EventRowView: View {
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
     }
-
 }
