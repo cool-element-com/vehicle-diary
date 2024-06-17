@@ -43,7 +43,7 @@ struct CreateVehicleView: View {
                 ||
                 millage == nil
                 ||
-                millage == 0
+                millage ?? 0 <= 0
             )
         }
         .dynamicTypeSize(...DynamicTypeSize.large)
