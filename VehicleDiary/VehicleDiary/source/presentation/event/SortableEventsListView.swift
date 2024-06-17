@@ -31,6 +31,9 @@ struct SortableEventsListView: View {
             ForEach(searchResults) { event in
                 EventRowView(event: event)
             }
+            .onDelete(perform: { indexSet in
+                deleteEvent(at: indexSet)
+            })
         }
         .listStyle(.plain)
         .navigationTitle("\(vehicle.brand) \(vehicle.model)")
@@ -51,6 +54,7 @@ struct SortableEventsListView: View {
     init(vehicle: Vehicle, sortOrder: [SortDescriptor<VEvent>]) {
         self.vehicle = vehicle
         let vehicleId = vehicle.id
+        /// source https://fatbobman.com/en/posts/how-to-handle-optional-values-in-swiftdata-predicates/
         _events = Query(
             filter: #Predicate<VEvent> { event in
                 if let eventVehicle = event.vehicle {
@@ -60,6 +64,15 @@ struct SortableEventsListView: View {
                 }
             },
             sort: sortOrder)
+    }
+
+    private func deleteEvent(at offsets: IndexSet) {
+        for index in offsets {
+            let event = searchResults[index]
+            vehicle.events?.removeAll(where: { event1 in
+                event.id == event1.id
+            })
+        }
     }
 }
 

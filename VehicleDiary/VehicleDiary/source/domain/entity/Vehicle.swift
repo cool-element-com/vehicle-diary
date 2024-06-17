@@ -23,7 +23,7 @@ class Vehicle {
         model: String,
         comment: String? = nil,
         millage: Double? = nil,
-        id: String,
+        id: String = UUID().uuidString,
         events: [VEvent]? = nil
     ) {
         self.brand = brand

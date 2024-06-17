@@ -16,6 +16,7 @@ class VEvent {
     var nextDate: Date?
     var recordedMillage: Double?
     var nextMillage: Double?
+    var id: String = UUID().uuidString
     var vehicle: Vehicle?
 
     init(
@@ -25,6 +26,7 @@ class VEvent {
         nextDate: Date? = nil,
         recordedMillage: Double? = nil,
         nextMillage: Double? = nil,
+        id: String = UUID().uuidString,
         vehicle: Vehicle? = nil
     ) {
         self.name = name
@@ -33,6 +35,7 @@ class VEvent {
         self.nextDate = nextDate
         self.recordedMillage = recordedMillage
         self.nextMillage = nextMillage
+        self.id = id
         self.vehicle = vehicle
     }
 }
