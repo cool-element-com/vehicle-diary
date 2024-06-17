@@ -1,5 +1,5 @@
 //
-//  CreateEventView.swift
+//  EditEventView.swift
 //  VehicleDiary
 //
 //  Created by boyan.yankov on 2024-06-17.
@@ -8,34 +8,27 @@
 import SwiftUI
 import SwiftData
 
-struct CreateEventView: View {
+struct EditEventView: View {
     @Environment(\.dismiss) var dismiss
+    @Bindable var event: VEvent
 
-    @Bindable var vehicle: Vehicle
-    @State private var name: String = ""
-    @State private var comment: String?
+    @State private var name: String
+    @State private var comment: String
 
-    @State private var recordedDate: Date = Date.now
+    @State private var recordedDate: Date
     @State private var recordedMillage: Double?
 
     @State private var nextDate: Date?
     @State private var nextMillage: Double?
-    @State private var isUsingNextDate = false
+    @State private var isUsingNextDate: Bool
 
     var body: some View {
         NavigationStack {
             Form {
                 TextField("Name", text: $name)
-                TextField("Comment (optional)",
-                          text: Binding(
-                            get: {
-                                comment ?? ""
-                            },
-                            set: { value in
-                                comment = value
-                            }))
+                TextField("Comment (optional)", text: $comment)
 
-                Section("Current Event") {
+                Section("Recorded") {
                     DatePicker(
                         selection: $recordedDate,
                         displayedComponents: .date
@@ -68,11 +61,11 @@ struct CreateEventView: View {
                         .keyboardType(.numberPad)
                 }
             }
-            .navigationTitle("Create Event")
+            .navigationTitle("Edit Event")
             .navigationBarTitleDisplayMode(.inline)
 
-            Button("Create") {
-                createEvent()
+            Button("Update") {
+                updateEvent()
                 dismiss()
             }
             .padding()
@@ -84,17 +77,24 @@ struct CreateEventView: View {
         .dynamicTypeSize(...DynamicTypeSize.large)
     }
 
-    private func createEvent() {
-        let event = VEvent(
-            name: name,
-            comment: comment,
-            recordedDate: recordedDate,
-            nextDate: isUsingNextDate ? nextDate : nil,
-            recordedMillage: recordedMillage,
-            nextMillage: nextMillage
-        )
+    init(event: VEvent) {
+        self.event = event
+        name = event.name
+        comment = event.comment ?? ""
+        recordedDate = event.recordedDate
+        recordedMillage = event.recordedMillage
+        nextDate = event.nextDate
+        nextMillage = event.nextMillage
+        isUsingNextDate = event.nextDate != nil
+    }
 
-        vehicle.events?.append(event)
+    private func updateEvent() {
+        event.name = name
+        event.comment = comment
+        event.recordedDate = recordedDate
+        event.nextDate = isUsingNextDate ? nextDate : nil
+        event.recordedMillage = recordedMillage
+        event.nextMillage = nextMillage
     }
 }
 
@@ -109,9 +109,18 @@ struct CreateEventView: View {
             millage: 12345,
             id: UUID().uuidString
         )
-        return
-            CreateEventView(vehicle: vehicle)
-                .modelContainer(container)
+        let event = VEvent(
+            name: "Test Event",
+            comment: "Test comment",
+            recordedDate: Date.now,
+            nextDate: Date.distantFuture,
+            recordedMillage: 10_000,
+            nextMillage: 20_000,
+            id: UUID().uuidString,
+            vehicle: vehicle
+        )
+        return EditEventView(event: event)
+            .modelContainer(container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
     }

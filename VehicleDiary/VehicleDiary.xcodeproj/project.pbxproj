@@ -22,6 +22,8 @@
 		B67749CD2C20235500779858 /* EventTimeMillageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67749CC2C20235500779858 /* EventTimeMillageView.swift */; };
 		B67749CF2C20293600779858 /* CreateEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67749CE2C20293600779858 /* CreateEventView.swift */; };
 		B67749D12C20463800779858 /* SortableEventsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67749D02C20463800779858 /* SortableEventsListView.swift */; };
+		B67749D32C20622E00779858 /* EditEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67749D22C20622E00779858 /* EditEventView.swift */; };
+		B67749D52C20704500779858 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67749D42C20704500779858 /* EventView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,8 @@
 		B67749CC2C20235500779858 /* EventTimeMillageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTimeMillageView.swift; sourceTree = "<group>"; };
 		B67749CE2C20293600779858 /* CreateEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventView.swift; sourceTree = "<group>"; };
 		B67749D02C20463800779858 /* SortableEventsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortableEventsListView.swift; sourceTree = "<group>"; };
+		B67749D22C20622E00779858 /* EditEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEventView.swift; sourceTree = "<group>"; };
+		B67749D42C20704500779858 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,11 +159,13 @@
 		B62941D12C1F7992003AA4FA /* event */ = {
 			isa = PBXGroup;
 			children = (
-				B62941D22C1F79AC003AA4FA /* EventsListView.swift */,
-				B62941D62C1F913C003AA4FA /* EventRowView.swift */,
-				B67749CC2C20235500779858 /* EventTimeMillageView.swift */,
 				B67749CE2C20293600779858 /* CreateEventView.swift */,
+				B62941D62C1F913C003AA4FA /* EventRowView.swift */,
+				B62941D22C1F79AC003AA4FA /* EventsListView.swift */,
+				B67749CC2C20235500779858 /* EventTimeMillageView.swift */,
 				B67749D02C20463800779858 /* SortableEventsListView.swift */,
+				B67749D22C20622E00779858 /* EditEventView.swift */,
+				B67749D42C20704500779858 /* EventView.swift */,
 			);
 			path = event;
 			sourceTree = "<group>";
@@ -240,8 +246,10 @@
 				B62941D52C1F87D3003AA4FA /* Constants.swift in Sources */,
 				B62941D72C1F913C003AA4FA /* EventRowView.swift in Sources */,
 				B62941D32C1F79AC003AA4FA /* EventsListView.swift in Sources */,
+				B67749D32C20622E00779858 /* EditEventView.swift in Sources */,
 				B62941C72C1B3F68003AA4FA /* Vehicle.swift in Sources */,
 				B62941B52C1B354B003AA4FA /* VehiclesListView.swift in Sources */,
+				B67749D52C20704500779858 /* EventView.swift in Sources */,
 				B62941B32C1B354B003AA4FA /* VehicleDiaryApp.swift in Sources */,
 				B67749CF2C20293600779858 /* CreateEventView.swift in Sources */,
 				B67749D12C20463800779858 /* SortableEventsListView.swift in Sources */,

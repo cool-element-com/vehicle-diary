@@ -13,6 +13,7 @@ struct SortableEventsListView: View {
     @State private var isShowingCreateVehicleView = false
     @Query var events: [VEvent]
     @State private var searchText = ""
+    @State private var editEvent: VEvent?
 
     var searchResults: [VEvent] {
         if searchText.isEmpty {
@@ -29,11 +30,25 @@ struct SortableEventsListView: View {
     var body: some View {
         List {
             ForEach(searchResults) { event in
-                EventRowView(event: event)
+                NavigationLink(value: event) {
+                    EventRowView(event: event)
+                }
+                .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                    Button {
+                        editEvent = event
+                    } label: {
+                        Label("Edit", systemImage: "square.and.pencil")
+                    }
+                    .tint(.green)
+                }
             }
             .onDelete(perform: { indexSet in
                 deleteEvent(at: indexSet)
             })
+        }
+        .navigationDestination(for: VEvent.self) { event in
+            EventView(event: event)
+                .dynamicTypeSize(...DynamicTypeSize.large)
         }
         .listStyle(.plain)
         .navigationTitle("\(vehicle.brand) \(vehicle.model)")
@@ -41,6 +56,9 @@ struct SortableEventsListView: View {
         .searchable(text: $searchText)
         .sheet(isPresented: $isShowingCreateVehicleView, content: {
             CreateEventView(vehicle: vehicle)
+        })
+        .sheet(item: $editEvent, content: { event in
+            EditEventView(event: event)
         })
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
