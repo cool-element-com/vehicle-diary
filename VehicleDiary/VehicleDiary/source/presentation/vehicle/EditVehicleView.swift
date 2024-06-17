@@ -36,6 +36,7 @@ struct EditVehicleView: View {
                 dismiss()
             }
             .buttonStyle(.borderedProminent)
+            .padding()
             .disabled(
                 vehicle.brand.isEmpty
                 ||

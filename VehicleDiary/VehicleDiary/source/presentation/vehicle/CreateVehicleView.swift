@@ -35,6 +35,7 @@ struct CreateVehicleView: View {
                 createVehicle()
             }
             .buttonStyle(.borderedProminent)
+            .padding()
             .disabled(
                 brand.isEmpty
                 ||

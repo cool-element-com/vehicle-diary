@@ -76,6 +76,7 @@ struct CreateEventView: View {
                 createEvent()
                 dismiss()
             }
+            .padding()
             .buttonStyle(.borderedProminent)
             .disabled(
                 name.isEmpty
