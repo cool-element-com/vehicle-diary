@@ -10,6 +10,7 @@ import SwiftData
 
 struct EventsListView: View {
     @Bindable var vehicle: Vehicle
+    @State private var isShowingCreateVehicleView = false
 
     var body: some View {
         List {
@@ -18,9 +19,19 @@ struct EventsListView: View {
             }
         }
         .listStyle(.plain)
-        .navigationTitle("\(vehicle.id)")
+        .navigationTitle("\(vehicle.brand) \(vehicle.model)")
         .navigationBarTitleDisplayMode(.inline)
-        #if DEBUG
+        .sheet(isPresented: $isShowingCreateVehicleView, content: {
+            CreateEventView(vehicle: vehicle)
+        })
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button("Create event", systemImage: "plus") {
+                    isShowingCreateVehicleView = true
+                }
+            }
+        }
+#if DEBUG
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button("Sample Data") {
@@ -28,10 +39,10 @@ struct EventsListView: View {
                 }
             }
         }
-        #endif
+#endif
     }
 
-    #if DEBUG
+#if DEBUG
     private func createSampleData() {
         var events = [VEvent]()
         for number in 0..<20 {
@@ -48,7 +59,7 @@ struct EventsListView: View {
         }
         vehicle.events = events
     }
-    #endif
+#endif
 }
 
 #Preview {

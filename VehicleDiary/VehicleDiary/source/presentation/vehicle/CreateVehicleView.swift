@@ -45,6 +45,7 @@ struct CreateVehicleView: View {
                 millage == 0
             )
         }
+        .dynamicTypeSize(...DynamicTypeSize.large)
     }
 
     private func createVehicle() {
@@ -52,7 +53,7 @@ struct CreateVehicleView: View {
             brand: brand,
             model: model,
             comment: comment.isEmpty ? nil : comment,
-            millage: millage ?? 0,
+            millage: millage,
             id: UUID().uuidString
         )
         modelContext.insert(vehicle)

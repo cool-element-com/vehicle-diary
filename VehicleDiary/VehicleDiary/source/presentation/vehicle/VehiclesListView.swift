@@ -44,7 +44,7 @@ struct VehiclesListView: View {
                 }
             }
             .navigationDestination(for: Vehicle.self) { vehicle in
-                /// go to events of the vehicle
+                EventsListView(vehicle: vehicle)
             }
             .listStyle(.plain)
             .navigationTitle("Vehicles")
@@ -77,6 +77,7 @@ struct VehiclesListView: View {
                 Text("All events associated with that vehicle will be deleted. Are you sure?")
             }
         }
+        .dynamicTypeSize(...DynamicTypeSize.large)
     }
 
     private func deleteVehicle(_ vehicle: Vehicle?) {

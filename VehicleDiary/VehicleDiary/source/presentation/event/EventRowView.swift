@@ -8,25 +8,14 @@
 import SwiftUI
 import SwiftData
 
-enum AlignmentSample {
-    enum MidAccountAndName: AlignmentID {
-        static func defaultValue(in context: ViewDimensions) -> CGFloat {
-            context[.top]
-        }
-    }
-
-    static let midAccountAndName = VerticalAlignment(MidAccountAndName.self)
-}
-
 struct EventRowView: View {
-    @Environment(\.locale) private var locale
     let event: VEvent
 
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
                 Text(event.name)
-                    .font(.title2.bold())
+                    .font(.title3.bold())
                 if !event.unwrappedComment.isEmpty {
                     Text(event.unwrappedComment)
                         .font(.caption)

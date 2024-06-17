@@ -33,6 +33,7 @@ struct VehicleRowView: View {
             .font(.subheadline)
 
         }
+        .dynamicTypeSize(...DynamicTypeSize.large)
     }
 }
 
