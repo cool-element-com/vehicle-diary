@@ -98,7 +98,7 @@ struct EventView: View {
             brand: "Subaru",
             model: "Outback",
             comment: "hello",
-            mileage: 19845,
+            mileage: 20000,
             id: UUID().uuidString
         )
         let event = VEvent(
@@ -111,7 +111,7 @@ as third line as well
             recordedDate: Date.now,
             upcomingDate: nil,
             recordedMileage: 10_000,
-            upcomingMileage: 20_000,
+            upcomingMileage: 15_000,
             id: UUID().uuidString
         )
         vehicle.events = [event]

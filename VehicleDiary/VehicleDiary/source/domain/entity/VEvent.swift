@@ -125,20 +125,28 @@ extension VEvent {
         guard let upcomingEventInDays = upcomingEventInDays() else {
             return Constants.Symbol.notAvailable
         }
+        guard upcomingEventInDays != 0 else {
+            return "Today"
+        }
+
         var pluralSuffix = "s"
         if upcomingEventInDays == 1
             ||
             upcomingEventInDays == -1 {
             pluralSuffix = ""
         }
-        var agoSuffix = ""
+
+        var prefix = ""
+        if upcomingEventInDays > 0 {
+            prefix = "In "
+        }
+
+        var suffix = ""
         if upcomingEventInDays < 0 {
-            agoSuffix = "ago"
+            suffix = " ago"
         }
-        var result = "\(abs(upcomingEventInDays)) day\(pluralSuffix) \(agoSuffix)"
-        if upcomingEventInDays == 0 {
-            result = "Today"
-        }
+
+        let result = "\(prefix)\(abs(upcomingEventInDays)) day\(pluralSuffix)\(suffix)"
         return result
     }
 
@@ -146,12 +154,18 @@ extension VEvent {
         guard let measurement = upcomingEventInMileageMeasurement() else {
             return Constants.Symbol.notAvailable
         }
-        let result = measurement
+        let absMeasurement = Measurement(value: abs(measurement.value), unit: UnitLength.kilometers)
+        let measurementString = absMeasurement
             .formatted(
                 .measurement(
                     width: .abbreviated,
                     usage: .road)
             .locale(locale))
+        var prefix = "Coming in "
+        if measurement.value < 0 {
+            prefix = "Overdue by "
+        }
+        let result = "\(prefix)\(measurementString)"
         return result
     }
 }
