@@ -17,3 +17,16 @@ extension Constants {
         return formatter
     }
 }
+
+extension Constants {
+    enum EventNotification {
+        static let days: TimeInterval = 30 * Constants.Time.secondsInDay
+        static let millage: Double = 500
+    }
+}
+
+extension Constants {
+    enum Time {
+        static let secondsInDay: TimeInterval = 24 * 60 * 60
+    }
+}

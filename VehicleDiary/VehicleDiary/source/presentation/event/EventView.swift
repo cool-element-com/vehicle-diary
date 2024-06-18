@@ -19,14 +19,18 @@ struct EventView: View {
                 Text(event.name)
                 Text(event.comment ?? "")
 
-                Section("Recorded") {
+                Section("Recorded at") {
                     HStack {
-                        Text("Date")
+                        Text("Date".uppercased())
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
                         Spacer()
                         Text(event.recordedDateString())
                     }
                     HStack {
-                        Text("Millage")
+                        Text("Millage".uppercased())
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
                         Spacer()
                         Text(event.recordedMillage != nil
                             ? event.recordedMillageMeasurement
@@ -43,7 +47,9 @@ struct EventView: View {
 
                 Section("Next Occurrence") {
                     HStack {
-                        Text("Date")
+                        Text("Date".uppercased())
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
                         Spacer()
                         Text(event.nextDate != nil 
                              ? event.nextDateString()
@@ -51,7 +57,9 @@ struct EventView: View {
                         )
                     }
                     HStack {
-                        Text("Millage")
+                        Text("Millage".uppercased())
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
                         Spacer()
                         Text(event.nextMillage != nil
                              ? event.nextMillageMeasurement.formatted(
@@ -64,6 +72,25 @@ struct EventView: View {
                         )
                     }
                 }
+
+
+                Section("Expected after") {
+                    HStack {
+                        Text("Day(s)".uppercased())
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                        Spacer()
+                        Text("-")
+                    }
+                    HStack {
+                        Text("Millage".uppercased())
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                        Spacer()
+                        Text("-")
+                    }
+                }
+
             }
             .navigationTitle(event.name)
             .navigationBarTitleDisplayMode(.inline)
@@ -95,7 +122,7 @@ struct EventView: View {
             name: "Test Event",
             comment: "Test comment",
             recordedDate: Date.now,
-            nextDate: nil,
+            nextDate: Date(timeIntervalSinceNow: 3600000),
             recordedMillage: 10_000,
             nextMillage: 20_000,
             id: UUID().uuidString,

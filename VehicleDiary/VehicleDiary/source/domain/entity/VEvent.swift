@@ -57,7 +57,10 @@ extension VEvent {
     var unwrappedNextDate: Date {
         nextDate ?? Date.now
     }
+}
 
+// MARK: - Utils
+extension VEvent {
     var recordedMillageMeasurement: Measurement<UnitLength> {
         Measurement(value: unwrappedRecordedMillage, unit: UnitLength.kilometers)
     }
@@ -72,5 +75,35 @@ extension VEvent {
 
     func nextDateString(using formatter: DateFormatter = Constants.dateFormatter()) -> String {
         formatter.string(from: unwrappedNextDate)
+    }
+}
+
+// MARK: - Next event calculations
+extension VEvent {
+
+    func nextEventInDays() -> Int? {
+        guard let nextDate = nextDate else {
+            return nil
+        }
+        let days = days(to: nextDate)
+        return days
+    }
+
+    private func days(from startDate: Date = Date.now, to futureDate: Date) -> Int {
+        let seconds = startDate.distance(to: futureDate)
+        let days = ceil(seconds / (Constants.Time.secondsInDay))
+        return Int(days)
+    }
+
+    func nextEventInMillage() -> Measurement<UnitLength>? {
+        guard let vehicleMillage = vehicle?.millage else {
+            return nil
+        }
+        guard let nextMillage = nextMillage else {
+            return nil
+        }
+        let diff = nextMillage - vehicleMillage
+        let measurement = Measurement(value: diff, unit: UnitLength.kilometers)
+        return measurement
     }
 }
