@@ -22,8 +22,8 @@ struct EventApproachListRowBackgroundModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         switch (approach, measurement) {
-        case (.inDays(_), .time),
-            (.afterMileage(_), .millage):
+        case (.inDays, .time),
+            (.afterMileage, .millage):
             content
                 .listRowBackground(Color.red.opacity(0.5))
         default:

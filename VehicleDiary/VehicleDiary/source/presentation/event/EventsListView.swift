@@ -69,10 +69,10 @@ this is a comment for a long event
 new line is also very important
 as third line as well
 """ : nil,
-                recordedDate: Date.init(timeIntervalSinceNow: Double.random(in: 10_000...1_000_000_000) + 100 * numberDouble),
-                upcomingDate: Date(timeIntervalSinceNow: Double.random(in: 10_000...1_000_000_000) + 1_000 * numberDouble),
-                recordedMileage: Double.random(in: 1_000...50_000) + 1_203 * numberDouble,
-                upcomingMileage: Double.random(in: 20_000...100_000) + 1_230 * numberDouble
+                recordedDate: Date.init(timeIntervalSinceNow: Double.random(in: 10_000...1_000_000) + 100 * numberDouble),
+                upcomingDate: Date(timeIntervalSinceNow: Double.random(in: 10_000...1_000_000) + 100 * numberDouble),
+                recordedMileage: Double.random(in: 1_000...10_000) + 1_203 * numberDouble,
+                upcomingMileage: Double.random(in: 10_000...10_500) + 1_230 * numberDouble
             )
             events.append(event)
         }
@@ -85,7 +85,13 @@ as third line as well
     do {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: Vehicle.self, migrationPlan: .none, configurations: config)
-        let vehicle = Vehicle(brand: "Subaru", model: "Outback", comment: "hello", mileage: 12345, id: UUID().uuidString)
+        let vehicle = Vehicle(
+            brand: "Subaru",
+            model: "Outback",
+            comment: "hello",
+            mileage: 10000,
+            id: UUID().uuidString
+        )
         container.mainContext.insert(vehicle)
 
         return NavigationStack {

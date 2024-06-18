@@ -49,12 +49,22 @@ struct EventTimeMileageView: View {
         return result
     }
     var backgroundColor: Color {
+        let color: Color
         switch occurrence {
         case .recorded:
-                .blue
+            color = .blue
         case .upcoming:
-                .orange
+            let approaching: [VEvent.Approach] = [
+                .inDays,
+                .afterMileage
+            ]
+            if approaching.contains(event.approach) {
+                color = .red
+            } else {
+                color = .green
+            }
         }
+        return color
     }
 
     var body: some View {
@@ -63,6 +73,7 @@ struct EventTimeMileageView: View {
                 .padding(.vertical, 2)
                 .font(.caption2)
                 .fontWeight(.none)
+
             HStack(alignment: .firstTextBaseline) {
                 Text("date".uppercased())
                     .font(.caption2)
@@ -72,6 +83,7 @@ struct EventTimeMileageView: View {
             }
             .font(.caption)
             .fontWeight(.medium)
+
             HStack(alignment: .firstTextBaseline) {
                 Text("mileage".uppercased())
                     .font(.caption2)
@@ -97,20 +109,40 @@ struct EventTimeMileageView: View {
     do {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: Vehicle.self, migrationPlan: .none, configurations: config)
+        let vehicle = Vehicle(
+            brand: "Subaru",
+            model: "Outback",
+            comment: "hello",
+            mileage: 10000,
+            id: UUID().uuidString
+        )
+        container.mainContext.insert(vehicle)
+
+        for number in 0..<20 {
+            let numberDouble = Double(number)
+            let event = VEvent(
+                name: "Event \(number)",
+                comment: number.isMultiple(of: 2) ? """
+this is a comment for a long event, new line is also very important new line is also very important, new line is also very important
+as third line as well
+""" : nil,
+                recordedDate: Date.init(timeIntervalSinceNow: Double.random(in: 100000...1000000) * numberDouble),
+                upcomingDate: nil,
+                recordedMileage: number.isMultiple(of: 2)
+                ? (Double.random(in: 5000...12000) + 123 * numberDouble)
+                : nil,
+                upcomingMileage: number.isMultiple(of: 2)
+                ? Double.random(in: 10000...10200) + 123 * numberDouble
+                : nil)
+            vehicle.events?.append(event)
+        }
+
         return List {
-            ForEach(0..<20, id: \.self) { number in
-                let numberDouble = Double(number)
-                let event = VEvent(
-                    name: "Event \(number)",
-                    comment: number.isMultiple(of: 2) ? "Comment \(number)" : nil,
-                    recordedDate: Date.init(timeIntervalSinceNow: 100 * numberDouble),
-                    upcomingDate: /*number.isMultiple(of: 3) ? Date(timeIntervalSinceNow: 100_000_000 + 1000 * numberDouble) : */nil,
-                    recordedMileage: number.isMultiple(of: 4) ? (1200034 + 123 * numberDouble) : nil,
-                    upcomingMileage: number.isMultiple(of: 5) ? 10000 + 123 * numberDouble : nil)
+            ForEach(vehicle.events ?? []) { event in
                 return EventRowView(event: event)
-                    .modelContainer(container)
             }
         }
+        .modelContainer(container)
         .listStyle(.plain)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")

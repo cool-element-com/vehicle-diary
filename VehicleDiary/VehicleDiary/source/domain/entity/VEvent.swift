@@ -125,7 +125,20 @@ extension VEvent {
         guard let upcomingEventInDays = upcomingEventInDays() else {
             return Constants.Symbol.notAvailable
         }
-        let result = "\(upcomingEventInDays) day\(upcomingEventInDays != 1 ? "s" : "")"
+        var pluralSuffix = "s"
+        if upcomingEventInDays == 1
+            ||
+            upcomingEventInDays == -1 {
+            pluralSuffix = ""
+        }
+        var agoSuffix = ""
+        if upcomingEventInDays < 0 {
+            agoSuffix = "ago"
+        }
+        var result = "\(abs(upcomingEventInDays)) day\(pluralSuffix) \(agoSuffix)"
+        if upcomingEventInDays == 0 {
+            result = "Today"
+        }
         return result
     }
 
@@ -147,8 +160,8 @@ extension VEvent {
 extension VEvent {
 
     enum Approach {
-        case inDays(Int)
-        case afterMileage(Double)
+        case inDays
+        case afterMileage
         case notYet
 
         enum Measurement {
@@ -166,21 +179,21 @@ extension VEvent {
             return .notYet
         case (.some(let days), .some(let distance)):
             if days < Constants.EventApproachingAfter.days {
-                return .inDays(days)
+                return .inDays
             } else if distance < Constants.EventApproachingAfter.mileage {
-                return .afterMileage(distance)
+                return .afterMileage
             } else {
                 return .notYet
             }
         case (.some(let days), .none):
             if days < Constants.EventApproachingAfter.days {
-                return .inDays(days)
+                return .inDays
             } else {
                 return .notYet
             }
         case (.none, .some(let distance)):
             if distance < Constants.EventApproachingAfter.mileage {
-                return .afterMileage(distance)
+                return .afterMileage
             } else {
                 return .notYet
             }

@@ -15,10 +15,10 @@ struct CreateEventView: View {
     @State private var name: String = ""
     @State private var comment: String?
 
-    @State private var recordedDate: Date = Date.now
+    @State private var recordedDate: Date = .now
     @State private var recordedMileage: Double?
 
-    @State private var upcomingDate: Date?
+    @State private var upcomingDate: Date = .now
     @State private var upcomingMileage: Double?
     @State private var isUsingNextDate = false
 
@@ -52,13 +52,7 @@ struct CreateEventView: View {
                     Toggle("Use upcoming date?", isOn: $isUsingNextDate.animation())
                     if isUsingNextDate {
                         DatePicker(
-                            selection: Binding(
-                                get: {
-                                    upcomingDate ?? Date.now
-                                },
-                                set: { value in
-                                    upcomingDate = value
-                                }),
+                            selection: $upcomingDate,
                             displayedComponents: .date
                         ) {
                             Text("Date")

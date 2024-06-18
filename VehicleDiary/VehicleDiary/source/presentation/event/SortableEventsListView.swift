@@ -101,6 +101,25 @@ struct SortableEventsListView: View {
         let vehicle = Vehicle(brand: "Subaru", model: "Outback", comment: "hello", mileage: 12345, id: UUID().uuidString)
         container.mainContext.insert(vehicle)
 
+        var events = [VEvent]()
+        for number in 0..<20 {
+            let numberDouble = Double(number)
+            let event = VEvent(
+                name: "Event \(number)",
+                comment: number.isMultiple(of: 2) ? """
+this is a comment for a long event
+new line is also very important
+as third line as well
+""" : nil,
+                recordedDate: Date.init(timeIntervalSinceNow: Double.random(in: 10_000...1_000_000_000) + 100 * numberDouble),
+                upcomingDate: Date(timeIntervalSinceNow: Double.random(in: 10_000...1_000_000_000) + 1_000 * numberDouble),
+                recordedMileage: Double.random(in: 1_000...10_000) + 1_203 * numberDouble,
+                upcomingMileage: Double.random(in: 10_000...10_500) + 1_230 * numberDouble
+            )
+            events.append(event)
+        }
+        vehicle.events = events
+
         return NavigationStack {
             SortableEventsListView(
                 vehicle: vehicle,
