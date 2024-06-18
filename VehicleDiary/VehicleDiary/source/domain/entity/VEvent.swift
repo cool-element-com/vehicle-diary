@@ -13,10 +13,22 @@ class VEvent {
     var name: String = "Unknown event"
     var comment: String?
     var recordedDate: Date = Date.now
-    var upcomingDate: Date?
     var recordedMileage: Double?
+    var upcomingDate: Date?
     var upcomingMileage: Double?
-    var isCompleted: Bool = false
+    var completedDate: Date?
+    var completedMileage: Double?
+    var isCompleted: Bool = false {
+        didSet {
+            if isCompleted == false {
+                completedDate = nil
+                completedMileage = nil
+            } else {
+                completedDate = Date.now
+                completedMileage = vehicle?.mileage
+            }
+        }
+    }
     var id: String = UUID().uuidString
     var vehicle: Vehicle?
 
@@ -77,6 +89,14 @@ extension VEvent {
             return nil
         }
         let result = Measurement(value: upcomingMileage, unit: UnitLength.kilometers)
+        return result
+    }
+
+    var completedMileageMeasurement: Measurement<UnitLength>? {
+        guard let completedMileage = completedMileage else {
+            return nil
+        }
+        let result = Measurement(value: completedMileage, unit: UnitLength.kilometers)
         return result
     }
 }
@@ -168,6 +188,14 @@ extension VEvent {
         let result = "\(prefix)\(measurementString)"
         return result
     }
+
+    var trackingString: String {
+        var result = "Not completed"
+        if isCompleted {
+            result = "Completed"
+        }
+        return result
+    }
 }
 
 // MARK: - Next event approaching calculations
@@ -176,6 +204,7 @@ extension VEvent {
     enum Approach {
         case inDays
         case afterMileage
+        case bothDaysAndMileage
         case notYet
 
         enum Measurement {
@@ -191,22 +220,26 @@ extension VEvent {
         switch (upcomingEventInDays, upcomingEventInMileageValue) {
         case (.none, .none):
             return .notYet
-        case (.some(let days), .some(let distance)):
-            if days < Constants.EventApproachingAfter.days {
+        case (.some(let days), .some(let mileage)):
+            if days < Constants.EventApproachingConstraint.days
+                &&
+                mileage < Constants.EventApproachingConstraint.mileage {
+                return .bothDaysAndMileage
+            } else if days < Constants.EventApproachingConstraint.days {
                 return .inDays
-            } else if distance < Constants.EventApproachingAfter.mileage {
+            } else if mileage < Constants.EventApproachingConstraint.mileage {
                 return .afterMileage
             } else {
                 return .notYet
             }
         case (.some(let days), .none):
-            if days < Constants.EventApproachingAfter.days {
+            if days < Constants.EventApproachingConstraint.days {
                 return .inDays
             } else {
                 return .notYet
             }
-        case (.none, .some(let distance)):
-            if distance < Constants.EventApproachingAfter.mileage {
+        case (.none, .some(let mileage)):
+            if mileage < Constants.EventApproachingConstraint.mileage {
                 return .afterMileage
             } else {
                 return .notYet

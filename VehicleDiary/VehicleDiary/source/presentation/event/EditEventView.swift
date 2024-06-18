@@ -21,6 +21,7 @@ struct EditEventView: View {
     @State private var upcomingDate: Date = .now
     @State private var upcomingMileage: Double?
     @State private var isUsingNextDate: Bool
+    @State private var isCompleted: Bool
 
     var body: some View {
         NavigationStack {
@@ -57,6 +58,10 @@ struct EditEventView: View {
                     TextField("Mileage", value: $upcomingMileage, format: .number)
                         .keyboardType(.numberPad)
                 }
+
+                Section("Tracking") {
+                    Toggle("Is completed?", isOn: $isCompleted.animation())
+                }
             }
             .navigationTitle("Edit Event")
             .navigationBarTitleDisplayMode(.inline)
@@ -83,6 +88,7 @@ struct EditEventView: View {
         upcomingDate = event.upcomingDate ?? .now
         upcomingMileage = event.upcomingMileage
         isUsingNextDate = event.upcomingDate != nil
+        isCompleted = event.isCompleted
     }
 
     private func updateEvent() {
@@ -92,6 +98,7 @@ struct EditEventView: View {
         event.upcomingDate = isUsingNextDate ? upcomingDate : nil
         event.recordedMileage = recordedMileage
         event.upcomingMileage = upcomingMileage
+        event.isCompleted = isCompleted
     }
 }
 

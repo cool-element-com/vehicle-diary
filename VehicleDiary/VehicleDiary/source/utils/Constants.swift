@@ -19,8 +19,8 @@ extension Constants {
 }
 
 extension Constants {
-    enum EventApproachingAfter {
-        static let seconds: TimeInterval = Double(Constants.EventApproachingAfter.days) * Constants.Time.secondsInDay
+    enum EventApproachingConstraint {
+        static let seconds: TimeInterval = Double(Constants.EventApproachingConstraint.days) * Constants.Time.secondsInDay
         static let days: Int = 30
         static let mileage: Double = 500
     }

@@ -9,22 +9,28 @@ import SwiftUI
 import SwiftData
 
 struct EventsListView: View {
+
+    enum Visibility {
+        case showAll
+        case showCompleted
+        case showNotCompleted
+    }
+
     @Bindable var vehicle: Vehicle
     @State private var sortOrder = [
         SortDescriptor(\VEvent.recordedDate)
     ]
+    @State private var visibility: Visibility = .showNotCompleted
 
     var body: some View {
-        SortableEventsListView(vehicle: vehicle, sortOrder: sortOrder)
+        SortableEventsListView(
+            vehicle: vehicle,
+            sortOrder: sortOrder,
+            visibility: visibility
+        )
             .toolbar {
                 Menu("Sort", systemImage: "arrow.up.arrow.down") {
-                    Picker("Sort by name", selection: $sortOrder) {
-                        Text("Sort by name")
-                            .tag([
-                                SortDescriptor(\VEvent.name)
-                            ])
-                    }
-                    Picker("Sort by upcoming event", selection: $sortOrder) {
+                    Picker("Sort events", selection: $sortOrder) {
                         Text("Sort by upcoming occurrence date")
                             .tag([
                                 SortDescriptor(\VEvent.upcomingDate)
@@ -33,8 +39,6 @@ struct EventsListView: View {
                             .tag([
                                 SortDescriptor(\VEvent.upcomingMileage)
                             ])
-                    }
-                    Picker("Sort by recorded event", selection: $sortOrder) {
                         Text("Sort by recorded date")
                             .tag([
                                 SortDescriptor(\VEvent.recordedDate)
@@ -43,6 +47,19 @@ struct EventsListView: View {
                             .tag([
                                 SortDescriptor(\VEvent.recordedMileage)
                             ])
+                        Text("Sort by name")
+                            .tag([
+                                SortDescriptor(\VEvent.name)
+                            ])
+                    }
+                    Picker("Show completed", selection: $visibility) {
+                        Text("Show all")
+                            .tag(Visibility.showAll)
+                        Text("Show completed")
+                            .tag(Visibility.showCompleted)
+                        Text("Show not completed")
+                            .tag(Visibility.showNotCompleted)
+
                     }
                 }
             }

@@ -54,25 +54,31 @@ struct EventView: View {
                         Text(event.upcomingMileageMeasurementString())
                     }
                 }
+               
+                if !event.isCompleted {
+                    Section("Expected") {
+                        HStack {
+                            Text("time".uppercased())
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                            Spacer()
+                            Text(event.upcomingEventInDaysString())
+                        }
+                        .eventApproachListRowBackground(approach: event.approach, measurement: .time)
 
-                Section("Expected") {
-                    HStack {
-                        Text("time".uppercased())
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                        Spacer()
-                        Text(event.upcomingEventInDaysString())
+                        HStack {
+                            Text("mileage".uppercased())
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                            Spacer()
+                            Text(event.upcomingEventInMileageString())
+                        }
+                        .eventApproachListRowBackground(approach: event.approach, measurement: .millage)
                     }
-                    .eventApproachListRowBackground(approach: event.approach, measurement: .time)
+                }
 
-                    HStack {
-                        Text("mileage".uppercased())
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                        Spacer()
-                        Text(event.upcomingEventInMileageString())
-                    }
-                    .eventApproachListRowBackground(approach: event.approach, measurement: .millage)
+                Section("Tracking") {
+                    Text(event.trackingString)
                 }
             }
             .navigationTitle(event.name)
@@ -109,9 +115,9 @@ new line is also very important
 as third line as well
 """,
             recordedDate: Date.now,
-            upcomingDate: nil,
+            upcomingDate: Date.init(timeIntervalSinceNow: Constants.Time.secondsInDay * 25),
             recordedMileage: 10_000,
-            upcomingMileage: 15_000,
+            upcomingMileage: 19_200,
             id: UUID().uuidString
         )
         vehicle.events = [event]

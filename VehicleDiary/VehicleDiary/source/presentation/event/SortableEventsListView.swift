@@ -69,19 +69,50 @@ struct SortableEventsListView: View {
         }
     }
 
-    init(vehicle: Vehicle, sortOrder: [SortDescriptor<VEvent>]) {
+    init(
+        vehicle: Vehicle,
+        sortOrder: [SortDescriptor<VEvent>],
+        visibility: EventsListView.Visibility
+    ) {
         self.vehicle = vehicle
         let vehicleId = vehicle.id
         /// source https://fatbobman.com/en/posts/how-to-handle-optional-values-in-swiftdata-predicates/
-        _events = Query(
-            filter: #Predicate<VEvent> { event in
-                if let eventVehicle = event.vehicle {
-                    eventVehicle.id == vehicleId
-                } else {
-                    false
-                }
-            },
-            sort: sortOrder)
+        switch visibility {
+        case .showAll:
+            _events = Query(
+                filter: #Predicate<VEvent> { event in
+                    if let eventVehicle = event.vehicle {
+                        eventVehicle.id == vehicleId
+                    } else {
+                        false
+                    }
+                },
+                sort: sortOrder)
+        case .showCompleted:
+            _events = Query(
+                filter: #Predicate<VEvent> { event in
+                    if let eventVehicle = event.vehicle {
+                        eventVehicle.id == vehicleId
+                        &&
+                        event.isCompleted == true
+                    } else {
+                        false
+                    }
+                },
+                sort: sortOrder)
+        case .showNotCompleted:
+            _events = Query(
+                filter: #Predicate<VEvent> { event in
+                    if let eventVehicle = event.vehicle {
+                        eventVehicle.id == vehicleId
+                        &&
+                        event.isCompleted == false
+                    } else {
+                        false
+                    }
+                },
+                sort: sortOrder)
+        }
     }
 
     private func deleteEvent(at offsets: IndexSet) {
@@ -125,7 +156,8 @@ as third line as well
                 vehicle: vehicle,
                 sortOrder: [
                     SortDescriptor(\VEvent.upcomingDate)
-                ]
+                ],
+                visibility: .showAll
             )
             .modelContainer(container)
         }

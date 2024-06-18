@@ -52,13 +52,15 @@ struct EventTimeMileageView: View {
         let color: Color
         switch occurrence {
         case .recorded:
-            color = .blue
+            color = .gray
         case .upcoming:
             let approaching: [VEvent.Approach] = [
                 .inDays,
                 .afterMileage
             ]
-            if approaching.contains(event.approach) {
+            if event.isCompleted {
+                color = .gray
+            } else if approaching.contains(event.approach) {
                 color = .red
             } else {
                 color = .green
