@@ -12,6 +12,7 @@ struct EventTimeMileageView: View {
     enum Occurrence {
         case recorded
         case upcoming
+        case completed
     }
 
     @Environment(\.locale) private var locale
@@ -25,6 +26,8 @@ struct EventTimeMileageView: View {
             result = "recorded"
         case .upcoming:
             result = "upcoming"
+        case .completed:
+            result = "completed"
         }
         return result.uppercased()
     }
@@ -35,6 +38,8 @@ struct EventTimeMileageView: View {
             result = event.recordedDateString()
         case .upcoming:
             result = event.upcomingDateString()
+        case .completed:
+            result = event.completedDateString()
         }
         return result
     }
@@ -45,6 +50,8 @@ struct EventTimeMileageView: View {
             result = event.recordedMileageMeasurementString()
         case .upcoming:
             result = event.upcomingMileageMeasurementString()
+        case .completed:
+            result = event.completedMileageMeasurementString()
         }
         return result
     }
@@ -52,19 +59,21 @@ struct EventTimeMileageView: View {
         let color: Color
         switch occurrence {
         case .recorded:
-            color = .gray
+            color = Color(uiColor: .lightGray)
         case .upcoming:
             let approaching: [VEvent.Approach] = [
                 .inDays,
-                .afterMileage
+                .afterMileage,
+                .bothDaysAndMileage
             ]
-            if event.isCompleted {
-                color = .gray
-            } else if approaching.contains(event.approach) {
+
+            if approaching.contains(event.approach) {
                 color = .red
             } else {
                 color = .green
             }
+        case .completed:
+            color = Color(uiColor: .darkGray)
         }
         return color
     }
@@ -135,7 +144,8 @@ as third line as well
                 : nil,
                 upcomingMileage: number.isMultiple(of: 2)
                 ? Double.random(in: 10000...10200) + 123 * numberDouble
-                : nil)
+                : nil,
+                isCompleted: number.isMultiple(of: 5) ? true : false)
             vehicle.events?.append(event)
         }
 

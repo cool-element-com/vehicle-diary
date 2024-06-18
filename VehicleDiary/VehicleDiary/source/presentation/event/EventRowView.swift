@@ -26,7 +26,7 @@ struct EventRowView: View {
 
             HStack(alignment: .top) {
                 EventTimeMileageView(event: event, occurrence: .recorded)
-                EventTimeMileageView(event: event, occurrence: .upcoming)
+                EventTimeMileageView(event: event, occurrence: event.isCompleted ? .completed : .upcoming)
             }
         }
         .dynamicTypeSize(...DynamicTypeSize.large)

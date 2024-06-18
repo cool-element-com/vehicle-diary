@@ -80,6 +80,26 @@ struct EventView: View {
                 Section("Tracking") {
                     Text(event.trackingString)
                 }
+
+                if event.isCompleted {
+                    Section("Completed") {
+                        HStack {
+                            Text("time".uppercased())
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                            Spacer()
+                            Text(event.completedDateString())
+                        }
+
+                        HStack {
+                            Text("mileage".uppercased())
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                            Spacer()
+                            Text(event.completedMileageMeasurementString())
+                        }
+                    }
+                }
             }
             .navigationTitle(event.name)
             .navigationBarTitleDisplayMode(.inline)

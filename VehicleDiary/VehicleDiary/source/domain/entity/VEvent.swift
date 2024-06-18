@@ -18,17 +18,7 @@ class VEvent {
     var upcomingMileage: Double?
     var completedDate: Date?
     var completedMileage: Double?
-    var isCompleted: Bool = false {
-        didSet {
-            if isCompleted == false {
-                completedDate = nil
-                completedMileage = nil
-            } else {
-                completedDate = Date.now
-                completedMileage = vehicle?.mileage
-            }
-        }
-    }
+    var isCompleted: Bool = false
     var id: String = UUID().uuidString
     var vehicle: Vehicle?
 
@@ -37,8 +27,10 @@ class VEvent {
         comment: String? = nil,
         recordedDate: Date,
         upcomingDate: Date? = nil,
+        completedDate: Date? = nil,
         recordedMileage: Double? = nil,
         upcomingMileage: Double? = nil,
+        completedMileage: Double? = nil,
         isCompleted: Bool = false,
         id: String = UUID().uuidString,
         vehicle: Vehicle? = nil
@@ -47,8 +39,10 @@ class VEvent {
         self.comment = comment
         self.recordedDate = recordedDate
         self.upcomingDate = upcomingDate
+        self.completedDate = completedDate
         self.recordedMileage = recordedMileage
         self.upcomingMileage = upcomingMileage
+        self.completedMileage = completedMileage
         self.isCompleted = isCompleted
         self.id = id
         self.vehicle = vehicle
@@ -108,10 +102,23 @@ extension VEvent {
     }
 
     func upcomingDateString(using formatter: DateFormatter = Constants.dateFormatter()) -> String {
-        guard let upcomingDate = upcomingDate else {
+        let result = dateString(from: upcomingDate, using: formatter)
+        return result
+    }
+
+    func completedDateString(using formatter: DateFormatter = Constants.dateFormatter()) -> String {
+        let result = dateString(from: completedDate, using: formatter)
+        return result
+    }
+
+    private func dateString(
+        from date: Date?,
+        using formatter: DateFormatter = Constants.dateFormatter()
+    ) -> String {
+        guard let date = date else {
             return Constants.Symbol.notAvailable
         }
-        let result = formatter.string(from: upcomingDate)
+        let result = formatter.string(from: date)
         return result
     }
 
@@ -122,6 +129,11 @@ extension VEvent {
 
     func upcomingMileageMeasurementString(using locale: Locale = Locale.current) -> String {
         let result = measurementString(from: upcomingMileageMeasurement, using: locale)
+        return result
+    }
+
+    func completedMileageMeasurementString(using locale: Locale = Locale.current) -> String {
+        let result = measurementString(from: completedMileageMeasurement, using: locale)
         return result
     }
 
@@ -205,7 +217,7 @@ extension VEvent {
         case inDays
         case afterMileage
         case bothDaysAndMileage
-        case notYet
+        case notApproaching
 
         enum Measurement {
             case time
@@ -219,7 +231,7 @@ extension VEvent {
 
         switch (upcomingEventInDays, upcomingEventInMileageValue) {
         case (.none, .none):
-            return .notYet
+            return .notApproaching
         case (.some(let days), .some(let mileage)):
             if days < Constants.EventApproachingConstraint.days
                 &&
@@ -230,19 +242,19 @@ extension VEvent {
             } else if mileage < Constants.EventApproachingConstraint.mileage {
                 return .afterMileage
             } else {
-                return .notYet
+                return .notApproaching
             }
         case (.some(let days), .none):
             if days < Constants.EventApproachingConstraint.days {
                 return .inDays
             } else {
-                return .notYet
+                return .notApproaching
             }
         case (.none, .some(let mileage)):
             if mileage < Constants.EventApproachingConstraint.mileage {
                 return .afterMileage
             } else {
-                return .notYet
+                return .notApproaching
             }
         }
     }

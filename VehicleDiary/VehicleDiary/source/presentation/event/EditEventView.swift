@@ -20,7 +20,8 @@ struct EditEventView: View {
 
     @State private var upcomingDate: Date = .now
     @State private var upcomingMileage: Double?
-    @State private var isUsingNextDate: Bool
+
+    @State private var isUsingUpcomingDate: Bool
     @State private var isCompleted: Bool
 
     var body: some View {
@@ -45,8 +46,8 @@ struct EditEventView: View {
                 }
 
                 Section("Next Occurrence") {
-                    Toggle("Use upcoming date?", isOn: $isUsingNextDate.animation())
-                    if isUsingNextDate {
+                    Toggle("Use upcoming date?", isOn: $isUsingUpcomingDate.animation())
+                    if isUsingUpcomingDate {
                         DatePicker(
                             selection: $upcomingDate,
                             displayedComponents: .date
@@ -59,8 +60,12 @@ struct EditEventView: View {
                         .keyboardType(.numberPad)
                 }
 
-                Section("Tracking") {
+                Section {
                     Toggle("Is completed?", isOn: $isCompleted.animation())
+                } header: {
+                    Text("Tracking")
+                } footer: {
+                    Text("Marking event as completed will use current date and Vehicle's mileage as input values.")
                 }
             }
             .navigationTitle("Edit Event")
@@ -83,22 +88,36 @@ struct EditEventView: View {
         self.event = event
         name = event.name
         comment = event.comment ?? ""
+
         recordedDate = event.recordedDate
         recordedMileage = event.recordedMileage
+
         upcomingDate = event.upcomingDate ?? .now
         upcomingMileage = event.upcomingMileage
-        isUsingNextDate = event.upcomingDate != nil
+
+        isUsingUpcomingDate = event.upcomingDate != nil
         isCompleted = event.isCompleted
     }
 
     private func updateEvent() {
         event.name = name
         event.comment = comment
+
         event.recordedDate = recordedDate
-        event.upcomingDate = isUsingNextDate ? upcomingDate : nil
         event.recordedMileage = recordedMileage
+
+        event.upcomingDate = isUsingUpcomingDate ? upcomingDate : nil
         event.upcomingMileage = upcomingMileage
+
         event.isCompleted = isCompleted
+
+        if isCompleted {
+            event.completedDate = .now
+            event.completedMileage = event.vehicle?.mileage
+        } else {
+            event.completedDate = nil
+            event.completedMileage = nil
+        }
     }
 }
 
@@ -113,6 +132,8 @@ struct EditEventView: View {
             mileage: 12345,
             id: UUID().uuidString
         )
+        container.mainContext.insert(vehicle)
+
         let event = VEvent(
             name: "Test Event",
             comment: """
@@ -123,9 +144,9 @@ as third line as well
             upcomingDate: Date.distantFuture,
             recordedMileage: 10_000,
             upcomingMileage: 20_000,
-            id: UUID().uuidString,
-            vehicle: vehicle
+            id: UUID().uuidString
         )
+        vehicle.events = [event]
         return EditEventView(event: event)
             .modelContainer(container)
     } catch {
