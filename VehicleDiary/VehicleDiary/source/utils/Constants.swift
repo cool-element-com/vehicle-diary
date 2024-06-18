@@ -19,14 +19,21 @@ extension Constants {
 }
 
 extension Constants {
-    enum EventNotification {
-        static let days: TimeInterval = 30 * Constants.Time.secondsInDay
-        static let millage: Double = 500
+    enum EventApproachingAfter {
+        static let seconds: TimeInterval = Double(Constants.EventApproachingAfter.days) * Constants.Time.secondsInDay
+        static let days: Int = 30
+        static let mileage: Double = 500
     }
 }
 
 extension Constants {
     enum Time {
         static let secondsInDay: TimeInterval = 24 * 60 * 60
+    }
+}
+
+extension Constants {
+    enum Symbol {
+        static let notAvailable = "-"
     }
 }

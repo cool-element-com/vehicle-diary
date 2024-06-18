@@ -16,10 +16,10 @@ struct EditEventView: View {
     @State private var comment: String
 
     @State private var recordedDate: Date
-    @State private var recordedMillage: Double?
+    @State private var recordedMileage: Double?
 
-    @State private var nextDate: Date?
-    @State private var nextMillage: Double?
+    @State private var upcomingDate: Date?
+    @State private var upcomingMileage: Double?
     @State private var isUsingNextDate: Bool
 
     var body: some View {
@@ -36,20 +36,20 @@ struct EditEventView: View {
                         Text("Date")
                     }
 
-                    TextField("Millage", value: $recordedMillage, format: .number)
+                    TextField("Mileage", value: $recordedMileage, format: .number)
                         .keyboardType(.numberPad)
                 }
 
                 Section("Next Occurrence") {
-                    Toggle("Use next date?", isOn: $isUsingNextDate.animation())
+                    Toggle("Use upcoming date?", isOn: $isUsingNextDate.animation())
                     if isUsingNextDate {
                         DatePicker(
                             selection: Binding(
                                 get: {
-                                    nextDate ?? Date.now
+                                    upcomingDate ?? Date.now
                                 },
                                 set: { value in
-                                    nextDate = value
+                                    upcomingDate = value
                                 }),
                             displayedComponents: .date
                         ) {
@@ -57,7 +57,7 @@ struct EditEventView: View {
                         }
                     }
 
-                    TextField("Millage", value: $nextMillage, format: .number)
+                    TextField("Mileage", value: $upcomingMileage, format: .number)
                         .keyboardType(.numberPad)
                 }
             }
@@ -82,19 +82,19 @@ struct EditEventView: View {
         name = event.name
         comment = event.comment ?? ""
         recordedDate = event.recordedDate
-        recordedMillage = event.recordedMillage
-        nextDate = event.nextDate
-        nextMillage = event.nextMillage
-        isUsingNextDate = event.nextDate != nil
+        recordedMileage = event.recordedMileage
+        upcomingDate = event.upcomingDate
+        upcomingMileage = event.upcomingMileage
+        isUsingNextDate = event.upcomingDate != nil
     }
 
     private func updateEvent() {
         event.name = name
         event.comment = comment
         event.recordedDate = recordedDate
-        event.nextDate = isUsingNextDate ? nextDate : nil
-        event.recordedMillage = recordedMillage
-        event.nextMillage = nextMillage
+        event.upcomingDate = isUsingNextDate ? upcomingDate : nil
+        event.recordedMileage = recordedMileage
+        event.upcomingMileage = upcomingMileage
     }
 }
 
@@ -106,16 +106,16 @@ struct EditEventView: View {
             brand: "Subaru",
             model: "Outback",
             comment: "hello",
-            millage: 12345,
+            mileage: 12345,
             id: UUID().uuidString
         )
         let event = VEvent(
             name: "Test Event",
             comment: "Test comment",
             recordedDate: Date.now,
-            nextDate: Date.distantFuture,
-            recordedMillage: 10_000,
-            nextMillage: 20_000,
+            upcomingDate: Date.distantFuture,
+            recordedMileage: 10_000,
+            upcomingMileage: 20_000,
             id: UUID().uuidString,
             vehicle: vehicle
         )

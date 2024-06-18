@@ -23,7 +23,7 @@ struct VehicleRowView: View {
                     .foregroundStyle(.secondary)
             }
             Text(
-                vehicle.millageMeasurement.formatted(
+                vehicle.mileageMeasurement.formatted(
                     .measurement(
                         width: .abbreviated,
                         usage: .road
@@ -47,7 +47,7 @@ struct VehicleRowView: View {
                     brand: "Subaru",
                     model: "Outback",
                     comment: number.isMultiple(of: 2) ? "Comment \(number)" : nil ,
-                    millage: 14503 + 1234 * Double(number),
+                    mileage: 14503 + 1234 * Double(number),
                     id: UUID().uuidString
                 )
                 VehicleRowView(vehicle: vehicle)

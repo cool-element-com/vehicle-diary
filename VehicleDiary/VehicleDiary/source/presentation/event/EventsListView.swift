@@ -24,14 +24,14 @@ struct EventsListView: View {
                                 SortDescriptor(\VEvent.name)
                             ])
                     }
-                    Picker("Sort by next event", selection: $sortOrder) {
-                        Text("Sort by next occurrence date")
+                    Picker("Sort by upcoming event", selection: $sortOrder) {
+                        Text("Sort by upcoming occurrence date")
                             .tag([
-                                SortDescriptor(\VEvent.nextDate)
+                                SortDescriptor(\VEvent.upcomingDate)
                             ])
-                        Text("Sort by next millage")
+                        Text("Sort by upcoming mileage")
                             .tag([
-                                SortDescriptor(\VEvent.nextMillage)
+                                SortDescriptor(\VEvent.upcomingMileage)
                             ])
                     }
                     Picker("Sort by recorded event", selection: $sortOrder) {
@@ -39,9 +39,9 @@ struct EventsListView: View {
                             .tag([
                                 SortDescriptor(\VEvent.recordedDate)
                             ])
-                        Text("Sort by recorded millage")
+                        Text("Sort by recorded mileage")
                             .tag([
-                                SortDescriptor(\VEvent.recordedMillage)
+                                SortDescriptor(\VEvent.recordedMileage)
                             ])
                     }
                 }
@@ -66,9 +66,9 @@ struct EventsListView: View {
                 name: "Event \(number)",
                 comment: number.isMultiple(of: 2) ? "Comment \(number)" : nil,
                 recordedDate: Date.init(timeIntervalSinceNow: Double.random(in: 10_000...1_000_000_000) + 100 * numberDouble),
-                nextDate: Date(timeIntervalSinceNow: Double.random(in: 10_000...1_000_000_000) + 1_000 * numberDouble),
-                recordedMillage: Double.random(in: 1_000...50_000) + 1_203 * numberDouble,
-                nextMillage: Double.random(in: 20_000...100_000) + 1_230 * numberDouble
+                upcomingDate: Date(timeIntervalSinceNow: Double.random(in: 10_000...1_000_000_000) + 1_000 * numberDouble),
+                recordedMileage: Double.random(in: 1_000...50_000) + 1_203 * numberDouble,
+                upcomingMileage: Double.random(in: 20_000...100_000) + 1_230 * numberDouble
             )
             events.append(event)
         }
@@ -81,7 +81,7 @@ struct EventsListView: View {
     do {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: Vehicle.self, migrationPlan: .none, configurations: config)
-        let vehicle = Vehicle(brand: "Subaru", model: "Outback", comment: "hello", millage: 12345, id: UUID().uuidString)
+        let vehicle = Vehicle(brand: "Subaru", model: "Outback", comment: "hello", mileage: 12345, id: UUID().uuidString)
         container.mainContext.insert(vehicle)
 
         return NavigationStack {

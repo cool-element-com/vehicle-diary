@@ -94,7 +94,7 @@ struct VehiclesListView: View {
                 brand: "Subaru",
                 model: "Outback",
                 comment: number.isMultiple(of: 2) ? "Comment \(number)" : nil ,
-                millage: 14503 + 1234 * Double(number),
+                mileage: 14503 + 1234 * Double(number),
                 id: UUID().uuidString
             )
             modelContext.insert(vehicle)

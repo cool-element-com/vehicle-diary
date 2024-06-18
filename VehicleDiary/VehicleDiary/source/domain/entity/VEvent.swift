@@ -13,9 +13,10 @@ class VEvent {
     var name: String = "Unknown event"
     var comment: String?
     var recordedDate: Date = Date.now
-    var nextDate: Date?
-    var recordedMillage: Double?
-    var nextMillage: Double?
+    var upcomingDate: Date?
+    var recordedMileage: Double?
+    var upcomingMileage: Double?
+    var isCompleted: Bool = false
     var id: String = UUID().uuidString
     var vehicle: Vehicle?
 
@@ -23,18 +24,20 @@ class VEvent {
         name: String,
         comment: String? = nil,
         recordedDate: Date,
-        nextDate: Date? = nil,
-        recordedMillage: Double? = nil,
-        nextMillage: Double? = nil,
+        upcomingDate: Date? = nil,
+        recordedMileage: Double? = nil,
+        upcomingMileage: Double? = nil,
+        isCompleted: Bool = false,
         id: String = UUID().uuidString,
         vehicle: Vehicle? = nil
     ) {
         self.name = name
         self.comment = comment
         self.recordedDate = recordedDate
-        self.nextDate = nextDate
-        self.recordedMillage = recordedMillage
-        self.nextMillage = nextMillage
+        self.upcomingDate = upcomingDate
+        self.recordedMileage = recordedMileage
+        self.upcomingMileage = upcomingMileage
+        self.isCompleted = isCompleted
         self.id = id
         self.vehicle = vehicle
     }
@@ -46,46 +49,144 @@ extension VEvent {
         comment ?? ""
     }
 
-    var unwrappedRecordedMillage: Double {
-        recordedMillage ?? 0
+    var unwrappedRecordedMileage: Double {
+        recordedMileage ?? 0
     }
 
-    var unwrappedNextMillage: Double {
-        nextMillage ?? 0
+    var unwrappedNextMileage: Double {
+        upcomingMileage ?? 0
     }
 
     var unwrappedNextDate: Date {
-        nextDate ?? Date.now
+        upcomingDate ?? Date.now
     }
 }
 
-// MARK: - Utils
+// MARK: - Measurements
 extension VEvent {
-    var recordedMillageMeasurement: Measurement<UnitLength> {
-        Measurement(value: unwrappedRecordedMillage, unit: UnitLength.kilometers)
+    var recordedMileageMeasurement: Measurement<UnitLength>? {
+        guard let recordedMileage = recordedMileage else {
+            return nil
+        }
+        let result = Measurement(value: recordedMileage, unit: UnitLength.kilometers)
+        return result
     }
 
-    var nextMillageMeasurement: Measurement<UnitLength> {
-        Measurement(value: unwrappedNextMillage, unit: UnitLength.kilometers)
+    var upcomingMileageMeasurement: Measurement<UnitLength>? {
+        guard let upcomingMileage = upcomingMileage else {
+            return nil
+        }
+        let result = Measurement(value: upcomingMileage, unit: UnitLength.kilometers)
+        return result
     }
+}
 
+// MARK: - User facing strings
+extension VEvent {
     func recordedDateString(using formatter: DateFormatter = Constants.dateFormatter()) -> String {
         formatter.string(from: recordedDate)
     }
 
-    func nextDateString(using formatter: DateFormatter = Constants.dateFormatter()) -> String {
-        formatter.string(from: unwrappedNextDate)
+    func upcomingDateString(using formatter: DateFormatter = Constants.dateFormatter()) -> String {
+        guard let upcomingDate = upcomingDate else {
+            return Constants.Symbol.notAvailable
+        }
+        let result = formatter.string(from: upcomingDate)
+        return result
+    }
+
+    func recordedMileageMeasurementString(using locale: Locale = Locale.current) -> String {
+        let result = measurementString(from: recordedMileageMeasurement, using: locale)
+        return result
+    }
+
+    func upcomingMileageMeasurementString(using locale: Locale = Locale.current) -> String {
+        let result = measurementString(from: upcomingMileageMeasurement, using: locale)
+        return result
+    }
+
+    private func measurementString(
+        from measurement: Measurement<UnitLength>?,
+        using locale: Locale = Locale.current
+    ) -> String {
+        guard let measurement = measurement else {
+            return Constants.Symbol.notAvailable
+        }
+        let result = measurement
+            .formatted(
+                .measurement(
+                    width: .abbreviated,
+                    usage: .road)
+            .locale(locale))
+        return result
+    }
+
+    func upcomingEventInDaysString() -> String {
+        guard let upcomingEventInDays = upcomingEventInDays() else {
+            return Constants.Symbol.notAvailable
+        }
+        let result = "\(upcomingEventInDays) day\(upcomingEventInDays != 1 ? "s" : "")"
+        return result
+    }
+
+    func upcomingEventInMileageString(using locale: Locale = Locale.current) -> String {
+        guard let measurement = upcomingEventInMileageMeasurement() else {
+            return Constants.Symbol.notAvailable
+        }
+        let result = measurement
+            .formatted(
+                .measurement(
+                    width: .abbreviated,
+                    usage: .road)
+            .locale(locale))
+        return result
     }
 }
 
-// MARK: - Next event calculations
+// MARK: - Next event approaching calculations
 extension VEvent {
 
-    func nextEventInDays() -> Int? {
-        guard let nextDate = nextDate else {
+    enum Approach {
+        case inDays(Int)
+        case afterMileage(Double)
+        case notYet
+    }
+
+    var approach: VEvent.Approach {
+        let upcomingEventInDays = upcomingEventInDays()
+        let upcomingEventInMileageValue = upcomingEventInMileageMeasurement()?.value
+
+        switch (upcomingEventInDays, upcomingEventInMileageValue) {
+        case (.none, .none):
+            return .notYet
+        case (.some(let days), .some(let distance)):
+            if days < Constants.EventApproachingAfter.days {
+                return .inDays(days)
+            } else if distance < Constants.EventApproachingAfter.mileage {
+                return .afterMileage(distance)
+            } else {
+                return .notYet
+            }
+        case (.some(let days), .none):
+            if days < Constants.EventApproachingAfter.days {
+                return .inDays(days)
+            } else {
+                return .notYet
+            }
+        case (.none, .some(let distance)):
+            if distance < Constants.EventApproachingAfter.mileage {
+                return .afterMileage(distance)
+            } else {
+                return .notYet
+            }
+        }
+    }
+
+    func upcomingEventInDays() -> Int? {
+        guard let upcomingDate = upcomingDate else {
             return nil
         }
-        let days = days(to: nextDate)
+        let days = days(to: upcomingDate)
         return days
     }
 
@@ -95,14 +196,14 @@ extension VEvent {
         return Int(days)
     }
 
-    func nextEventInMillage() -> Measurement<UnitLength>? {
-        guard let vehicleMillage = vehicle?.millage else {
+    func upcomingEventInMileageMeasurement() -> Measurement<UnitLength>? {
+        guard let vehicleMileage = vehicle?.mileage else {
             return nil
         }
-        guard let nextMillage = nextMillage else {
+        guard let upcomingMileage = upcomingMileage else {
             return nil
         }
-        let diff = nextMillage - vehicleMillage
+        let diff = upcomingMileage - vehicleMileage
         let measurement = Measurement(value: diff, unit: UnitLength.kilometers)
         return measurement
     }

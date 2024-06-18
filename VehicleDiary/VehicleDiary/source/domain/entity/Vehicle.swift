@@ -13,7 +13,7 @@ class Vehicle {
     var brand: String = "Unknown brand"
     var model: String = "Unknown model"
     var comment: String?
-    var millage: Double?
+    var mileage: Double?
     var id: String = UUID().uuidString
 
     @Relationship(deleteRule: .cascade) var events: [VEvent]? = [VEvent]()
@@ -22,14 +22,14 @@ class Vehicle {
         brand: String,
         model: String,
         comment: String? = nil,
-        millage: Double? = nil,
+        mileage: Double? = nil,
         id: String = UUID().uuidString,
         events: [VEvent]? = nil
     ) {
         self.brand = brand
         self.model = model
         self.comment = comment
-        self.millage = millage
+        self.mileage = mileage
         self.id = id
         self.events = events
     }
@@ -45,11 +45,11 @@ extension Vehicle {
         comment ?? ""
     }
 
-    var unwrappedMillage: Double {
-        millage ?? 0
+    var unwrappedMileage: Double {
+        mileage ?? 0
     }
 
-    var millageMeasurement: Measurement<UnitLength> {
-        Measurement(value: unwrappedMillage, unit: UnitLength.kilometers)
+    var mileageMeasurement: Measurement<UnitLength> {
+        Measurement(value: unwrappedMileage, unit: UnitLength.kilometers)
     }
 }

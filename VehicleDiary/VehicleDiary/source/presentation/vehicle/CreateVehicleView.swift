@@ -16,7 +16,7 @@ struct CreateVehicleView: View {
     @State private var brand: String = ""
     @State private var model: String = ""
     @State private var comment: String = ""
-    @State private var millage: Double? = nil
+    @State private var mileage: Double? = nil
 
     var body: some View {
         NavigationStack {
@@ -24,7 +24,7 @@ struct CreateVehicleView: View {
                 TextField("Brand", text: $brand)
                 TextField("Model", text: $model)
                 TextField("Comment (optional)", text: $comment)
-                TextField("Millage", value: $millage, format: .number)
+                TextField("Mileage", value: $mileage, format: .number)
                     .keyboardType(.numberPad)
             }
             .keyboardType(.asciiCapable)
@@ -41,9 +41,9 @@ struct CreateVehicleView: View {
                 ||
                 model.isEmpty
                 ||
-                millage == nil
+                mileage == nil
                 ||
-                millage ?? 0 <= 0
+                mileage ?? 0 <= 0
             )
         }
         .dynamicTypeSize(...DynamicTypeSize.large)
@@ -54,7 +54,7 @@ struct CreateVehicleView: View {
             brand: brand,
             model: model,
             comment: comment.isEmpty ? nil : comment,
-            millage: millage,
+            mileage: mileage,
             id: UUID().uuidString
         )
         modelContext.insert(vehicle)

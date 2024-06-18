@@ -19,7 +19,7 @@ struct EventView: View {
                 Text(event.name)
                 Text(event.comment ?? "")
 
-                Section("Recorded at") {
+                Section("Recorded") {
                     HStack {
                         Text("Date".uppercased())
                             .font(.caption)
@@ -28,20 +28,11 @@ struct EventView: View {
                         Text(event.recordedDateString())
                     }
                     HStack {
-                        Text("Millage".uppercased())
+                        Text("Mileage".uppercased())
                             .font(.caption)
                             .foregroundStyle(.secondary)
                         Spacer()
-                        Text(event.recordedMillage != nil
-                            ? event.recordedMillageMeasurement
-                            .formatted(
-                                .measurement(
-                                    width: .abbreviated,
-                                    usage: .road)
-                                .locale(locale)
-                            )
-                            : "-"
-                        )
+                        Text(event.recordedMileageMeasurementString())
                     }
                 }
 
@@ -51,46 +42,34 @@ struct EventView: View {
                             .font(.caption)
                             .foregroundStyle(.secondary)
                         Spacer()
-                        Text(event.nextDate != nil 
-                             ? event.nextDateString()
-                             : "-"
-                        )
+                        Text(event.upcomingDateString())
                     }
                     HStack {
-                        Text("Millage".uppercased())
+                        Text("Mileage".uppercased())
                             .font(.caption)
                             .foregroundStyle(.secondary)
                         Spacer()
-                        Text(event.nextMillage != nil
-                             ? event.nextMillageMeasurement.formatted(
-                                .measurement(
-                                    width: .abbreviated,
-                                    usage: .road)
-                                .locale(locale)
-                             )
-                             : "-"
-                        )
+                        Text(event.upcomingMileageMeasurementString())
                     }
                 }
 
-
-                Section("Expected after") {
+                Section("Expected") {
                     HStack {
-                        Text("Day(s)".uppercased())
+                        Text("time".uppercased())
                             .font(.caption)
                             .foregroundStyle(.secondary)
                         Spacer()
-                        Text("-")
+                        Text(event.upcomingEventInDaysString())
                     }
                     HStack {
-                        Text("Millage".uppercased())
+                        Text("mileage".uppercased())
                             .font(.caption)
                             .foregroundStyle(.secondary)
                         Spacer()
-                        Text("-")
+                        Text(event.upcomingEventInMileageString())
                     }
                 }
-
+                .eventApproachBackground(approach: event.approach)
             }
             .navigationTitle(event.name)
             .navigationBarTitleDisplayMode(.inline)
@@ -107,6 +86,30 @@ struct EventView: View {
     }
 }
 
+struct EventApproachBackgroundModifier: ViewModifier {
+    let approach: VEvent.Approach
+    init(approach: VEvent.Approach) {
+        self.approach = approach
+    }
+
+    func body(content: Content) -> some View {
+        switch approach {
+        case .inDays(_),
+                .afterMileage(_):
+            content
+                .listRowBackground(Color.red.opacity(0.5))
+        case .notYet:
+            content
+        }
+    }
+}
+
+extension View {
+    func eventApproachBackground(approach: VEvent.Approach) -> some View {
+        modifier(EventApproachBackgroundModifier(approach: approach))
+    }
+}
+
 #Preview {
     do {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
@@ -115,19 +118,20 @@ struct EventView: View {
             brand: "Subaru",
             model: "Outback",
             comment: "hello",
-            millage: 12345,
+            mileage: 19845,
             id: UUID().uuidString
         )
         let event = VEvent(
             name: "Test Event",
             comment: "Test comment",
             recordedDate: Date.now,
-            nextDate: Date(timeIntervalSinceNow: 3600000),
-            recordedMillage: 10_000,
-            nextMillage: 20_000,
-            id: UUID().uuidString,
-            vehicle: vehicle
+            upcomingDate: Date(timeIntervalSinceNow: 360000),
+            recordedMileage: 10_000,
+            upcomingMileage: 20_000,
+            id: UUID().uuidString
         )
+        vehicle.events = [event]
+        container.mainContext.insert(vehicle)
         return NavigationStack {
             EventView(event: event)
                 .modelContainer(container)

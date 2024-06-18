@@ -1,5 +1,5 @@
 //
-//  EventTimeMillageView.swift
+//  EventTimeMileageView.swift
 //  VehicleDiary
 //
 //  Created by boyan.yankov on 2024-06-17.
@@ -8,10 +8,10 @@
 import SwiftUI
 import SwiftData
 
-struct EventTimeMillageView: View {
+struct EventTimeMileageView: View {
     enum Occurrence {
         case recorded
-        case next
+        case upcoming
     }
 
     @Environment(\.locale) private var locale
@@ -23,42 +23,28 @@ struct EventTimeMillageView: View {
         switch occurrence {
         case .recorded:
             result = "recorded"
-        case .next:
-            result = "next"
+        case .upcoming:
+            result = "upcoming"
         }
         return result.uppercased()
     }
-    var dateString: String? {
-        let result: String?
+    var dateString: String {
+        let result: String
         switch occurrence {
         case .recorded:
             result = event.recordedDateString()
-        case .next:
-            if event.nextDate != nil {
-                result = event.nextDateString()
-            } else {
-                result = nil
-            }
+        case .upcoming:
+            result = event.upcomingDateString()
         }
         return result
     }
-    var millage: Double? {
-        let result: Double?
+    var mileageMeasurementString: String {
+        let result: String
         switch occurrence {
         case .recorded:
-            result = event.recordedMillage
-        case .next:
-            result = event.nextMillage
-        }
-        return result
-    }
-    var millageMeasurement: Measurement<UnitLength> {
-        let result: Measurement<UnitLength>
-        switch occurrence {
-        case .recorded:
-            result = event.recordedMillageMeasurement
-        case .next:
-            result = event.nextMillageMeasurement
+            result = event.recordedMileageMeasurementString()
+        case .upcoming:
+            result = event.upcomingMileageMeasurementString()
         }
         return result
     }
@@ -66,7 +52,7 @@ struct EventTimeMillageView: View {
         switch occurrence {
         case .recorded:
                 .blue
-        case .next:
+        case .upcoming:
                 .orange
         }
     }
@@ -82,29 +68,16 @@ struct EventTimeMillageView: View {
                     .font(.caption2)
                     .fontWeight(.light)
                 Spacer()
-                if let dateString {
-                    Text(dateString)
-                } else {
-                    Text("-")
-                }
+                Text(dateString)
             }
             .font(.caption)
             .fontWeight(.medium)
             HStack(alignment: .firstTextBaseline) {
-                Text("millage".uppercased())
+                Text("mileage".uppercased())
                     .font(.caption2)
                     .fontWeight(.light)
                 Spacer()
-                if millage != nil {
-                    Text(millageMeasurement.formatted(
-                        .measurement(
-                            width: .abbreviated,
-                            usage: .road
-                        ).locale(locale)
-                    ))
-                } else {
-                    Text("-")
-                }
+                Text(mileageMeasurementString)
             }
             .font(.caption)
             .fontWeight(.medium)
@@ -131,9 +104,9 @@ struct EventTimeMillageView: View {
                     name: "Event \(number)",
                     comment: number.isMultiple(of: 2) ? "Comment \(number)" : nil,
                     recordedDate: Date.init(timeIntervalSinceNow: 100 * numberDouble),
-                    nextDate: /*number.isMultiple(of: 3) ? Date(timeIntervalSinceNow: 100_000_000 + 1000 * numberDouble) : */nil,
-                    recordedMillage: number.isMultiple(of: 4) ? (1200034 + 123 * numberDouble) : nil,
-                    nextMillage: number.isMultiple(of: 5) ? 10000 + 123 * numberDouble : nil)
+                    upcomingDate: /*number.isMultiple(of: 3) ? Date(timeIntervalSinceNow: 100_000_000 + 1000 * numberDouble) : */nil,
+                    recordedMileage: number.isMultiple(of: 4) ? (1200034 + 123 * numberDouble) : nil,
+                    upcomingMileage: number.isMultiple(of: 5) ? 10000 + 123 * numberDouble : nil)
                 return EventRowView(event: event)
                     .modelContainer(container)
             }

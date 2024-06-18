@@ -24,8 +24,8 @@ struct EventRowView: View {
             .padding(.vertical, 0)
 
             HStack(alignment: .top) {
-                EventTimeMillageView(event: event, occurrence: .recorded)
-                EventTimeMillageView(event: event, occurrence: .next)
+                EventTimeMileageView(event: event, occurrence: .recorded)
+                EventTimeMileageView(event: event, occurrence: .upcoming)
             }
         }
         .dynamicTypeSize(...DynamicTypeSize.large)
@@ -43,9 +43,9 @@ struct EventRowView: View {
                     name: "Event \(number)",
                     comment: number.isMultiple(of: 2) ? "Comment \(number)" : nil,
                     recordedDate: Date.init(timeIntervalSinceNow: 100 * numberDouble),
-                    nextDate: nil,
-                    recordedMillage: number.isMultiple(of: 4) ? (1200034 + 123 * numberDouble) : nil,
-                    nextMillage: number.isMultiple(of: 5) ? 10000 + 123 * numberDouble : nil)
+                    upcomingDate: nil,
+                    recordedMileage: number.isMultiple(of: 4) ? (1200034 + 123 * numberDouble) : nil,
+                    upcomingMileage: number.isMultiple(of: 5) ? 10000 + 123 * numberDouble : nil)
                 return EventRowView(event: event)
                     .modelContainer(container)
             }

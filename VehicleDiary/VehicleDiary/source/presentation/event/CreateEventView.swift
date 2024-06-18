@@ -16,10 +16,10 @@ struct CreateEventView: View {
     @State private var comment: String?
 
     @State private var recordedDate: Date = Date.now
-    @State private var recordedMillage: Double?
+    @State private var recordedMileage: Double?
 
-    @State private var nextDate: Date?
-    @State private var nextMillage: Double?
+    @State private var upcomingDate: Date?
+    @State private var upcomingMileage: Double?
     @State private var isUsingNextDate = false
 
     var body: some View {
@@ -43,20 +43,20 @@ struct CreateEventView: View {
                         Text("Date")
                     }
 
-                    TextField("Millage", value: $recordedMillage, format: .number)
+                    TextField("Mileage", value: $recordedMileage, format: .number)
                         .keyboardType(.numberPad)
                 }
 
                 Section("Next Occurrence") {
-                    Toggle("Use next date?", isOn: $isUsingNextDate.animation())
+                    Toggle("Use upcoming date?", isOn: $isUsingNextDate.animation())
                     if isUsingNextDate {
                         DatePicker(
                             selection: Binding(
                                 get: {
-                                    nextDate ?? Date.now
+                                    upcomingDate ?? Date.now
                                 },
                                 set: { value in
-                                    nextDate = value
+                                    upcomingDate = value
                                 }),
                             displayedComponents: .date
                         ) {
@@ -64,7 +64,7 @@ struct CreateEventView: View {
                         }
                     }
 
-                    TextField("Millage", value: $nextMillage, format: .number)
+                    TextField("Mileage", value: $upcomingMileage, format: .number)
                         .keyboardType(.numberPad)
                 }
             }
@@ -89,9 +89,9 @@ struct CreateEventView: View {
             name: name,
             comment: comment,
             recordedDate: recordedDate,
-            nextDate: isUsingNextDate ? nextDate : nil,
-            recordedMillage: recordedMillage,
-            nextMillage: nextMillage
+            upcomingDate: isUsingNextDate ? upcomingDate : nil,
+            recordedMileage: recordedMileage,
+            upcomingMileage: upcomingMileage
         )
 
         vehicle.events?.append(event)
@@ -106,7 +106,7 @@ struct CreateEventView: View {
             brand: "Subaru",
             model: "Outback",
             comment: "hello",
-            millage: 12345,
+            mileage: 12345,
             id: UUID().uuidString
         )
         return

@@ -15,10 +15,10 @@ struct EditVehicleView: View {
     @State private var brand: String
     @State private var model: String
     @State private var comment: String
-    /// for some reason when using `Double` for `millage`
+    /// for some reason when using `Double` for `mileage`
     /// when `TextField` content is deleted
     /// button stays active
-    @State private var millage: String
+    @State private var mileage: String
 
     var body: some View {
         NavigationStack {
@@ -26,7 +26,7 @@ struct EditVehicleView: View {
                 TextField("Brand", text: $brand)
                 TextField("Model", text: $model)
                 TextField("Comment (optional)", text: $comment)
-                TextField("Millage", text: $millage)
+                TextField("Mileage", text: $mileage)
                     .keyboardType(.numberPad)
             }
             .navigationTitle("Update Vehicle")
@@ -42,11 +42,11 @@ struct EditVehicleView: View {
                 ||
                 model.isEmpty
                 ||
-                millage.isEmpty
+                mileage.isEmpty
                 ||
-                Double(millage) == nil
+                Double(mileage) == nil
                 ||
-                Double(millage) ?? 0 < 0
+                Double(mileage) ?? 0 < 0
             )
         }
         .dynamicTypeSize(...DynamicTypeSize.large)
@@ -57,14 +57,14 @@ struct EditVehicleView: View {
         brand = vehicle.brand
         model = vehicle.model
         comment = vehicle.comment ?? ""
-        millage = String(format: "%.0f", vehicle.millage ?? 0)
+        mileage = String(format: "%.0f", vehicle.mileage ?? 0)
     }
 
     private func update(_ vehicle: Vehicle) {
         vehicle.brand = brand
         vehicle.model = model
         vehicle.comment = comment
-        vehicle.millage = Double(millage) ?? 0
+        vehicle.mileage = Double(mileage) ?? 0
 
         dismiss()
     }
@@ -78,7 +78,7 @@ struct EditVehicleView: View {
             brand: "Subaru",
             model: "Outback",
             comment: "hello",
-            millage: 12345,
+            mileage: 12345,
             id: UUID().uuidString
         )
         return EditVehicleView(vehicle: vehicle)
