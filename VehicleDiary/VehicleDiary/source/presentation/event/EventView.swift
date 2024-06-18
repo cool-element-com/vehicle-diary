@@ -17,7 +17,9 @@ struct EventView: View {
         VStack {
             Form {
                 Text(event.name)
-                Text(event.comment ?? "")
+                Section("comment") {
+                    Text(event.comment ?? Constants.Symbol.notAvailable)
+                }
 
                 Section("Recorded") {
                     HStack {
@@ -61,6 +63,8 @@ struct EventView: View {
                         Spacer()
                         Text(event.upcomingEventInDaysString())
                     }
+                    .eventApproachListRowBackground(approach: event.approach, measurement: .time)
+
                     HStack {
                         Text("mileage".uppercased())
                             .font(.caption)
@@ -68,8 +72,8 @@ struct EventView: View {
                         Spacer()
                         Text(event.upcomingEventInMileageString())
                     }
+                    .eventApproachListRowBackground(approach: event.approach, measurement: .millage)
                 }
-                .eventApproachBackground(approach: event.approach)
             }
             .navigationTitle(event.name)
             .navigationBarTitleDisplayMode(.inline)
@@ -86,30 +90,6 @@ struct EventView: View {
     }
 }
 
-struct EventApproachBackgroundModifier: ViewModifier {
-    let approach: VEvent.Approach
-    init(approach: VEvent.Approach) {
-        self.approach = approach
-    }
-
-    func body(content: Content) -> some View {
-        switch approach {
-        case .inDays(_),
-                .afterMileage(_):
-            content
-                .listRowBackground(Color.red.opacity(0.5))
-        case .notYet:
-            content
-        }
-    }
-}
-
-extension View {
-    func eventApproachBackground(approach: VEvent.Approach) -> some View {
-        modifier(EventApproachBackgroundModifier(approach: approach))
-    }
-}
-
 #Preview {
     do {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
@@ -123,9 +103,13 @@ extension View {
         )
         let event = VEvent(
             name: "Test Event",
-            comment: "Test comment",
+            comment: """
+this is a comment for a long event
+new line is also very important
+as third line as well
+""",
             recordedDate: Date.now,
-            upcomingDate: Date(timeIntervalSinceNow: 360000),
+            upcomingDate: nil,
             recordedMileage: 10_000,
             upcomingMileage: 20_000,
             id: UUID().uuidString

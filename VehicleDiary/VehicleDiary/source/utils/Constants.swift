@@ -35,5 +35,6 @@ extension Constants {
 extension Constants {
     enum Symbol {
         static let notAvailable = "-"
+        static let emptyString = ""
     }
 }

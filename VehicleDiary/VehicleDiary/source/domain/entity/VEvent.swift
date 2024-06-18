@@ -150,6 +150,11 @@ extension VEvent {
         case inDays(Int)
         case afterMileage(Double)
         case notYet
+
+        enum Measurement {
+            case time
+            case millage
+        }
     }
 
     var approach: VEvent.Approach {

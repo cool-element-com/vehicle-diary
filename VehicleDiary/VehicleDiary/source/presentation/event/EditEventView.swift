@@ -26,7 +26,10 @@ struct EditEventView: View {
         NavigationStack {
             Form {
                 TextField("Name", text: $name)
-                TextField("Comment (optional)", text: $comment)
+
+                Section("Comment") {
+                    TextEditor(text: $comment)
+                }
 
                 Section("Recorded") {
                     DatePicker(
@@ -111,7 +114,10 @@ struct EditEventView: View {
         )
         let event = VEvent(
             name: "Test Event",
-            comment: "Test comment",
+            comment: """
+this is a comment for a long event, new line is also very important new line is also very important, new line is also very important
+as third line as well
+""",
             recordedDate: Date.now,
             upcomingDate: Date.distantFuture,
             recordedMileage: 10_000,

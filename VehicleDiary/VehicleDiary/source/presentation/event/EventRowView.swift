@@ -19,6 +19,7 @@ struct EventRowView: View {
                 if !event.unwrappedComment.isEmpty {
                     Text(event.unwrappedComment)
                         .font(.caption)
+                        .lineLimit(2)
                 }
             }
             .padding(.vertical, 0)
@@ -41,7 +42,10 @@ struct EventRowView: View {
                 let numberDouble = Double(number)
                 let event = VEvent(
                     name: "Event \(number)",
-                    comment: number.isMultiple(of: 2) ? "Comment \(number)" : nil,
+                    comment: number.isMultiple(of: 2) ? """
+this is a comment for a long event, new line is also very important new line is also very important, new line is also very important
+as third line as well
+""" : nil,
                     recordedDate: Date.init(timeIntervalSinceNow: 100 * numberDouble),
                     upcomingDate: nil,
                     recordedMileage: number.isMultiple(of: 4) ? (1200034 + 123 * numberDouble) : nil,

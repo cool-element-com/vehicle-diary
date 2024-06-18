@@ -64,7 +64,11 @@ struct EventsListView: View {
             let numberDouble = Double(number)
             let event = VEvent(
                 name: "Event \(number)",
-                comment: number.isMultiple(of: 2) ? "Comment \(number)" : nil,
+                comment: number.isMultiple(of: 2) ? """
+this is a comment for a long event
+new line is also very important
+as third line as well
+""" : nil,
                 recordedDate: Date.init(timeIntervalSinceNow: Double.random(in: 10_000...1_000_000_000) + 100 * numberDouble),
                 upcomingDate: Date(timeIntervalSinceNow: Double.random(in: 10_000...1_000_000_000) + 1_000 * numberDouble),
                 recordedMileage: Double.random(in: 1_000...50_000) + 1_203 * numberDouble,

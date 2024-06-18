@@ -26,14 +26,15 @@ struct CreateEventView: View {
         NavigationStack {
             Form {
                 TextField("Name", text: $name)
-                TextField("Comment (optional)",
-                          text: Binding(
-                            get: {
-                                comment ?? ""
-                            },
-                            set: { value in
-                                comment = value
-                            }))
+                Section("Comment") {
+                    TextEditor(text: Binding(
+                        get: {
+                            comment ?? ""
+                        },
+                        set: { value in
+                            comment = value
+                        }))
+                }
 
                 Section("Current Event") {
                     DatePicker(
