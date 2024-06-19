@@ -225,6 +225,13 @@ extension VEvent {
         }
     }
 
+    private var daysConstraint: Int {
+        UserDefaults.standard.integer(forKey: Constants.EventApproachingConstraint.Key.daysConstraint)
+    }
+    private var mileageConstraint: Double {
+        UserDefaults.standard.double(forKey: Constants.EventApproachingConstraint.Key.mileageConstraint)
+    }
+
     var approach: VEvent.Approach {
         let upcomingEventInDays = upcomingEventInDays()
         let upcomingEventInMileageValue = upcomingEventInMileageMeasurement()?.value
@@ -233,25 +240,25 @@ extension VEvent {
         case (.none, .none):
             return .notApproaching
         case (.some(let days), .some(let mileage)):
-            if days < Constants.EventApproachingConstraint.days
+            if days <= daysConstraint
                 &&
-                mileage < Constants.EventApproachingConstraint.mileage {
+                mileage <= mileageConstraint {
                 return .bothDaysAndMileage
-            } else if days < Constants.EventApproachingConstraint.days {
+            } else if days <= daysConstraint {
                 return .inDays
-            } else if mileage < Constants.EventApproachingConstraint.mileage {
+            } else if mileage <= mileageConstraint {
                 return .afterMileage
             } else {
                 return .notApproaching
             }
         case (.some(let days), .none):
-            if days < Constants.EventApproachingConstraint.days {
+            if days <= daysConstraint {
                 return .inDays
             } else {
                 return .notApproaching
             }
         case (.none, .some(let mileage)):
-            if mileage < Constants.EventApproachingConstraint.mileage {
+            if mileage <= mileageConstraint {
                 return .afterMileage
             } else {
                 return .notApproaching

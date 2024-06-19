@@ -9,20 +9,22 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.locale) var locale
-    private let daysConstraints = [
+    private let daysConstraints: [Int] = [
         7,
         14,
         21,
         28
     ]
-    @State private var daysConstraint = 28
-    private let mileageConstraints = [
-        Measurement(value: 200, unit: UnitLength.kilometers),
-        Measurement(value: 300, unit: UnitLength.kilometers),
-        Measurement(value: 400, unit: UnitLength.kilometers),
-        Measurement(value: 500, unit: UnitLength.kilometers),
+    @AppStorage(Constants.EventApproachingConstraint.Key.daysConstraint)
+    private var daysConstraint: Int = 28
+    private let mileageConstraints: [Double] = [
+        200,
+        300,
+        400,
+        500,
     ]
-    @State private var mileageConstraint = Measurement(value: 500, unit: UnitLength.kilometers)
+    @AppStorage(Constants.EventApproachingConstraint.Key.mileageConstraint) 
+    private var mileageConstraint: Double = 500
 
     var body: some View {
         NavigationStack {
@@ -35,15 +37,18 @@ struct SettingsView: View {
                     }
 
                     Picker("When occurrence mileage is within", selection: $mileageConstraint) {
-                        ForEach(mileageConstraints, id: \.self) { measurement in
+                        ForEach(mileageConstraints, id: \.self) { mileage in
                             Text(
-                                measurement
-                                    .formatted(
-                                        .measurement(
-                                            width: .abbreviated,
-                                            usage: .road
-                                        ).locale(locale)
-                                    )
+                                Measurement(
+                                    value: mileage,
+                                    unit: UnitLength.kilometers
+                                )
+                                .formatted(
+                                    .measurement(
+                                        width: .abbreviated,
+                                        usage: .road
+                                    ).locale(locale)
+                                )
                             )
                         }
                     }
