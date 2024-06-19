@@ -64,19 +64,22 @@ struct EventsListView: View {
                     }
                 }
             }
-#if DEBUG
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button("Sample Data") {
-                    createSampleData()
-                }
-            }
-        }
-#endif
     }
+}
 
-#if DEBUG
-    private func createSampleData() {
+#Preview {
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: Vehicle.self, migrationPlan: .none, configurations: config)
+        let vehicle = Vehicle(
+            brand: "Subaru",
+            model: "Outback",
+            comment: "hello",
+            mileage: 10000,
+            id: UUID().uuidString
+        )
+        container.mainContext.insert(vehicle)
+
         var events = [VEvent]()
         for number in 0..<20 {
             let numberDouble = Double(number)
@@ -95,23 +98,6 @@ as third line as well
             events.append(event)
         }
         vehicle.events = events
-    }
-#endif
-}
-
-#Preview {
-    do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Vehicle.self, migrationPlan: .none, configurations: config)
-        let vehicle = Vehicle(
-            brand: "Subaru",
-            model: "Outback",
-            comment: "hello",
-            mileage: 10000,
-            id: UUID().uuidString
-        )
-        container.mainContext.insert(vehicle)
-
         return NavigationStack {
             EventsListView(vehicle: vehicle)
                     .modelContainer(container)

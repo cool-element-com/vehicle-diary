@@ -53,15 +53,6 @@ struct VehiclesListView: View {
                     isShowingCreateVehicle.toggle()
                 }
             }
-            #if DEBUG
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button("Sample Data") {
-                        createSampleData()
-                    }
-                }
-            }
-            #endif
             .sheet(isPresented: $isShowingCreateVehicle) {
                 CreateVehicleView()
             }
@@ -86,9 +77,12 @@ struct VehiclesListView: View {
         }
         modelContext.delete(vehicle)
     }
+}
 
-    #if DEBUG
-    private func createSampleData() {
+#Preview {
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: Vehicle.self, migrationPlan: .none, configurations: config)
         for number in 0..<20 {
             let vehicle = Vehicle(
                 brand: "Subaru",
@@ -97,16 +91,8 @@ struct VehiclesListView: View {
                 mileage: 14503 + 1234 * Double(number),
                 id: UUID().uuidString
             )
-            modelContext.insert(vehicle)
+            container.mainContext.insert(vehicle)
         }
-    }
-    #endif
-}
-
-#Preview {
-    do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Vehicle.self, migrationPlan: .none, configurations: config)
 
         return VehiclesListView()
             .modelContainer(container)
