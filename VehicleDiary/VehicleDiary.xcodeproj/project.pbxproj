@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B61050592C237B6900674AD5 /* AppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61050582C237B6900674AD5 /* AppIcon.swift */; };
 		B62941B32C1B354B003AA4FA /* VehicleDiaryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62941B22C1B354B003AA4FA /* VehicleDiaryApp.swift */; };
 		B62941B52C1B354B003AA4FA /* VehiclesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62941B42C1B354B003AA4FA /* VehiclesListView.swift */; };
 		B62941B72C1B354D003AA4FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B62941B62C1B354D003AA4FA /* Assets.xcassets */; };
@@ -32,6 +33,7 @@
 /* Begin PBXFileReference section */
 		B61050562C231F8E00674AD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B61050572C23201700674AD5 /* VehicleDiary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VehicleDiary.entitlements; sourceTree = "<group>"; };
+		B61050582C237B6900674AD5 /* AppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon.swift; sourceTree = "<group>"; };
 		B62941AF2C1B354B003AA4FA /* VehicleDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VehicleDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B62941B22C1B354B003AA4FA /* VehicleDiaryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleDiaryApp.swift; sourceTree = "<group>"; };
 		B62941B42C1B354B003AA4FA /* VehiclesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehiclesListView.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				B63609B22C22FFAB002664C0 /* AppTabView.swift */,
+				B61050582C237B6900674AD5 /* AppIcon.swift */,
 			);
 			path = app;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				B62941D02C1C8A10003AA4FA /* EditVehicleView.swift in Sources */,
 				B62941CC2C1C5609003AA4FA /* VehicleRowView.swift in Sources */,
 				B63609B62C23047F002664C0 /* SettingsView.swift in Sources */,
+				B61050592C237B6900674AD5 /* AppIcon.swift in Sources */,
 				B62941D52C1F87D3003AA4FA /* Constants.swift in Sources */,
 				B62941D72C1F913C003AA4FA /* EventRowView.swift in Sources */,
 				B67749DA2C21CF4800779858 /* EventApproachListRowBackgroundModifier.swift in Sources */,
