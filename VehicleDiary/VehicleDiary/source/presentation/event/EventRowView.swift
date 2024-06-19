@@ -20,6 +20,7 @@ struct EventRowView: View {
                     Text(event.unwrappedComment)
                         .font(.caption)
                         .lineLimit(2)
+                        .padding(.horizontal, 4)
                 }
             }
             .padding(.vertical, 0)

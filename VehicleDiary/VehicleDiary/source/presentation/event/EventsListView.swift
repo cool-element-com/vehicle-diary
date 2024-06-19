@@ -30,8 +30,18 @@ struct EventsListView: View {
         )
             .toolbar {
                 Menu("Sort", systemImage: "arrow.up.arrow.down") {
+                    Picker("Show completed", selection: $visibility) {
+                        Text("Show all")
+                            .tag(Visibility.showAll)
+                        Text("Show completed")
+                            .tag(Visibility.showCompleted)
+                        Text("Show not completed")
+                            .tag(Visibility.showNotCompleted)
+
+                    }
+
                     Picker("Sort events", selection: $sortOrder) {
-                        Text("Sort by upcoming occurrence date")
+                        Text("Sort by upcoming date")
                             .tag([
                                 SortDescriptor(\VEvent.upcomingDate)
                             ])
@@ -51,15 +61,6 @@ struct EventsListView: View {
                             .tag([
                                 SortDescriptor(\VEvent.name)
                             ])
-                    }
-                    Picker("Show completed", selection: $visibility) {
-                        Text("Show all")
-                            .tag(Visibility.showAll)
-                        Text("Show completed")
-                            .tag(Visibility.showCompleted)
-                        Text("Show not completed")
-                            .tag(Visibility.showNotCompleted)
-
                     }
                 }
             }
