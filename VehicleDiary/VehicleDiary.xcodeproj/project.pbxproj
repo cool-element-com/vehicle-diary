@@ -31,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		B61050562C231F8E00674AD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B61050572C23201700674AD5 /* VehicleDiary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VehicleDiary.entitlements; sourceTree = "<group>"; };
 		B62941AF2C1B354B003AA4FA /* VehicleDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VehicleDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B62941B22C1B354B003AA4FA /* VehicleDiaryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleDiaryApp.swift; sourceTree = "<group>"; };
 		B62941B42C1B354B003AA4FA /* VehiclesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehiclesListView.swift; sourceTree = "<group>"; };
@@ -84,6 +85,7 @@
 		B62941B12C1B354B003AA4FA /* VehicleDiary */ = {
 			isa = PBXGroup;
 			children = (
+				B61050572C23201700674AD5 /* VehicleDiary.entitlements */,
 				B61050562C231F8E00674AD5 /* Info.plist */,
 				B62941C02C1B3DC1003AA4FA /* source */,
 				B62941B62C1B354D003AA4FA /* Assets.xcassets */,
@@ -423,6 +425,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = VehicleDiary/VehicleDiary.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"VehicleDiary/Preview Content\"";
@@ -443,7 +446,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.yahoo.boyankov.VehicleDiary;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.cool.element.vdiary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -460,6 +463,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = VehicleDiary/VehicleDiary.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"VehicleDiary/Preview Content\"";
@@ -480,7 +484,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.yahoo.boyankov.VehicleDiary;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.cool.element.vdiary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
