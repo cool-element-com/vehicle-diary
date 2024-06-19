@@ -15,6 +15,10 @@ struct AppTabView: View {
                 .tabItem {
                     Label("Records", systemImage: "book.pages")
                 }
+            SettingsView()
+                .tabItem {
+                    Label("Settings", systemImage: "gearshape.2")
+                }
         }
     }
 }
