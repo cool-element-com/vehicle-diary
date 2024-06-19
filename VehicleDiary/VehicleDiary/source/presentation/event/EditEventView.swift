@@ -70,16 +70,18 @@ struct EditEventView: View {
             }
             .navigationTitle("Edit Event")
             .navigationBarTitleDisplayMode(.inline)
-
-            Button("Update") {
-                updateEvent()
-                dismiss()
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Update") {
+                        updateEvent()
+                        dismiss()
+                    }
+                    .padding(.horizontal, 10)
+                    .disabled(
+                        name.isEmpty
+                    )
+                }
             }
-            .padding()
-            .buttonStyle(.borderedProminent)
-            .disabled(
-                name.isEmpty
-            )
         }
         .dynamicTypeSize(...DynamicTypeSize.large)
     }

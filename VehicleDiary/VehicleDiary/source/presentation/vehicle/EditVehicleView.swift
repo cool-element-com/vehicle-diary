@@ -29,25 +29,27 @@ struct EditVehicleView: View {
                 TextField("Mileage", text: $mileage)
                     .keyboardType(.numberPad)
             }
-            .navigationTitle("Update Vehicle")
+            .navigationTitle("Edit Vehicle")
             .navigationBarTitleDisplayMode(.inline)
-
-            Button("Update") {
-                update(vehicle)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Update") {
+                        update(vehicle)
+                    }
+                    .padding(.horizontal, 10)
+                    .disabled(
+                        brand.isEmpty
+                        ||
+                        model.isEmpty
+                        ||
+                        mileage.isEmpty
+                        ||
+                        Double(mileage) == nil
+                        ||
+                        Double(mileage) ?? 0 < 0
+                    )
+                }
             }
-            .buttonStyle(.borderedProminent)
-            .padding()
-            .disabled(
-                brand.isEmpty
-                ||
-                model.isEmpty
-                ||
-                mileage.isEmpty
-                ||
-                Double(mileage) == nil
-                ||
-                Double(mileage) ?? 0 < 0
-            )
         }
         .dynamicTypeSize(...DynamicTypeSize.large)
     }

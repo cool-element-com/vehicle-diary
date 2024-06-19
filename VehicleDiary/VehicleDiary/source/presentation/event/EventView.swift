@@ -103,12 +103,14 @@ struct EventView: View {
             }
             .navigationTitle(event.name)
             .navigationBarTitleDisplayMode(.inline)
-
-            Button("Edit") {
-                isShowingEditView = true
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Edit") {
+                        isShowingEditView = true
+                    }
+                    .padding(.horizontal, 10)
+                }
             }
-            .padding()
-            .buttonStyle(.borderedProminent)
         }
         .sheet(isPresented: $isShowingEditView, content: {
             EditEventView(event: event)

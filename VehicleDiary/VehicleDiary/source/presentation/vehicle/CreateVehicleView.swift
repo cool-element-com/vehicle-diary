@@ -28,23 +28,25 @@ struct CreateVehicleView: View {
                     .keyboardType(.numberPad)
             }
             .keyboardType(.asciiCapable)
-            .navigationTitle("Create Vehicle")
+            .navigationTitle("New Vehicle")
             .navigationBarTitleDisplayMode(.inline)
-
-            Button("Create") {
-                createVehicle()
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Create") {
+                        createVehicle()
+                    }
+                    .padding(.horizontal, 10)
+                    .disabled(
+                        brand.isEmpty
+                        ||
+                        model.isEmpty
+                        ||
+                        mileage == nil
+                        ||
+                        mileage ?? 0 <= 0
+                    )
+                }
             }
-            .buttonStyle(.borderedProminent)
-            .padding()
-            .disabled(
-                brand.isEmpty
-                ||
-                model.isEmpty
-                ||
-                mileage == nil
-                ||
-                mileage ?? 0 <= 0
-            )
         }
         .dynamicTypeSize(...DynamicTypeSize.large)
     }

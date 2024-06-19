@@ -63,18 +63,20 @@ struct CreateEventView: View {
                         .keyboardType(.numberPad)
                 }
             }
-            .navigationTitle("Create Event")
+            .navigationTitle("New Event")
             .navigationBarTitleDisplayMode(.inline)
-
-            Button("Create") {
-                createEvent()
-                dismiss()
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Create") {
+                        createEvent()
+                        dismiss()
+                    }
+                    .padding(.horizontal, 10)
+                    .disabled(
+                        name.isEmpty
+                    )
+                }
             }
-            .padding()
-            .buttonStyle(.borderedProminent)
-            .disabled(
-                name.isEmpty
-            )
         }
         .dynamicTypeSize(...DynamicTypeSize.large)
     }
