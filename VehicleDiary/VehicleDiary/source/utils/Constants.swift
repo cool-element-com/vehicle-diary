@@ -24,6 +24,11 @@ extension Constants {
             static let daysConstraint = "daysConstraint"
             static let mileageConstraint = "mileageConstraint"
         }
+
+        enum Value {
+            static let daysConstraint: Int = 28
+            static let mileageConstraint: Double = 500
+        }
     }
 }
 

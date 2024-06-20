@@ -226,10 +226,20 @@ extension VEvent {
     }
 
     private var daysConstraint: Int {
-        UserDefaults.standard.integer(forKey: Constants.EventApproachingConstraint.Key.daysConstraint)
+        let storedValue = UserDefaults.standard.integer(forKey: Constants.EventApproachingConstraint.Key.daysConstraint)
+        if storedValue > 0 {
+            return storedValue
+        } else {
+            return Constants.EventApproachingConstraint.Value.daysConstraint
+        }
     }
     private var mileageConstraint: Double {
-        UserDefaults.standard.double(forKey: Constants.EventApproachingConstraint.Key.mileageConstraint)
+        let storedValue = UserDefaults.standard.double(forKey: Constants.EventApproachingConstraint.Key.mileageConstraint)
+        if storedValue > 0 {
+            return storedValue
+        } else {
+            return Constants.EventApproachingConstraint.Value.mileageConstraint
+        }
     }
 
     var approach: VEvent.Approach {

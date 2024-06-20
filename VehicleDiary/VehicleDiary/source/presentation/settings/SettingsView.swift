@@ -13,18 +13,21 @@ struct SettingsView: View {
         7,
         14,
         21,
-        28
+        28,
+        35,
+        42
     ]
     @AppStorage(Constants.EventApproachingConstraint.Key.daysConstraint)
-    private var daysConstraint: Int = 28
+    private var daysConstraint: Int = Constants.EventApproachingConstraint.Value.daysConstraint
     private let mileageConstraints: [Double] = [
         200,
         300,
-        400,
         500,
+        1000,
+        2000
     ]
     @AppStorage(Constants.EventApproachingConstraint.Key.mileageConstraint) 
-    private var mileageConstraint: Double = 500
+    private var mileageConstraint: Double = Constants.EventApproachingConstraint.Value.mileageConstraint
 
     var body: some View {
         NavigationStack {
