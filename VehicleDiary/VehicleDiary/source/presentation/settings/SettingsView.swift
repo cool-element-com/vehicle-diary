@@ -62,6 +62,12 @@ struct SettingsView: View {
     }
 }
 
-#Preview {
+#Preview("en_US") {
     SettingsView()
+        .environment(\.locale, Locale(identifier: "en_US"))
+}
+
+#Preview("GR") {
+    SettingsView()
+        .environment(\.locale, Locale(identifier: "GR"))
 }
