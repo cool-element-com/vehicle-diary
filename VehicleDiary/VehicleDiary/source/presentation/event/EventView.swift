@@ -12,6 +12,7 @@ struct EventView: View {
     @Environment(\.locale) var locale
     let event: VEvent
     @State private var isShowingEditView = false
+    @State private var isEventReoccurring: Bool = false
 
     var body: some View {
         VStack {
@@ -39,19 +40,24 @@ struct EventView: View {
                 }
 
                 Section("Next Occurrence") {
-                    HStack {
-                        Text("Date".uppercased())
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                        Spacer()
-                        Text(event.upcomingDateString())
+                    Toggle(isOn: $isEventReoccurring) {
+                        Text("Is Event reoccurring?")
                     }
-                    HStack {
-                        Text("Mileage".uppercased())
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                        Spacer()
-                        Text(event.upcomingMileageMeasurementString())
+                    if isEventReoccurring {
+                        HStack {
+                            Text("Date".uppercased())
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                            Spacer()
+                            Text(event.upcomingDateString())
+                        }
+                        HStack {
+                            Text("Mileage".uppercased())
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                            Spacer()
+                            Text(event.upcomingMileageMeasurementString())
+                        }
                     }
                 }
                

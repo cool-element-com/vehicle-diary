@@ -129,7 +129,7 @@ struct EventTimeMileageView: View {
         )
         container.mainContext.insert(vehicle)
 
-        for number in 0..<20 {
+        for number in 0..<1 {
             let numberDouble = Double(number)
             let event = VEvent(
                 name: "Event \(number)",
@@ -145,7 +145,7 @@ as third line as well
                 upcomingMileage: number.isMultiple(of: 2)
                 ? Double.random(in: 10000...10200) + 123 * numberDouble
                 : nil,
-                isCompleted: number.isMultiple(of: 5) ? true : false)
+                isCompleted: false)
             vehicle.events?.append(event)
         }
 

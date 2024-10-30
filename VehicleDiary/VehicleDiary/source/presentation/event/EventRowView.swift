@@ -26,8 +26,13 @@ struct EventRowView: View {
             .padding(.vertical, 0)
 
             HStack(alignment: .top) {
-                EventTimeMileageView(event: event, occurrence: .recorded)
-                EventTimeMileageView(event: event, occurrence: event.isCompleted ? .completed : .upcoming)
+                if event.isReoccurring {
+                    EventTimeMileageView(event: event, occurrence: .recorded)
+                    EventTimeMileageView(event: event, occurrence: event.isCompleted ? .completed : .upcoming)
+                } else {
+                    EventTimeMileageView(event: event, occurrence: .recorded)
+                }
+
             }
         }
         .dynamicTypeSize(...DynamicTypeSize.large)

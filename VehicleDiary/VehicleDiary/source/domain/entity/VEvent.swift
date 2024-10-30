@@ -68,6 +68,13 @@ extension VEvent {
     }
 }
 
+// MARK: - Reoccurrance
+extension VEvent {
+    var isReoccurring: Bool {
+        upcomingDate != nil || upcomingMileage != nil
+    }
+}
+
 // MARK: - Measurements
 extension VEvent {
     var recordedMileageMeasurement: Measurement<UnitLength>? {
