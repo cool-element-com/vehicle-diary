@@ -21,6 +21,7 @@ struct CreateEventView: View {
     @State private var upcomingDate: Date = .now
     @State private var upcomingMileage: Double?
     @State private var isUsingNextDate = false
+    @State private var isEventReoccurring: Bool = false
 
     var body: some View {
         NavigationStack {
@@ -49,7 +50,7 @@ struct CreateEventView: View {
                 }
 
                 Section("Next Occurrence") {
-                    Toggle("Use upcoming date?", isOn: $isUsingNextDate.animation())
+                    Toggle("Is event reoccurring?", isOn: $isUsingNextDate.animation())
                     if isUsingNextDate {
                         DatePicker(
                             selection: $upcomingDate,
@@ -57,10 +58,9 @@ struct CreateEventView: View {
                         ) {
                             Text("Date")
                         }
+                        TextField("Mileage", value: $upcomingMileage, format: .number)
+                            .keyboardType(.numberPad)
                     }
-
-                    TextField("Mileage", value: $upcomingMileage, format: .number)
-                        .keyboardType(.numberPad)
                 }
             }
             .navigationTitle("New Event")
