@@ -30,6 +30,7 @@
 		B67749D32C20622E00779858 /* EditEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67749D22C20622E00779858 /* EditEventView.swift */; };
 		B67749D52C20704500779858 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67749D42C20704500779858 /* EventView.swift */; };
 		B67749DA2C21CF4800779858 /* EventApproachListRowBackgroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67749D92C21CF4800779858 /* EventApproachListRowBackgroundModifier.swift */; };
+		B6A4A3DD2CE2A9D8005BFB6A /* EventRecordTimeMileageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A4A3DC2CE2A9BA005BFB6A /* EventRecordTimeMileageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		B67749D22C20622E00779858 /* EditEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEventView.swift; sourceTree = "<group>"; };
 		B67749D42C20704500779858 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		B67749D92C21CF4800779858 /* EventApproachListRowBackgroundModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventApproachListRowBackgroundModifier.swift; sourceTree = "<group>"; };
+		B6A4A3DC2CE2A9BA005BFB6A /* EventRecordTimeMileageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRecordTimeMileageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +181,7 @@
 		B62941D12C1F7992003AA4FA /* event */ = {
 			isa = PBXGroup;
 			children = (
+				B6A4A3DC2CE2A9BA005BFB6A /* EventRecordTimeMileageView.swift */,
 				B67749CE2C20293600779858 /* CreateEventView.swift */,
 				B67749D22C20622E00779858 /* EditEventView.swift */,
 				B62941D62C1F913C003AA4FA /* EventRowView.swift */,
@@ -308,6 +311,7 @@
 				B67749D52C20704500779858 /* EventView.swift in Sources */,
 				B62941B32C1B354B003AA4FA /* VehicleDiaryApp.swift in Sources */,
 				B67749CF2C20293600779858 /* CreateEventView.swift in Sources */,
+				B6A4A3DD2CE2A9D8005BFB6A /* EventRecordTimeMileageView.swift in Sources */,
 				B67749D12C20463800779858 /* SortableEventsListView.swift in Sources */,
 				B67749CD2C20235500779858 /* EventTimeMillageView.swift in Sources */,
 				B62941CE2C1C624A003AA4FA /* CreateVehicleView.swift in Sources */,
