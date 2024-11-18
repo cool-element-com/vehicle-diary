@@ -16,71 +16,21 @@ struct EventTimeMileageView: View {
     }
 
     @Environment(\.locale) private var locale
-    let event: VEvent
-    let occurrence: Occurrence
+    private let viewModel: ViewModel
 
-    var title: String {
-        let result: String
-        switch occurrence {
-        case .recorded:
-            result = "recorded"
-        case .upcoming:
-            result = "upcoming"
-        case .completed:
-            result = "completed"
-        }
-        return result.uppercased()
-    }
-    var dateString: String {
-        let result: String
-        switch occurrence {
-        case .recorded:
-            result = event.recordedDateString()
-        case .upcoming:
-            result = event.upcomingDateString()
-        case .completed:
-            result = event.completedDateString()
-        }
-        return result
-    }
-    var mileageMeasurementString: String {
-        let result: String
-        switch occurrence {
-        case .recorded:
-            result = event.recordedMileageMeasurementString()
-        case .upcoming:
-            result = event.upcomingMileageMeasurementString()
-        case .completed:
-            result = event.completedMileageMeasurementString()
-        }
-        return result
-    }
-    var backgroundColor: Color {
-        let color: Color
-        switch occurrence {
-        case .recorded:
-            color = Color(uiColor: .lightGray)
-        case .upcoming:
-            let approaching: [VEvent.Approach] = [
-                .inDays,
-                .afterMileage,
-                .bothDaysAndMileage
-            ]
-
-            if approaching.contains(event.approach) {
-                color = .red
-            } else {
-                color = .green
-            }
-        case .completed:
-            color = Color(uiColor: .darkGray)
-        }
-        return color
+    init(
+        event: VEvent,
+        occurrence: Occurrence
+    ) {
+        self.viewModel = ViewModel(
+            event: event,
+            occurrence: occurrence
+        )
     }
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(title)
+            Text(viewModel.title)
                 .padding(.vertical, 2)
                 .font(.caption2)
                 .fontWeight(.none)
@@ -90,7 +40,7 @@ struct EventTimeMileageView: View {
                     .font(.caption2)
                     .fontWeight(.light)
                 Spacer()
-                Text(dateString)
+                Text(viewModel.dateString)
             }
             .font(.caption)
             .fontWeight(.medium)
@@ -100,7 +50,7 @@ struct EventTimeMileageView: View {
                     .font(.caption2)
                     .fontWeight(.light)
                 Spacer()
-                Text(mileageMeasurementString)
+                Text(viewModel.mileageMeasurementString)
             }
             .font(.caption)
             .fontWeight(.medium)
@@ -111,8 +61,76 @@ struct EventTimeMileageView: View {
         .padding(.horizontal, 8)
         .background(content: {
             RoundedRectangle(cornerRadius: 4)
-                .fill(backgroundColor.opacity(0.25))
+                .fill(viewModel.backgroundColor.opacity(0.25))
         })
+    }
+}
+
+extension EventTimeMileageView {
+    fileprivate struct ViewModel {
+        let event: VEvent
+        let occurrence: EventTimeMileageView.Occurrence
+
+        var title: String {
+            let result: String
+            switch occurrence {
+            case .recorded:
+                result = "recorded"
+            case .upcoming:
+                result = "upcoming"
+            case .completed:
+                result = "completed"
+            }
+            return result.uppercased()
+        }
+
+        var dateString: String {
+            let result: String
+            switch occurrence {
+            case .recorded:
+                result = event.recordedDateString()
+            case .upcoming:
+                result = event.upcomingDateString()
+            case .completed:
+                result = event.completedDateString()
+            }
+            return result
+        }
+
+        var mileageMeasurementString: String {
+            let result: String
+            switch occurrence {
+            case .recorded:
+                result = event.recordedMileageMeasurementString()
+            case .upcoming:
+                result = event.upcomingMileageMeasurementString()
+            case .completed:
+                result = event.completedMileageMeasurementString()
+            }
+            return result
+        }
+        var backgroundColor: Color {
+            let color: Color
+            switch occurrence {
+            case .recorded:
+                color = Color(uiColor: .lightGray)
+            case .upcoming:
+                let approaching: [VEvent.Approach] = [
+                    .inDays,
+                    .afterMileage,
+                    .bothDaysAndMileage
+                ]
+
+                if approaching.contains(event.approach) {
+                    color = .red
+                } else {
+                    color = .green
+                }
+            case .completed:
+                color = Color(uiColor: .darkGray)
+            }
+            return color
+        }
     }
 }
 
