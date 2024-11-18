@@ -116,7 +116,32 @@ struct EventTimeMileageView: View {
     }
 }
 
-#Preview {
+#Preview("EventTimeMileageView") {
+    let event = VEvent(name: "Test Name", recordedDate: .now)
+    VStack {
+        EventTimeMileageView(event: event, occurrence: .completed)
+        EventTimeMileageView(event: event, occurrence: .upcoming)
+        EventTimeMileageView(event: event, occurrence: .recorded)
+    }
+
+}
+
+#Preview("upcoming EventTimeMileageView") {
+    let event = VEvent(name: "Test Name", recordedDate: .now)
+    EventTimeMileageView(event: event, occurrence: .upcoming)
+}
+
+#Preview("recorded EventTimeMileageView") {
+    let event = VEvent(name: "Test Name", recordedDate: .now)
+    EventTimeMileageView(event: event, occurrence: .recorded)
+}
+
+#Preview("completed EventTimeMileageView") {
+    let event = VEvent(name: "Test Name", recordedDate: .now)
+    EventTimeMileageView(event: event, occurrence: .completed)
+}
+
+#Preview("2 events in a list") {
     do {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: Vehicle.self, migrationPlan: .none, configurations: config)
@@ -129,7 +154,7 @@ struct EventTimeMileageView: View {
         )
         container.mainContext.insert(vehicle)
 
-        for number in 0..<1 {
+        for number in 0..<2 {
             let numberDouble = Double(number)
             let event = VEvent(
                 name: "Event \(number)",

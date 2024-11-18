@@ -16,3 +16,7 @@ struct EventRecordTimeMileageView: View {
         Text("EventRecordTimeMileageView")
     }
 }
+
+#Preview {
+    EventRecordTimeMileageView()
+}

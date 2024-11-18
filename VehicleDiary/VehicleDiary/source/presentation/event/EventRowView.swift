@@ -39,6 +39,51 @@ struct EventRowView: View {
     }
 }
 
+#Preview("EventRowView") {
+        let event = VEvent(
+            name: "test event",
+            comment: """
+this is a comment for a long event, new line is also very important new line is also very important, new line is also very important
+as third line as well
+""" ,
+            recordedDate: Date.init(timeIntervalSinceNow: Double.random(in: 100000...1000000)),
+            upcomingDate: nil,
+            recordedMileage: Double.random(in: 5000...12000),
+            upcomingMileage: Double.random(in: 10000...10200),
+            isCompleted: false)
+        return EventRowView(event: event)
+}
+
+#Preview("EventRowView1") {
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: Vehicle.self, migrationPlan: .none, configurations: config)
+        let vehicle = Vehicle(
+            brand: "Subaru",
+            model: "Outback",
+            comment: "hello",
+            mileage: 10000,
+            id: UUID().uuidString
+        )
+        container.mainContext.insert(vehicle)
+        let event = VEvent(
+            name: "test event",
+            comment: """
+this is a comment for a long event, new line is also very important new line is also very important, new line is also very important
+as third line as well
+""" ,
+            recordedDate: Date.init(timeIntervalSinceNow: Double.random(in: 100000...1000000)),
+            upcomingDate: nil,
+            recordedMileage: Double.random(in: 5000...12000),
+            upcomingMileage: Double.random(in: 10000...10200),
+            isCompleted: false)
+        vehicle.events?.append(event)
+        return EventRowView(event: event)
+    } catch {
+        return Text("Failed to create preview: \(error.localizedDescription)")
+    }
+}
+
 #Preview {
     do {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
