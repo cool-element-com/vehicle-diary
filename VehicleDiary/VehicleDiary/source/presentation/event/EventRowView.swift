@@ -16,15 +16,21 @@ struct EventRowView: View {
             VStack(alignment: .leading) {
                 Text(event.name)
                     .font(.title3.bold())
+                    .padding(.bottom, 2)
                 if !event.unwrappedComment.isEmpty {
                     Text(event.unwrappedComment)
                         .font(.caption)
                         .lineLimit(2)
-                        .padding(.horizontal, 4)
+                        .padding(.horizontal, 8)
                 }
             }
-            .padding(.vertical, 0)
-            EventTimeMileageView(event: event, occurrence: .recorded)
+            .padding(.bottom, 4)
+
+            EventTimeMileageView(
+                event: event,
+                occurrence: .recorded
+            )
+            .padding(.horizontal, 8)
         }
         .dynamicTypeSize(...DynamicTypeSize.large)
     }

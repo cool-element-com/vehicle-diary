@@ -30,11 +30,6 @@ struct EventTimeMileageView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(viewModel.title)
-                .padding(.vertical, 2)
-                .font(.caption2)
-                .fontWeight(.none)
-
             HStack(alignment: .firstTextBaseline) {
                 Text("date".uppercased())
                     .font(.caption2)
@@ -56,13 +51,7 @@ struct EventTimeMileageView: View {
             .fontWeight(.medium)
         }
         .dynamicTypeSize(...DynamicTypeSize.large)
-        .frame(height: 60)
-        .padding(.vertical, 2)
-        .padding(.horizontal, 8)
-        .background(content: {
-            RoundedRectangle(cornerRadius: 4)
-                .fill(viewModel.backgroundColor.opacity(0.25))
-        })
+        .padding(.vertical, 0)
     }
 }
 
@@ -70,19 +59,6 @@ extension EventTimeMileageView {
     fileprivate struct ViewModel {
         let event: VEvent
         let occurrence: EventTimeMileageView.Occurrence
-
-        var title: String {
-            let result: String
-            switch occurrence {
-            case .recorded:
-                result = "recorded"
-            case .upcoming:
-                result = "upcoming"
-            case .completed:
-                result = "completed"
-            }
-            return result.uppercased()
-        }
 
         var dateString: String {
             let result: String
