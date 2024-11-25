@@ -9,10 +9,8 @@ import SwiftUI
 
 struct Theme {
     let colors: [SwiftUI.Color] = Theme.Color.all
-    let elementConfig: [Theme.Configuration] = [
-        .completedEventCard,
-        .pendingEventCard
-    ]
+    let completedEventConfig = Theme.Configuration.completedEventCard
+    let pendingEventConfig = Theme.Configuration.pendingEventCard
 
     private init() {}
 

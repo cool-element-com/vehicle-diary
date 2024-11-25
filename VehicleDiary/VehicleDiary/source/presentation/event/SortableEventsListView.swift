@@ -29,9 +29,9 @@ struct SortableEventsListView: View {
 
     private func backgroundColor(for event: VEvent) -> Color {
         if event.isCompleted {
-            return .green
+            return Theme.default.completedEventConfig.backgroundColor
         } else {
-            return .red
+            return Theme.default.pendingEventConfig.backgroundColor
         }
     }
 
