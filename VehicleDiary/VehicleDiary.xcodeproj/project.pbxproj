@@ -24,6 +24,8 @@
 		B62941D72C1F913C003AA4FA /* EventRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62941D62C1F913C003AA4FA /* EventRowView.swift */; };
 		B63609B32C22FFAB002664C0 /* AppTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63609B22C22FFAB002664C0 /* AppTabView.swift */; };
 		B63609B62C23047F002664C0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63609B52C23047F002664C0 /* SettingsView.swift */; };
+		B670E5552CF4BA2C00C776D2 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B670E5542CF4BA2500C776D2 /* Theme.swift */; };
+		B670E5582CF4C03E00C776D2 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B670E5572CF4C03400C776D2 /* Color+Extensions.swift */; };
 		B67749CD2C20235500779858 /* EventTimeMillageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67749CC2C20235500779858 /* EventTimeMillageView.swift */; };
 		B67749CF2C20293600779858 /* CreateEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67749CE2C20293600779858 /* CreateEventView.swift */; };
 		B67749D12C20463800779858 /* SortableEventsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67749D02C20463800779858 /* SortableEventsListView.swift */; };
@@ -53,6 +55,8 @@
 		B62941D62C1F913C003AA4FA /* EventRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRowView.swift; sourceTree = "<group>"; };
 		B63609B22C22FFAB002664C0 /* AppTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabView.swift; sourceTree = "<group>"; };
 		B63609B52C23047F002664C0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B670E5542CF4BA2500C776D2 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		B670E5572CF4C03400C776D2 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		B67749CC2C20235500779858 /* EventTimeMillageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTimeMillageView.swift; sourceTree = "<group>"; };
 		B67749CE2C20293600779858 /* CreateEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventView.swift; sourceTree = "<group>"; };
 		B67749D02C20463800779858 /* SortableEventsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortableEventsListView.swift; sourceTree = "<group>"; };
@@ -152,6 +156,7 @@
 		B62941C42C1B3E1A003AA4FA /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				B670E5562CF4C02E00C776D2 /* extensions */,
 				B67749D62C207BE500779858 /* modifier */,
 				B62941D42C1F87D3003AA4FA /* Constants.swift */,
 			);
@@ -196,6 +201,7 @@
 		B63609B12C22FF7C002664C0 /* app */ = {
 			isa = PBXGroup;
 			children = (
+				B670E5542CF4BA2500C776D2 /* Theme.swift */,
 				B63609B22C22FFAB002664C0 /* AppTabView.swift */,
 				B61050582C237B6900674AD5 /* AppIcon.swift */,
 			);
@@ -208,6 +214,14 @@
 				B63609B52C23047F002664C0 /* SettingsView.swift */,
 			);
 			path = settings;
+			sourceTree = "<group>";
+		};
+		B670E5562CF4C02E00C776D2 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B670E5572CF4C03400C776D2 /* Color+Extensions.swift */,
+			);
+			path = extensions;
 			sourceTree = "<group>";
 		};
 		B67749D62C207BE500779858 /* modifier */ = {
@@ -301,8 +315,10 @@
 				B63609B62C23047F002664C0 /* SettingsView.swift in Sources */,
 				B61050592C237B6900674AD5 /* AppIcon.swift in Sources */,
 				B62941D52C1F87D3003AA4FA /* Constants.swift in Sources */,
+				B670E5552CF4BA2C00C776D2 /* Theme.swift in Sources */,
 				B62941D72C1F913C003AA4FA /* EventRowView.swift in Sources */,
 				B67749DA2C21CF4800779858 /* EventApproachListRowBackgroundModifier.swift in Sources */,
+				B670E5582CF4C03E00C776D2 /* Color+Extensions.swift in Sources */,
 				B62941D32C1F79AC003AA4FA /* EventsListView.swift in Sources */,
 				B67749D32C20622E00779858 /* EditEventView.swift in Sources */,
 				B62941C72C1B3F68003AA4FA /* Vehicle.swift in Sources */,
