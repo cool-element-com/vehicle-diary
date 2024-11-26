@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct Theme {
-    let colors: [SwiftUI.Color] = Theme.Color.all
     let completedEventConfig = Theme.Configuration.completedEventCard
     let pendingEventConfig = Theme.Configuration.pendingEventCard
+    let defaultConfig = Theme.Configuration.default
 
     private init() {}
 
@@ -19,19 +19,11 @@ struct Theme {
 
 extension Theme {
     enum Color {
-        static let color_0 = SwiftUI.Color(hex: "#8ECAE6")
-        static let color_1 = SwiftUI.Color(hex: "#219EBC")
-        static let color_2 = SwiftUI.Color(hex: "#023047")
-        static let color_3 = SwiftUI.Color(hex: "#FFB703")
-        static let color_4 = SwiftUI.Color(hex: "#FB8500")
-
-        static let all: [SwiftUI.Color] = [
-            color_0,
-            color_1,
-            color_2,
-            color_3,
-            color_4
-        ]
+        static let dustyBlue = SwiftUI.Color(.dustyBlue)
+        static let riverBlue = SwiftUI.Color(.riverBlue)
+        static let naviBlue = SwiftUI.Color(.naviBlue)
+        static let sandman = SwiftUI.Color(.sandman)
+        static let orangejuice = SwiftUI.Color(.orangeJuice)
     }
 }
 
@@ -52,15 +44,21 @@ extension Theme {
         }
 
         static let completedEventCard: Theme.Configuration = .init(
-            backgroundColor: Theme.Color.color_0,
-            foregroundColor: Theme.Color.color_1,
-            textColor: Theme.Color.color_2
+            backgroundColor: Theme.Color.dustyBlue,
+            foregroundColor: Theme.Color.riverBlue,
+            textColor: Theme.Color.naviBlue
         )
 
         static let pendingEventCard: Theme.Configuration = .init(
-            backgroundColor: Theme.Color.color_3,
-            foregroundColor: Theme.Color.color_4,
-            textColor: Theme.Color.color_2
+            backgroundColor: Theme.Color.orangejuice,
+            foregroundColor: Theme.Color.sandman,
+            textColor: Theme.Color.naviBlue
+        )
+
+        static let `default`: Theme.Configuration = .init(
+            backgroundColor: Theme.Color.dustyBlue,
+            foregroundColor: Theme.Color.riverBlue,
+            textColor: Theme.Color.naviBlue
         )
     }
 }

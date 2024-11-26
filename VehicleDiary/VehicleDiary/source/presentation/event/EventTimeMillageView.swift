@@ -15,6 +15,10 @@ struct EventTimeMileageView: View {
         case completed
     }
 
+    private var textColor: Color {
+        Theme.default.defaultConfig.textColor
+    }
+
     @Environment(\.locale) private var locale
     private let viewModel: ViewModel
 
@@ -34,8 +38,10 @@ struct EventTimeMileageView: View {
                 Text("date".uppercased())
                     .font(.caption2)
                     .fontWeight(.light)
+                    .foregroundStyle(textColor)
                 Spacer()
                 Text(viewModel.dateString)
+                    .foregroundStyle(textColor)
             }
             .font(.caption)
             .fontWeight(.medium)
@@ -44,8 +50,10 @@ struct EventTimeMileageView: View {
                 Text("mileage".uppercased())
                     .font(.caption2)
                     .fontWeight(.light)
+                    .foregroundStyle(textColor)
                 Spacer()
                 Text(viewModel.mileageMeasurementString)
+                    .foregroundStyle(textColor)
             }
             .font(.caption)
             .fontWeight(.medium)

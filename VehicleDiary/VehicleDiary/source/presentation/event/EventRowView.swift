@@ -11,15 +11,24 @@ import SwiftData
 struct EventRowView: View {
     let event: VEvent
 
+    private var textColorPrimary: Color {
+        Theme.default.defaultConfig.textColor
+    }
+    private var textColorSecondary: Color {
+        Theme.default.defaultConfig.foregroundColor
+    }
+
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
                 Text(event.name)
                     .font(.title3.bold())
+                    .foregroundStyle(textColorPrimary)
                     .padding(.bottom, 2)
                 if !event.unwrappedComment.isEmpty {
                     Text(event.unwrappedComment)
                         .font(.caption)
+                        .foregroundStyle(textColorSecondary)
                         .lineLimit(2)
                         .padding(.horizontal, 8)
                 }
@@ -30,9 +39,10 @@ struct EventRowView: View {
                 event: event,
                 occurrence: .recorded
             )
-            .padding(.horizontal, 8)
+            .padding(.horizontal, 0)
         }
         .dynamicTypeSize(...DynamicTypeSize.large)
+        .padding(0)
     }
 }
 

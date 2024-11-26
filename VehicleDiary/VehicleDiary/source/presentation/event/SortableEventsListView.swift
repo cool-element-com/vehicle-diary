@@ -29,9 +29,9 @@ struct SortableEventsListView: View {
 
     private func backgroundColor(for event: VEvent) -> Color {
         if event.isCompleted {
-            return Theme.default.completedEventConfig.backgroundColor
+            return Theme.default.completedEventConfig.backgroundColor.opacity(0.1)
         } else {
-            return Theme.default.pendingEventConfig.backgroundColor
+            return Theme.default.pendingEventConfig.backgroundColor.opacity(0.1)
         }
     }
 
@@ -58,6 +58,16 @@ struct SortableEventsListView: View {
             .onDelete(perform: { indexSet in
                 deleteEvent(at: indexSet)
             })
+            .listRowSeparator(.hidden)
+            .listRowInsets(
+                EdgeInsets(
+                    top: 4,
+                    leading: 16,
+                    bottom: 4,
+                    trailing: 16
+                )
+            )
+
         }
         .navigationDestination(for: VEvent.self) { event in
             EventView(event: event)
