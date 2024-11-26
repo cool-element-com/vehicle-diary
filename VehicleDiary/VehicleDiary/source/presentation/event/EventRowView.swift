@@ -25,21 +25,21 @@ struct EventRowView: View {
                     .font(.title3.bold())
                     .foregroundStyle(textColorPrimary)
                     .padding(.bottom, 2)
+                EventTimeMileageView(
+                    event: event,
+                    occurrence: .recorded
+                )
+                .padding(.horizontal, 0)
+                .padding(.bottom, 4)
                 if !event.unwrappedComment.isEmpty {
                     Text(event.unwrappedComment)
                         .font(.caption)
-                        .foregroundStyle(textColorSecondary)
+                        .foregroundStyle(textColorPrimary.opacity(0.65))
                         .lineLimit(2)
                         .padding(.horizontal, 8)
                 }
             }
             .padding(.bottom, 4)
-
-            EventTimeMileageView(
-                event: event,
-                occurrence: .recorded
-            )
-            .padding(.horizontal, 0)
         }
         .dynamicTypeSize(...DynamicTypeSize.large)
         .padding(0)

@@ -37,7 +37,6 @@ struct EventTimeMileageView: View {
             HStack(alignment: .firstTextBaseline) {
                 Text("date".uppercased())
                     .font(.caption2)
-                    .fontWeight(.light)
                     .foregroundStyle(textColor)
                 Spacer()
                 Text(viewModel.dateString)
@@ -49,7 +48,6 @@ struct EventTimeMileageView: View {
             HStack(alignment: .firstTextBaseline) {
                 Text("mileage".uppercased())
                     .font(.caption2)
-                    .fontWeight(.light)
                     .foregroundStyle(textColor)
                 Spacer()
                 Text(viewModel.mileageMeasurementString)
@@ -58,6 +56,7 @@ struct EventTimeMileageView: View {
             .font(.caption)
             .fontWeight(.medium)
         }
+        .fontWeight(.thin)
         .dynamicTypeSize(...DynamicTypeSize.large)
         .padding(.vertical, 0)
     }
