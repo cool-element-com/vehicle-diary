@@ -27,6 +27,14 @@ struct SortableEventsListView: View {
         }
     }
 
+    private func backgroundColor(for event: VEvent) -> Color {
+        if event.isCompleted {
+            return Theme.default.completedEventConfig.backgroundColor.opacity(0.1)
+        } else {
+            return Theme.default.pendingEventConfig.backgroundColor.opacity(0.1)
+        }
+    }
+
     var body: some View {
         List {
             ForEach(searchResults) { event in
@@ -41,10 +49,25 @@ struct SortableEventsListView: View {
                     }
                     .tint(.green)
                 }
+                .padding(8)
+                .background(
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(backgroundColor(for: event))
+                )
             }
             .onDelete(perform: { indexSet in
                 deleteEvent(at: indexSet)
             })
+            .listRowSeparator(.hidden)
+            .listRowInsets(
+                EdgeInsets(
+                    top: 4,
+                    leading: 16,
+                    bottom: 4,
+                    trailing: 16
+                )
+            )
+
         }
         .navigationDestination(for: VEvent.self) { event in
             EventView(event: event)
@@ -145,7 +168,8 @@ as third line as well
                 recordedDate: Date.init(timeIntervalSinceNow: Double.random(in: 10_000...1_000_000_000) + 100 * numberDouble),
                 upcomingDate: Date(timeIntervalSinceNow: Double.random(in: 10_000...1_000_000_000) + 1_000 * numberDouble),
                 recordedMileage: Double.random(in: 1_000...10_000) + 1_203 * numberDouble,
-                upcomingMileage: Double.random(in: 10_000...10_500) + 1_230 * numberDouble
+                upcomingMileage: Double.random(in: 10_000...10_500) + 1_230 * numberDouble,
+                isCompleted: number.isMultiple(of: 2)
             )
             events.append(event)
         }

@@ -58,7 +58,23 @@ struct SettingsView: View {
                 }
             }
             .navigationTitle("Settings")
+            Text(infoText)
+                .fontWeight(.light)
+                .fontDesign(.monospaced)
+                .font(.system(size: 12))
         }
+    }
+
+    private var infoText: String {
+        let env = Utils.AppEnvironment.current
+        let result: String
+        switch env {
+            case .production:
+            result = "v\(BundleInfoProvider.vbNumber)"
+        case .development:
+            result = "v\(BundleInfoProvider.vbNumber) @ \(Utils.AppEnvironment.current.rawValue)"
+        }
+        return result
     }
 }
 

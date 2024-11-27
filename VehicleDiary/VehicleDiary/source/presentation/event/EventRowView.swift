@@ -11,31 +11,83 @@ import SwiftData
 struct EventRowView: View {
     let event: VEvent
 
+    private var textColorPrimary: Color {
+        Theme.default.defaultConfig.textColor
+    }
+    private var textColorSecondary: Color {
+        Theme.default.defaultConfig.foregroundColor
+    }
+
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
                 Text(event.name)
                     .font(.title3.bold())
+                    .foregroundStyle(textColorPrimary)
+                    .padding(.bottom, 2)
+                EventTimeMileageView(
+                    event: event,
+                    occurrence: .recorded
+                )
+                .padding(.horizontal, 0)
+                .padding(.bottom, 4)
                 if !event.unwrappedComment.isEmpty {
                     Text(event.unwrappedComment)
                         .font(.caption)
+                        .foregroundStyle(textColorPrimary.opacity(0.65))
                         .lineLimit(2)
-                        .padding(.horizontal, 4)
+                        .padding(.horizontal, 8)
                 }
             }
-            .padding(.vertical, 0)
-
-            HStack(alignment: .top) {
-                if event.isReoccurring {
-                    EventTimeMileageView(event: event, occurrence: .recorded)
-                    EventTimeMileageView(event: event, occurrence: event.isCompleted ? .completed : .upcoming)
-                } else {
-                    EventTimeMileageView(event: event, occurrence: .recorded)
-                }
-
-            }
+            .padding(.bottom, 4)
         }
         .dynamicTypeSize(...DynamicTypeSize.large)
+        .padding(0)
+    }
+}
+
+#Preview("EventRowView") {
+        let event = VEvent(
+            name: "test event",
+            comment: """
+this is a comment for a long event, new line is also very important new line is also very important, new line is also very important
+as third line as well
+""" ,
+            recordedDate: Date.init(timeIntervalSinceNow: Double.random(in: 100000...1000000)),
+            upcomingDate: nil,
+            recordedMileage: Double.random(in: 5000...12000),
+            upcomingMileage: Double.random(in: 10000...10200),
+            isCompleted: false)
+        return EventRowView(event: event)
+}
+
+#Preview("EventRowView1") {
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: Vehicle.self, migrationPlan: .none, configurations: config)
+        let vehicle = Vehicle(
+            brand: "Subaru",
+            model: "Outback",
+            comment: "hello",
+            mileage: 10000,
+            id: UUID().uuidString
+        )
+        container.mainContext.insert(vehicle)
+        let event = VEvent(
+            name: "test event",
+            comment: """
+this is a comment for a long event, new line is also very important new line is also very important, new line is also very important
+as third line as well
+""" ,
+            recordedDate: Date.init(timeIntervalSinceNow: Double.random(in: 100000...1000000)),
+            upcomingDate: nil,
+            recordedMileage: Double.random(in: 5000...12000),
+            upcomingMileage: Double.random(in: 10000...10200),
+            isCompleted: false)
+        vehicle.events?.append(event)
+        return EventRowView(event: event)
+    } catch {
+        return Text("Failed to create preview: \(error.localizedDescription)")
     }
 }
 

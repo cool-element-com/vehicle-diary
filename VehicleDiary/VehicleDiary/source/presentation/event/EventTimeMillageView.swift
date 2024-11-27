@@ -15,82 +15,32 @@ struct EventTimeMileageView: View {
         case completed
     }
 
+    private var textColor: Color {
+        Theme.default.defaultConfig.textColor
+    }
+
     @Environment(\.locale) private var locale
-    let event: VEvent
-    let occurrence: Occurrence
+    private let viewModel: ViewModel
 
-    var title: String {
-        let result: String
-        switch occurrence {
-        case .recorded:
-            result = "recorded"
-        case .upcoming:
-            result = "upcoming"
-        case .completed:
-            result = "completed"
-        }
-        return result.uppercased()
-    }
-    var dateString: String {
-        let result: String
-        switch occurrence {
-        case .recorded:
-            result = event.recordedDateString()
-        case .upcoming:
-            result = event.upcomingDateString()
-        case .completed:
-            result = event.completedDateString()
-        }
-        return result
-    }
-    var mileageMeasurementString: String {
-        let result: String
-        switch occurrence {
-        case .recorded:
-            result = event.recordedMileageMeasurementString()
-        case .upcoming:
-            result = event.upcomingMileageMeasurementString()
-        case .completed:
-            result = event.completedMileageMeasurementString()
-        }
-        return result
-    }
-    var backgroundColor: Color {
-        let color: Color
-        switch occurrence {
-        case .recorded:
-            color = Color(uiColor: .lightGray)
-        case .upcoming:
-            let approaching: [VEvent.Approach] = [
-                .inDays,
-                .afterMileage,
-                .bothDaysAndMileage
-            ]
-
-            if approaching.contains(event.approach) {
-                color = .red
-            } else {
-                color = .green
-            }
-        case .completed:
-            color = Color(uiColor: .darkGray)
-        }
-        return color
+    init(
+        event: VEvent,
+        occurrence: Occurrence
+    ) {
+        self.viewModel = ViewModel(
+            event: event,
+            occurrence: occurrence
+        )
     }
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(title)
-                .padding(.vertical, 2)
-                .font(.caption2)
-                .fontWeight(.none)
-
             HStack(alignment: .firstTextBaseline) {
                 Text("date".uppercased())
                     .font(.caption2)
-                    .fontWeight(.light)
+                    .foregroundStyle(textColor)
                 Spacer()
-                Text(dateString)
+                Text(viewModel.dateString)
+                    .foregroundStyle(textColor)
             }
             .font(.caption)
             .fontWeight(.medium)
@@ -98,25 +48,101 @@ struct EventTimeMileageView: View {
             HStack(alignment: .firstTextBaseline) {
                 Text("mileage".uppercased())
                     .font(.caption2)
-                    .fontWeight(.light)
+                    .foregroundStyle(textColor)
                 Spacer()
-                Text(mileageMeasurementString)
+                Text(viewModel.mileageMeasurementString)
+                    .foregroundStyle(textColor)
             }
             .font(.caption)
             .fontWeight(.medium)
         }
+        .fontWeight(.thin)
         .dynamicTypeSize(...DynamicTypeSize.large)
-        .frame(height: 60)
-        .padding(.vertical, 2)
-        .padding(.horizontal, 8)
-        .background(content: {
-            RoundedRectangle(cornerRadius: 4)
-                .fill(backgroundColor.opacity(0.25))
-        })
+        .padding(.vertical, 0)
     }
 }
 
-#Preview {
+extension EventTimeMileageView {
+    fileprivate struct ViewModel {
+        let event: VEvent
+        let occurrence: EventTimeMileageView.Occurrence
+
+        var dateString: String {
+            let result: String
+            switch occurrence {
+            case .recorded:
+                result = event.recordedDateString()
+            case .upcoming:
+                result = event.upcomingDateString()
+            case .completed:
+                result = event.completedDateString()
+            }
+            return result
+        }
+
+        var mileageMeasurementString: String {
+            let result: String
+            switch occurrence {
+            case .recorded:
+                result = event.recordedMileageMeasurementString()
+            case .upcoming:
+                result = event.upcomingMileageMeasurementString()
+            case .completed:
+                result = event.completedMileageMeasurementString()
+            }
+            return result
+        }
+        var backgroundColor: Color {
+            let color: Color
+            switch occurrence {
+            case .recorded:
+                color = Color(uiColor: .lightGray)
+            case .upcoming:
+                let approaching: [VEvent.Approach] = [
+                    .inDays,
+                    .afterMileage,
+                    .bothDaysAndMileage
+                ]
+
+                if approaching.contains(event.approach) {
+                    color = .red
+                } else {
+                    color = .green
+                }
+            case .completed:
+                color = Color(uiColor: .darkGray)
+            }
+            return color
+        }
+    }
+}
+
+#Preview("EventTimeMileageView") {
+    let event = VEvent(name: "Test Name", recordedDate: .now)
+    VStack {
+        EventTimeMileageView(event: event, occurrence: .completed)
+        EventTimeMileageView(event: event, occurrence: .upcoming)
+        EventTimeMileageView(event: event, occurrence: .recorded)
+    }
+
+}
+
+#Preview("upcoming EventTimeMileageView") {
+    let event = VEvent(name: "Test Name", recordedDate: .now)
+    EventTimeMileageView(event: event, occurrence: .upcoming)
+}
+
+#Preview("recorded EventTimeMileageView") {
+    let event = VEvent(name: "Test Name", recordedDate: .now)
+    EventTimeMileageView(event: event, occurrence: .recorded)
+}
+
+#Preview("completed EventTimeMileageView") {
+    let event = VEvent(name: "Test Name", recordedDate: .now)
+    EventTimeMileageView(event: event, occurrence: .completed)
+}
+
+#Preview("2 events in a list") {
     do {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: Vehicle.self, migrationPlan: .none, configurations: config)
@@ -129,7 +155,7 @@ struct EventTimeMileageView: View {
         )
         container.mainContext.insert(vehicle)
 
-        for number in 0..<1 {
+        for number in 0..<2 {
             let numberDouble = Double(number)
             let event = VEvent(
                 name: "Event \(number)",

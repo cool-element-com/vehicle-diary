@@ -20,7 +20,7 @@ struct EventsListView: View {
     @State private var sortOrder = [
         SortDescriptor(\VEvent.recordedDate)
     ]
-    @State private var visibility: Visibility = .showNotCompleted
+    @State private var visibility: Visibility = .showAll
 
     var body: some View {
         SortableEventsListView(

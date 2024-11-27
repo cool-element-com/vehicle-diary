@@ -24,12 +24,17 @@
 		B62941D72C1F913C003AA4FA /* EventRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62941D62C1F913C003AA4FA /* EventRowView.swift */; };
 		B63609B32C22FFAB002664C0 /* AppTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63609B22C22FFAB002664C0 /* AppTabView.swift */; };
 		B63609B62C23047F002664C0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63609B52C23047F002664C0 /* SettingsView.swift */; };
+		B63AA8892CF71A53003D74E6 /* BundleInfoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63AA8882CF71A46003D74E6 /* BundleInfoProvider.swift */; };
+		B63AA88B2CF71E46003D74E6 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63AA88A2CF71E42003D74E6 /* Utils.swift */; };
+		B670E5552CF4BA2C00C776D2 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B670E5542CF4BA2500C776D2 /* Theme.swift */; };
+		B670E5582CF4C03E00C776D2 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B670E5572CF4C03400C776D2 /* Color+Extensions.swift */; };
 		B67749CD2C20235500779858 /* EventTimeMillageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67749CC2C20235500779858 /* EventTimeMillageView.swift */; };
 		B67749CF2C20293600779858 /* CreateEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67749CE2C20293600779858 /* CreateEventView.swift */; };
 		B67749D12C20463800779858 /* SortableEventsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67749D02C20463800779858 /* SortableEventsListView.swift */; };
 		B67749D32C20622E00779858 /* EditEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67749D22C20622E00779858 /* EditEventView.swift */; };
 		B67749D52C20704500779858 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67749D42C20704500779858 /* EventView.swift */; };
 		B67749DA2C21CF4800779858 /* EventApproachListRowBackgroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67749D92C21CF4800779858 /* EventApproachListRowBackgroundModifier.swift */; };
+		B6A4A3DD2CE2A9D8005BFB6A /* EventRecordTimeMileageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A4A3DC2CE2A9BA005BFB6A /* EventRecordTimeMileageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,12 +57,17 @@
 		B62941D62C1F913C003AA4FA /* EventRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRowView.swift; sourceTree = "<group>"; };
 		B63609B22C22FFAB002664C0 /* AppTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabView.swift; sourceTree = "<group>"; };
 		B63609B52C23047F002664C0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B63AA8882CF71A46003D74E6 /* BundleInfoProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleInfoProvider.swift; sourceTree = "<group>"; };
+		B63AA88A2CF71E42003D74E6 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		B670E5542CF4BA2500C776D2 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		B670E5572CF4C03400C776D2 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		B67749CC2C20235500779858 /* EventTimeMillageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTimeMillageView.swift; sourceTree = "<group>"; };
 		B67749CE2C20293600779858 /* CreateEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventView.swift; sourceTree = "<group>"; };
 		B67749D02C20463800779858 /* SortableEventsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortableEventsListView.swift; sourceTree = "<group>"; };
 		B67749D22C20622E00779858 /* EditEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEventView.swift; sourceTree = "<group>"; };
 		B67749D42C20704500779858 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		B67749D92C21CF4800779858 /* EventApproachListRowBackgroundModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventApproachListRowBackgroundModifier.swift; sourceTree = "<group>"; };
+		B6A4A3DC2CE2A9BA005BFB6A /* EventRecordTimeMileageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRecordTimeMileageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,8 +160,11 @@
 		B62941C42C1B3E1A003AA4FA /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				B63AA88A2CF71E42003D74E6 /* Utils.swift */,
+				B670E5562CF4C02E00C776D2 /* extensions */,
 				B67749D62C207BE500779858 /* modifier */,
 				B62941D42C1F87D3003AA4FA /* Constants.swift */,
+				B63AA8882CF71A46003D74E6 /* BundleInfoProvider.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -179,6 +192,7 @@
 		B62941D12C1F7992003AA4FA /* event */ = {
 			isa = PBXGroup;
 			children = (
+				B6A4A3DC2CE2A9BA005BFB6A /* EventRecordTimeMileageView.swift */,
 				B67749CE2C20293600779858 /* CreateEventView.swift */,
 				B67749D22C20622E00779858 /* EditEventView.swift */,
 				B62941D62C1F913C003AA4FA /* EventRowView.swift */,
@@ -193,6 +207,7 @@
 		B63609B12C22FF7C002664C0 /* app */ = {
 			isa = PBXGroup;
 			children = (
+				B670E5542CF4BA2500C776D2 /* Theme.swift */,
 				B63609B22C22FFAB002664C0 /* AppTabView.swift */,
 				B61050582C237B6900674AD5 /* AppIcon.swift */,
 			);
@@ -205,6 +220,14 @@
 				B63609B52C23047F002664C0 /* SettingsView.swift */,
 			);
 			path = settings;
+			sourceTree = "<group>";
+		};
+		B670E5562CF4C02E00C776D2 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B670E5572CF4C03400C776D2 /* Color+Extensions.swift */,
+			);
+			path = extensions;
 			sourceTree = "<group>";
 		};
 		B67749D62C207BE500779858 /* modifier */ = {
@@ -292,14 +315,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B63AA8892CF71A53003D74E6 /* BundleInfoProvider.swift in Sources */,
 				B62941C92C1B4040003AA4FA /* VEvent.swift in Sources */,
 				B62941D02C1C8A10003AA4FA /* EditVehicleView.swift in Sources */,
 				B62941CC2C1C5609003AA4FA /* VehicleRowView.swift in Sources */,
 				B63609B62C23047F002664C0 /* SettingsView.swift in Sources */,
 				B61050592C237B6900674AD5 /* AppIcon.swift in Sources */,
 				B62941D52C1F87D3003AA4FA /* Constants.swift in Sources */,
+				B670E5552CF4BA2C00C776D2 /* Theme.swift in Sources */,
 				B62941D72C1F913C003AA4FA /* EventRowView.swift in Sources */,
 				B67749DA2C21CF4800779858 /* EventApproachListRowBackgroundModifier.swift in Sources */,
+				B670E5582CF4C03E00C776D2 /* Color+Extensions.swift in Sources */,
 				B62941D32C1F79AC003AA4FA /* EventsListView.swift in Sources */,
 				B67749D32C20622E00779858 /* EditEventView.swift in Sources */,
 				B62941C72C1B3F68003AA4FA /* Vehicle.swift in Sources */,
@@ -307,7 +333,9 @@
 				B63609B32C22FFAB002664C0 /* AppTabView.swift in Sources */,
 				B67749D52C20704500779858 /* EventView.swift in Sources */,
 				B62941B32C1B354B003AA4FA /* VehicleDiaryApp.swift in Sources */,
+				B63AA88B2CF71E46003D74E6 /* Utils.swift in Sources */,
 				B67749CF2C20293600779858 /* CreateEventView.swift in Sources */,
+				B6A4A3DD2CE2A9D8005BFB6A /* EventRecordTimeMileageView.swift in Sources */,
 				B67749D12C20463800779858 /* SortableEventsListView.swift in Sources */,
 				B67749CD2C20235500779858 /* EventTimeMillageView.swift in Sources */,
 				B62941CE2C1C624A003AA4FA /* CreateVehicleView.swift in Sources */,
@@ -439,6 +467,7 @@
 		B62941BE2C1B354D003AA4FA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APP_ENVIRONMENT = DEBUG;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = VehicleDiary/VehicleDiary.entitlements;
@@ -477,6 +506,7 @@
 		B62941BF2C1B354D003AA4FA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APP_ENVIRONMENT = RELEASE;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = VehicleDiary/VehicleDiary.entitlements;
