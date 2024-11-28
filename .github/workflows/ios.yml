@@ -14,15 +14,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Navigate to iOS project directory
-        run: | 
-          cd iOS/VehicleDiary
       - name: Set Default Scheme
         run: |
           echo "Setting default scheme"
           pwd
           ls -aril
+          cd iOS/VehicleDiary
+          pwd
+          ls -aril
           git status
+
           # scheme_list=$(xcodebuild -list -json | tr -d "\n")
           # echo $scheme_list
           # default=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['targets'][0]")
