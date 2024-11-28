@@ -12,10 +12,22 @@ struct EventRowView: View {
     let event: VEvent
 
     private var textColorPrimary: Color {
-        Theme.default.defaultConfig.textColor
+        var result: Color
+        if event.isCompleted {
+            result = Theme.default.completedEventConfig.textColor
+        } else {
+            result = Theme.default.pendingEventConfig.textColor
+        }
+        return result
     }
     private var textColorSecondary: Color {
-        Theme.default.defaultConfig.foregroundColor
+        let result: Color
+        if event.isCompleted {
+            result = Theme.default.completedEventConfig.foregroundColor
+        } else {
+            result = Theme.default.pendingEventConfig.foregroundColor
+        }
+        return result
     }
 
     var body: some View {

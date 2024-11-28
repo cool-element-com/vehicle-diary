@@ -16,7 +16,13 @@ struct EventTimeMileageView: View {
     }
 
     private var textColor: Color {
-        Theme.default.defaultConfig.textColor
+        var result: Color
+        if viewModel.event.isCompleted {
+            result = Theme.default.completedEventConfig.textColor
+        } else {
+            result = Theme.default.pendingEventConfig.textColor
+        }
+        return result
     }
 
     @Environment(\.locale) private var locale
