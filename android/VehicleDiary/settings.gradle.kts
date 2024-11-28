@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "VehicleDiary"
 include(":app")
+ 
