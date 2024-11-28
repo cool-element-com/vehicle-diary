@@ -29,9 +29,9 @@ struct SortableEventsListView: View {
 
     private func backgroundColor(for event: VEvent) -> Color {
         if event.isCompleted {
-            return Theme.default.completedEventConfig.backgroundColor.opacity(0.1)
+            return Theme.default.completedEventConfig.backgroundColor.opacity(0.2)
         } else {
-            return Theme.default.pendingEventConfig.backgroundColor.opacity(0.1)
+            return Theme.default.pendingEventConfig.backgroundColor.opacity(0.2)
         }
     }
 

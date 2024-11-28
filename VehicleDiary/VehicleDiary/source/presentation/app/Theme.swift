@@ -46,19 +46,19 @@ extension Theme {
         static let completedEventCard: Theme.Configuration = .init(
             backgroundColor: Theme.Color.dustyBlue,
             foregroundColor: Theme.Color.riverBlue,
-            textColor: Theme.Color.naviBlue
+            textColor: Theme.Color.riverBlue
         )
 
         static let pendingEventCard: Theme.Configuration = .init(
             backgroundColor: Theme.Color.orangejuice,
             foregroundColor: Theme.Color.sandman,
-            textColor: Theme.Color.naviBlue
+            textColor: Theme.Color.sandman
         )
 
         static let `default`: Theme.Configuration = .init(
             backgroundColor: Theme.Color.dustyBlue,
             foregroundColor: Theme.Color.riverBlue,
-            textColor: Theme.Color.naviBlue
+            textColor: Theme.Color.riverBlue
         )
     }
 }
