@@ -11,32 +11,37 @@ struct AppIcon: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .fill(
-                    .linearGradient(
-                        colors: [
-                            Color(red: 25/255, green: 215/255, blue: 255/255),
-                            Color(red: 4/255, green: 8/255, blue: 255/255)
-                        ],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
+                .fill(.black)
+                .ignoresSafeArea()
+            ZStack {
+                Rectangle()
+                    .fill(
+                        .linearGradient(
+                            colors: [
+                                SwiftUI.Color(.black).opacity(0.12),
+                                SwiftUI.Color(.black).opacity(0.12)
+                            ],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
                     )
-                )
-            Image(systemName: "book.pages")
-                .resizable()
-                .scaledToFit()
-                .padding(40)
-                .foregroundStyle(
-                    .linearGradient(
-                        colors: [
-                            .white,
-                            .blue.opacity(0.2)
-                        ],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
+                Image(systemName: "book.pages")
+                    .resizable()
+                    .scaledToFit()
+                    .padding(40)
+                    .foregroundStyle(
+                        .linearGradient(
+                            colors: [
+                                .white,
+                                .white.opacity(0.42)
+                            ],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
                     )
-                )
+            }
+            .frame(width: 1024, height: 1024)
         }
-        .frame(width: 1024, height: 1024)
 
     }
 }
