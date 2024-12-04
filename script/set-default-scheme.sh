@@ -8,8 +8,10 @@ log_command() {
     echo "${WHITE_ON_BLUE}${1}${NC}"
 }
 
-log_command "pwd"
+log_command "hello runtime :)"
+log_command "we are ready to run some shell commands"
 pwd
+
 # cd iOS/VehicleDiary
 # ls -aril
 # scheme_list=$(xcodebuild -list -json | tr -d "\n")
