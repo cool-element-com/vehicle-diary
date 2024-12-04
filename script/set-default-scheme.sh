@@ -2,10 +2,11 @@
 set -e
 
 WHITE_ON_BLUE='\033[37;44m'
+YELLOW_ON_BLUE='\033[33;44m'
 NC='\033[0m' # no color
 
 log_command() {
-    echo "${WHITE_ON_BLUE}${1}${NC}"
+    echo "${YELLOW_ON_BLUE}${1}${NC}"
 }
 
 log_command "hello runtime :)"
