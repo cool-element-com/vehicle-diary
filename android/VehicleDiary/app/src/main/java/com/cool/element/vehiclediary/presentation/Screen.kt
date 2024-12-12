@@ -7,4 +7,5 @@ sealed class Screen(val route: String) {
     object EventsListScreen: Screen("EventsListScreen")
     object AddEventScreen: Screen("AddEventScreen")
     object EditEventScreen: Screen("EditEventScreen")
+    object SettingsScreen: Screen("SettingsScreen")
 }
