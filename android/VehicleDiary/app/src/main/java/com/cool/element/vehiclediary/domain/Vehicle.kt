@@ -12,13 +12,14 @@ data class Vehicle(
     val purchaseDate: String = "",
     val purchasePrice: Double = 0.0,
     val odometer: Int = 0,
-    val image: String = ""
+    val image: String = "",
+    val events: List<VEvent> = mutableListOf()
 ) {
     companion object {
         val sample = Vehicle(
             id = 1000L,
             name = "Test vehicle",
-            brand = "Test make",
+            brand = "Test brand",
             model = "Test model",
             year = 2021,
             color = "Test color",
@@ -27,7 +28,8 @@ data class Vehicle(
             purchaseDate = "2021-01-01",
             purchasePrice = 10000.0,
             odometer = 1000,
-            image = "Test image"
+            image = "Test image",
+            events = VEvent.sampleList.toMutableList()
         )
         val sampleList: List<Vehicle>
             get() {
@@ -36,7 +38,7 @@ data class Vehicle(
                     val vehicle = Vehicle(
                         id = i.toLong(),
                         name = "Vehicle $i Name",
-                        brand = "Vehicle $i Make",
+                        brand = "Vehicle $i Brand",
                         model = "Vehicle $i Model",
                         year = 2021,
                         color = "Vehicle $i Color",
@@ -45,7 +47,8 @@ data class Vehicle(
                         purchaseDate = "2021-01-01",
                         purchasePrice = 10000.0,
                         odometer = 1000,
-                        image = "Vehicle $i Image"
+                        image = "Vehicle $i Image",
+                        events = VEvent.sampleList.toMutableList()
                     )
                     result.add(vehicle)
                 }

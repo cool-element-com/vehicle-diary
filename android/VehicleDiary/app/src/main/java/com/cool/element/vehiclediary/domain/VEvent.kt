@@ -13,9 +13,7 @@ data class VEvent(
     val completedDate: LocalDateTime = LocalDateTime.now(),
     val completedMileage: Double = 0.0,
     val isCompleted: Boolean = false,
-    /// TODO: Add make relation to Vehicle
-    /// - either via vehicleId or
-    /// - vehicle reference
+    val vehicle: Vehicle? = null
 ) {
     companion object {
         val sample = VEvent(
@@ -27,8 +25,9 @@ data class VEvent(
             upcomingDate = LocalDateTime.now(),
             upcomingMileage = 2000.0,
             completedDate = LocalDateTime.now(),
-            completedMileage = 3000.0,
-            isCompleted = false
+            completedMileage = 1500.0,
+            isCompleted = false,
+            vehicle = Vehicle.sample
         )
         val sampleList: List<VEvent>
             get() {
@@ -43,8 +42,9 @@ data class VEvent(
                         upcomingDate = LocalDateTime.now(),
                         upcomingMileage = 2000.0,
                         completedDate = LocalDateTime.now(),
-                        completedMileage = 3000.0,
-                        isCompleted = false
+                        completedMileage = 1500.0,
+                        isCompleted = false,
+                        vehicle = Vehicle.sample
                     )
                     result.add(event)
                 }
