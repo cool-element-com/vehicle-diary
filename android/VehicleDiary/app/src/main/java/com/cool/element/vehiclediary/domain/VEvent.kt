@@ -1,31 +1,53 @@
 package com.cool.element.vehiclediary.domain
 
-import java.time.LocalDateTime
+/**
+ *
+ * @param id
+ * @param title
+ * @param amount
+ * @param quantity
+ * @param description
+ * @param location
+ * @param recordedDate
+ * @param recordedMileage
+ * @param upcomingDate
+ * @param upcomingMileage
+ * @param completedDate
+ * @param completedMileage
+ * @param isCompleted
+ * @param vehicle
+ */
+data class VEvent (
 
-data class VEvent(
-    val id: Long = 0L,
-    val title: String = "",
-    val description: String = "",
-    val recordedDate: LocalDateTime = LocalDateTime.now(),
-    val recordedMileage: Double = 0.0,
-    val upcomingDate: LocalDateTime = LocalDateTime.now(),
-    val upcomingMileage: Double = 0.0,
-    val completedDate: LocalDateTime = LocalDateTime.now(),
-    val completedMileage: Double = 0.0,
-    val isCompleted: Boolean = false,
-    val vehicle: Vehicle? = null
+    val id: kotlin.Long,
+    val title: kotlin.String,
+    val amount: kotlin.Double? = null,
+    val quantity: kotlin.Int? = null,
+    val description: kotlin.String? = null,
+    val location: kotlin.String? = null,
+    val recordedDate: java.time.LocalDateTime,
+    val recordedMileage: kotlin.Int,
+    val upcomingDate: java.time.LocalDateTime,
+    val upcomingMileage: kotlin.Int,
+    val completedDate: java.time.LocalDateTime? = null,
+    val completedMileage: kotlin.Int? = null,
+    val isCompleted: kotlin.Boolean? = null,
+    val vehicle: Vehicle
 ) {
     companion object {
         val sample = VEvent(
             id = 1000L,
             title = "Test event",
+            amount = 100.0,
+            quantity = 1,
             description = "Test event description",
-            recordedDate = LocalDateTime.now(),
-            recordedMileage = 1000.0,
-            upcomingDate = LocalDateTime.now(),
-            upcomingMileage = 2000.0,
-            completedDate = LocalDateTime.now(),
-            completedMileage = 1500.0,
+            location = "Test location",
+            recordedDate = java.time.LocalDateTime.now(),
+            recordedMileage = 1000,
+            upcomingDate = java.time.LocalDateTime.now(),
+            upcomingMileage = 2000,
+            completedDate = java.time.LocalDateTime.now(),
+            completedMileage = 1500,
             isCompleted = false,
             vehicle = Vehicle.sample
         )
@@ -36,13 +58,16 @@ data class VEvent(
                     val event = VEvent(
                         id = i.toLong(),
                         title = "Event $i Title",
+                        amount = 100.0,
+                        quantity = 1,
                         description = "Event $i Description",
-                        recordedDate = LocalDateTime.now(),
-                        recordedMileage = 1000.0,
-                        upcomingDate = LocalDateTime.now(),
-                        upcomingMileage = 2000.0,
-                        completedDate = LocalDateTime.now(),
-                        completedMileage = 1500.0,
+                        location = "Event $i Location",
+                        recordedDate = java.time.LocalDateTime.now(),
+                        recordedMileage = 1000,
+                        upcomingDate = java.time.LocalDateTime.now(),
+                        upcomingMileage = 2000,
+                        completedDate = java.time.LocalDateTime.now(),
+                        completedMileage = 1500,
                         isCompleted = false,
                         vehicle = Vehicle.sample
                     )

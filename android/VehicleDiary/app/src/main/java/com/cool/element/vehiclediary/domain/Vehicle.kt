@@ -1,19 +1,36 @@
 package com.cool.element.vehiclediary.domain
 
-data class Vehicle(
-    val id: Long = 0L,
-    val name: String = "",
-    val brand: String = "",
-    val model: String = "",
-    val year: Int = 0,
-    val color: String = "",
-    val vin: String = "",
-    val licensePlate: String = "",
-    val purchaseDate: String = "",
-    val purchasePrice: Double = 0.0,
-    val odometer: Int = 0,
-    val image: String = "",
-    val events: List<VEvent> = mutableListOf()
+/**
+ *
+ * @param id
+ * @param name
+ * @param brand
+ * @param model
+ * @param year
+ * @param vin
+ * @param licensePlate
+ * @param purchaseDate
+ * @param image
+ * @param odometer
+ * @param createdAt
+ * @param updatedAt
+ * @param events
+ */
+data class Vehicle (
+
+    val id: kotlin.Long,
+    val name: kotlin.String,
+    val brand: kotlin.String,
+    val model: kotlin.String,
+    val year: kotlin.Int,
+    val vin: kotlin.String? = null,
+    val licensePlate: kotlin.String? = null,
+    val purchaseDate: java.time.LocalDateTime? = null,
+    val image: kotlin.String? = null,
+    val odometer: kotlin.Int,
+    val createdAt: java.time.LocalDateTime? = null,
+    val updatedAt: java.time.LocalDateTime? = null,
+    val events: kotlin.Array<VEvent>? = null
 ) {
     companion object {
         val sample = Vehicle(
@@ -22,14 +39,14 @@ data class Vehicle(
             brand = "Test brand",
             model = "Test model",
             year = 2021,
-            color = "Test color",
             vin = "Test vin",
             licensePlate = "Test license plate",
-            purchaseDate = "2021-01-01",
-            purchasePrice = 10000.0,
-            odometer = 1000,
+            purchaseDate = java.time.LocalDateTime.now(),
             image = "Test image",
-            events = VEvent.sampleList.toMutableList()
+            odometer = 1000,
+            createdAt = java.time.LocalDateTime.now(),
+            updatedAt = java.time.LocalDateTime.now(),
+            events = VEvent.sampleList.toTypedArray()
         )
         val sampleList: List<Vehicle>
             get() {
@@ -41,14 +58,14 @@ data class Vehicle(
                         brand = "Vehicle $i Brand",
                         model = "Vehicle $i Model",
                         year = 2021,
-                        color = "Vehicle $i Color",
                         vin = "Vehicle $i Vin",
                         licensePlate = "Vehicle $i License Plate",
-                        purchaseDate = "2021-01-01",
-                        purchasePrice = 10000.0,
-                        odometer = 1000,
+                        purchaseDate = java.time.LocalDateTime.now(),
                         image = "Vehicle $i Image",
-                        events = VEvent.sampleList.toMutableList()
+                        odometer = 1000,
+                        createdAt = java.time.LocalDateTime.now(),
+                        updatedAt = java.time.LocalDateTime.now(),
+                        events = VEvent.sampleList.toTypedArray()
                     )
                     result.add(vehicle)
                 }
