@@ -18,7 +18,6 @@ package com.cool.element.vehiclediary.domain
  * @param vehicle
  */
 data class VEvent (
-
     val id: kotlin.Long,
     val title: kotlin.String,
     val amount: kotlin.Double? = null,

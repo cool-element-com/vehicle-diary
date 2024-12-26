@@ -11,6 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.cool.element.vehiclediary.domain.Vehicle
+import com.cool.element.vehiclediary.presentation.VehicleListView
 import com.cool.element.vehiclediary.ui.theme.VehicleDiaryTheme
 
 class MainActivity : ComponentActivity() {
@@ -18,30 +20,25 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            VehicleDiaryTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Vehicle Diary",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+            VehicleDiaryAppStart()
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun VehicleDiaryAppStart() {
+    VehicleDiaryTheme {
+        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            VehicleListView(
+                vehicles = Vehicle.sampleList,
+                modifier = Modifier.padding(innerPadding)
+            )
+        }
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    VehicleDiaryTheme {
-        Greeting("Vehicle Diary")
-    }
+fun VehicleDiaryAppStartPreview() {
+    VehicleDiaryAppStart()
 }

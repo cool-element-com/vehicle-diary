@@ -17,20 +17,19 @@ package com.cool.element.vehiclediary.domain
  * @param events
  */
 data class Vehicle (
-
-    val id: kotlin.Long,
-    val name: kotlin.String,
-    val brand: kotlin.String,
-    val model: kotlin.String,
-    val year: kotlin.Int,
-    val vin: kotlin.String? = null,
-    val licensePlate: kotlin.String? = null,
+    val id: Long,
+    val name: String,
+    val brand: String,
+    val model: String,
+    val year: Int,
+    val vin: String? = null,
+    val licensePlate: String? = null,
     val purchaseDate: java.time.LocalDateTime? = null,
-    val image: kotlin.String? = null,
-    val odometer: kotlin.Int,
+    val image: String? = null,
+    val odometer: Int,
     val createdAt: java.time.LocalDateTime? = null,
     val updatedAt: java.time.LocalDateTime? = null,
-    val events: kotlin.Array<VEvent>? = null
+    val events: Array<VEvent>? = null
 ) {
     companion object {
         val sample = Vehicle(
@@ -46,7 +45,7 @@ data class Vehicle (
             odometer = 1000,
             createdAt = java.time.LocalDateTime.now(),
             updatedAt = java.time.LocalDateTime.now(),
-            events = VEvent.sampleList.toTypedArray()
+            events = null
         )
         val sampleList: List<Vehicle>
             get() {
@@ -65,11 +64,35 @@ data class Vehicle (
                         odometer = 1000,
                         createdAt = java.time.LocalDateTime.now(),
                         updatedAt = java.time.LocalDateTime.now(),
-                        events = VEvent.sampleList.toTypedArray()
+                        events = null
                     )
                     result.add(vehicle)
                 }
                 return result
             }
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Vehicle
+
+        if (name != other.name) return false
+        if (brand != other.brand) return false
+        if (model != other.model) return false
+        if (year != other.year) return false
+        if (vin != other.vin) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = name.hashCode()
+        result = 31 * result + brand.hashCode()
+        result = 31 * result + model.hashCode()
+        result = 31 * result + year
+        result = 31 * result + (vin?.hashCode() ?: 0)
+        return result
     }
 }
