@@ -46,10 +46,10 @@ fun AppBarView(
             )
         },
         colors = TopAppBarColors(
-            containerColor = colorResource(id = R.color.purple_200),
+            containerColor = colorResource(id = R.color.app_color_3),
             scrolledContainerColor = colorResource(id = R.color.white),
             navigationIconContentColor = colorResource(id = R.color.white),
-            titleContentColor = colorResource(id = R.color.white),
+            titleContentColor = colorResource(id = R.color.app_color_1),
             actionIconContentColor = colorResource(id = R.color.white)
         )
 //        backgroundColor = colorResource(id = R.color.app_bar_color),
