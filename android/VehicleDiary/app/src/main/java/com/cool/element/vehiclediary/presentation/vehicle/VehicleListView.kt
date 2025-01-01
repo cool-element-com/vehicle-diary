@@ -1,42 +1,64 @@
 package com.cool.element.vehiclediary.presentation.vehicle
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import android.util.Log
+import android.widget.Toast
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.*
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import coil.compose.rememberAsyncImagePainter
 import com.cool.element.vehiclediary.domain.Vehicle
+import com.cool.element.vehiclediary.presentation.navigation.AppBarView
+import com.cool.element.vehiclediary.utils.Constants
 
 @Composable
 fun VehicleListView(
     vehicles: List<Vehicle>,
     modifier: Modifier = Modifier
 ) {
-    LazyColumn(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        items(vehicles) { vehicle ->
-            VehicleRow(vehicle = vehicle)
-            HorizontalDivider(
-                modifier = Modifier.padding(vertical = 8.dp),
-                thickness = 1.dp,
-                color = Color.Gray
+    val context = LocalContext.current
+    Scaffold(
+        topBar = {
+            AppBarView(
+                title = Constants.ViewTitle.vehicles,
+                onBackButtonTapped = {
+                    Toast
+                        .makeText(
+                            context,
+                            "Back button tapped",
+                            Toast.LENGTH_LONG
+                        )
+                        .show()
+                }
             )
+        }
+    ) { paddingValues ->
+        Log.d(
+            Constants.LogTag.debug,
+            "paddingValues: $paddingValues"
+        )
+        LazyColumn(
+            modifier = modifier
+                .fillMaxSize()
+                .padding(16.dp)
+                .offset(y = 48.dp)
+        ) {
+            items(vehicles) { vehicle ->
+                VehicleRow(vehicle = vehicle)
+                HorizontalDivider(
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    thickness = 1.dp,
+                    color = Color.Gray
+                )
+            }
         }
     }
 }
