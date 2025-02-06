@@ -15,13 +15,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.cool.element.vehiclediary.domain.Vehicle
+import com.cool.element.vehiclediary.presentation.Screen
 import com.cool.element.vehiclediary.presentation.navigation.AppBarView
 import com.cool.element.vehiclediary.utils.Constants
 
 @Composable
 fun VehicleListView(
     vehicles: List<Vehicle>,
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -61,6 +64,7 @@ fun VehicleListView(
             }
         }
     }
+    navController.navigate(Screen.EventListScreen.route)
 }
 
 @Preview(showBackground = true)
@@ -68,5 +72,5 @@ fun VehicleListView(
 fun PreviewVehicleListView() {
     val vehicles = Vehicle.sampleList
 
-    VehicleListView(vehicles = vehicles)
+    VehicleListView(vehicles = vehicles, navController = NavController(LocalContext.current))
 }
