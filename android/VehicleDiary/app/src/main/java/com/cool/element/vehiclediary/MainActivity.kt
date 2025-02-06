@@ -10,7 +10,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 import com.cool.element.vehiclediary.domain.Vehicle
+import com.cool.element.vehiclediary.presentation.navigation.VehicleDiaryNavHost
 import com.cool.element.vehiclediary.presentation.vehicle.VehicleListView
 import com.cool.element.vehiclediary.ui.theme.VehicleDiaryTheme
 
@@ -30,7 +32,8 @@ fun VehicleDiaryAppStart() {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
             VehicleListView(
                 vehicles = Vehicle.sampleList,
-                modifier = Modifier.padding(innerPadding)
+                modifier = Modifier.padding(innerPadding),
+                navController = rememberNavController()
             )
         }
     }
