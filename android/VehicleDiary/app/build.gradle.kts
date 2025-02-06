@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("androidx.room")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -16,6 +18,10 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    room {
+        schemaDirectory("$projectDir/schemas")
     }
 
     buildTypes {
@@ -34,12 +40,31 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.15"
+    }
     buildFeatures {
         compose = true
     }
 }
 
 dependencies {
+
+//    val compose_version = "1.7.5"
+    val room_version = "2.6.1"
+    val nav_version = "2.8.4"
+
+    implementation("androidx.navigation:navigation-compose:$nav_version")
+
+
+    // Room
+    implementation("androidx.room:room-runtime:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
+    ksp("androidx.room:room-compiler")
+    ksp("androidx.room:room-compiler:$room_version")
+
+
+    implementation("io.coil-kt:coil-compose:2.4.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
