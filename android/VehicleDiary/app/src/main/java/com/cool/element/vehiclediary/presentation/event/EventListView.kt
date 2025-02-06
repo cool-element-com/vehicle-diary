@@ -16,6 +16,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.cool.element.vehiclediary.domain.VEvent
 import com.cool.element.vehiclediary.presentation.Screen
 import com.cool.element.vehiclediary.presentation.navigation.AppBarView

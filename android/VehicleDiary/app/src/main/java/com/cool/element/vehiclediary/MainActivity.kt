@@ -21,7 +21,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            VehicleDiaryNavHost()
+            val navController = rememberNavController()
+            VehicleDiaryNavHost(navController = navController)
         }
     }
 }
