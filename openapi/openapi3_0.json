@@ -1,0 +1,168 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Vehicle Diary OpenAPI 3.0",
+    "description": "<H2> Creqte an app that will be useful to keep track of evens that are part of a vehicle's lifecycle... </> \n\nsample use cases:\n- i am having my car motor's oil change in every 10000 km or 1 year - which ever come first - i want to be notified\n- i want to check when was the last time i was having breaks repair or check, or when i changed my front swipers\n- i have several vehicles - i want to track all of their events and be notified somehow\n- i want to have list of repair workshops that i am visiting and a quick way to contact with them for specific issue\n\nSome useful links:\n- [Vehicle Diary repository](https://github.com/cool-element-com/vehicle-diary)\n- [Vehicle Diary Priority Board](https://github.com/orgs/cool-element-com/projects/2/views/2)",
+    "contact": {
+      "email": "cool.element.com@gmail.com"
+    },
+    "license": {
+      "name": "The MIT License",
+      "url": "https://opensource.org/license/mit"
+    },
+    "version": "n/a"
+  },
+  "paths": {
+    "/vehicleDiary/app": {
+      "post": {
+        "summary": "Checkout web version of the app",
+        "requestBody": {
+          "description": "Checkout web version of the app",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VEvent"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "invalid input"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Vehicle": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "brand": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "year": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vin": {
+            "type": "string"
+          },
+          "licensePlate": {
+            "type": "string"
+          },
+          "purchaseDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "image": {
+            "type": "string"
+          },
+          "odometer": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VEvent"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "brand",
+          "model",
+          "year",
+          "odometer"
+        ]
+      },
+      "VEvent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "title": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "recordedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "recordedMileage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "upcomingDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "upcomingMileage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "completedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "completedMileage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isCompleted": {
+            "type": "boolean"
+          },
+          "vehicle": {
+            "$ref": "#/components/schemas/Vehicle"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "recordedDate",
+          "recordedMileage",
+          "upcomingDate",
+          "upcomingMileage",
+          "vehicle"
+        ]
+      }
+    }
+  }
+}
