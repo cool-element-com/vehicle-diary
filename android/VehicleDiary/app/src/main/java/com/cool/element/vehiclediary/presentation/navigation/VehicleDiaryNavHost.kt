@@ -11,21 +11,21 @@ import com.cool.element.vehiclediary.domain.Vehicle
 import com.cool.element.vehiclediary.domain.VEvent
 
 @Composable
-fun VehicleDiaryNavHost(navHostController: NavHostController) {
+fun VehicleDiaryNavHost(navController: NavHostController) {
     NavHost(
-        navController = navHostController,
+        navController = navController,
         startDestination = Screen.VehiclesListScreen.route
     ) {
         composable(Screen.VehiclesListScreen.route) {
             VehicleListView(
                 vehicles = Vehicle.sampleList,
-                navController = navHostController
+                navController = navController
             )
         }
         composable(Screen.EventsListScreen.route) {
             EventListView(
                 events = VEvent.sampleList,
-                navController = navHostController
+                navController = navController
             )
         }
     }
