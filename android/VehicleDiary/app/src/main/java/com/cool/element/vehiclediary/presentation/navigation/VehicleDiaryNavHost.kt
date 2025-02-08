@@ -1,6 +1,7 @@
 package com.cool.element.vehiclediary.presentation.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -9,23 +10,27 @@ import com.cool.element.vehiclediary.presentation.event.EventListView
 import com.cool.element.vehiclediary.presentation.vehicle.VehicleListView
 import com.cool.element.vehiclediary.domain.Vehicle
 import com.cool.element.vehiclediary.domain.VEvent
+import com.cool.element.vehiclediary.presentation.vehicle.VehiclesListViewModel
 
 @Composable
-fun VehicleDiaryNavHost(navHostController: NavHostController) {
+fun VehicleDiaryNavHost(
+    navController: NavHostController,
+    viewModel: VehiclesListViewModel = viewModel()
+) {
     NavHost(
-        navController = navHostController,
+        navController = navController,
         startDestination = Screen.VehiclesListScreen.route
     ) {
         composable(Screen.VehiclesListScreen.route) {
             VehicleListView(
-                vehicles = Vehicle.sampleList,
-                navController = navHostController
+                viewModel = viewModel,
+                navController = navController
             )
         }
         composable(Screen.EventsListScreen.route) {
             EventListView(
                 events = VEvent.sampleList,
-                navController = navHostController
+                navController = navController
             )
         }
     }
