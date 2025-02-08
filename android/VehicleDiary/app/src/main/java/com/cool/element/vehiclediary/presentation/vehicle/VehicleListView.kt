@@ -10,6 +10,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -20,10 +22,13 @@ import com.cool.element.vehiclediary.domain.Vehicle
 import com.cool.element.vehiclediary.presentation.Screen
 import com.cool.element.vehiclediary.presentation.navigation.AppBarView
 import com.cool.element.vehiclediary.utils.Constants
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Composable
 fun VehicleListView(
-    vehicles: List<Vehicle>,
+    viewModel: VehiclesListViewModel,
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
@@ -54,13 +59,19 @@ fun VehicleListView(
                 .padding(16.dp)
                 .offset(y = 48.dp)
         ) {
-            items(vehicles) { vehicle ->
-                VehicleRow(vehicle = vehicle)
-                HorizontalDivider(
-                    modifier = Modifier.padding(vertical = 8.dp),
-                    thickness = 1.dp,
-                    color = Color.Gray
-                )
+            CoroutineScope(Dispatchers.Main).launch {
+                val vehicles: List<Vehicle> by viewModel
+                    .getAllVehicles()
+                    .collectAsState(initial = emptyList())
+
+                items(vehicles) { vehicle ->
+                    VehicleRow(vehicle = vehicle)
+                    HorizontalDivider(
+                        modifier = Modifier.padding(vertical = 8.dp),
+                        thickness = 1.dp,
+                        color = Color.Gray
+                    )
+                }
             }
         }
     }
@@ -70,7 +81,10 @@ fun VehicleListView(
 @Preview(showBackground = true)
 @Composable
 fun PreviewVehicleListView() {
-    val vehicles = Vehicle.sampleList
+    val viewModel = FakeVehiclesListViewModelImpl()
 
-    VehicleListView(vehicles = vehicles, navController = NavController(LocalContext.current))
+    VehicleListView(
+        viewModel = viewModel,
+        navController = NavController(LocalContext.current)
+    )
 }

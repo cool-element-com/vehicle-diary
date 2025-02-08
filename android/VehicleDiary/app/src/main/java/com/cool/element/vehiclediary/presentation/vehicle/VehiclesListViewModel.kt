@@ -4,23 +4,24 @@ import androidx.lifecycle.ViewModel
 import com.cool.element.vehiclediary.data.FakeVehicleRepository
 import com.cool.element.vehiclediary.data.VehicleRepository
 import com.cool.element.vehiclediary.domain.Vehicle
+import kotlinx.coroutines.flow.Flow
 
 interface VehiclesListViewModel {
-    fun getAllVehicles()
-    fun getVehicleById(id: Long)
+    fun getAllVehicles() : Flow<List<Vehicle>>
+    fun getVehicleById(id: Long) : Flow<Vehicle>
     suspend fun insertVehicle(vehicle: Vehicle)
     suspend fun updateVehicle(vehicle: Vehicle)
     suspend fun deleteVehicle(vehicle: Vehicle)
 }
 
-class VehiclesListViewModelImpl(
+class FakeVehiclesListViewModelImpl(
     private val repository: VehicleRepository = FakeVehicleRepository()
 ) : VehiclesListViewModel, ViewModel() {
-    override fun getAllVehicles() {
+    override fun getAllVehicles() : Flow<List<Vehicle>> {
         repository.getAllVehicles()
     }
 
-    override fun getVehicleById(id: Long) {
+    override fun getVehicleById(id: Long) : Flow<Vehicle> {
         repository.getVehicleById(id)
     }
 
