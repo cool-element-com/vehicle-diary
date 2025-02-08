@@ -8,6 +8,8 @@ interface VehicleRepository {
     fun getAllVehicles() : Flow<List<Vehicle>>
     fun getVehicleById(id: Long)
     suspend fun insertVehicle(vehicle: Vehicle)
+    suspend fun updateVehicle(vehicle: Vehicle)
+    suspend fun deleteVehicle(vehicle: Vehicle)
 }
 
 class AppVehicleRepository(
@@ -23,6 +25,14 @@ class AppVehicleRepository(
 
     override suspend fun insertVehicle(vehicle: Vehicle) {
         return vehicleDao.insertVehicle(vehicle)
+    }
+
+    override suspend fun updateVehicle(vehicle: Vehicle) {
+        return vehicleDao.updateVehicle(vehicle)
+    }
+
+    override suspend fun deleteVehicle(vehicle: Vehicle) {
+        return vehicleDao.deleteVehicle(vehicle)
     }
 }
 
@@ -46,5 +56,18 @@ class FakeVehicleRepository : VehicleRepository {
 
     override suspend fun insertVehicle(vehicle: Vehicle) {
         vehicles.add(vehicle)
+    }
+
+    override suspend fun updateVehicle(vehicle: Vehicle) {
+        val index = vehicles.indexOfFirst { it.id == vehicle.id }
+        if (index >= 0) {
+            vehicles[index] = vehicle
+        } else {
+            throw IllegalArgumentException("Vehicle not found id=${vehicle.id}")
+        }
+    }
+
+    override suspend fun deleteVehicle(vehicle: Vehicle) {
+        vehicles.remove(vehicle)
     }
 }
