@@ -18,11 +18,11 @@ class FakeVehiclesListViewModelImpl(
     private val repository: VehicleRepository = FakeVehicleRepository()
 ) : VehiclesListViewModel, ViewModel() {
     override fun getAllVehicles() : Flow<List<Vehicle>> {
-        repository.getAllVehicles()
+        return repository.getAllVehicles()
     }
 
     override fun getVehicleById(id: Long) : Flow<Vehicle> {
-        repository.getVehicleById(id)
+        return repository.getVehicleById(id)
     }
 
     override suspend fun insertVehicle(vehicle: Vehicle) {

@@ -18,13 +18,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.cool.element.vehiclediary.domain.Vehicle
 import com.cool.element.vehiclediary.presentation.Screen
 import com.cool.element.vehiclediary.presentation.navigation.AppBarView
 import com.cool.element.vehiclediary.utils.Constants
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @Composable
 fun VehicleListView(
@@ -33,6 +29,8 @@ fun VehicleListView(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
+    val vehicles by viewModel.getAllVehicles().collectAsState(initial = emptyList())
+
     Scaffold(
         topBar = {
             AppBarView(
@@ -59,23 +57,25 @@ fun VehicleListView(
                 .padding(16.dp)
                 .offset(y = 48.dp)
         ) {
-            CoroutineScope(Dispatchers.Main).launch {
-                val vehicles: List<Vehicle> by viewModel
-                    .getAllVehicles()
-                    .collectAsState(initial = emptyList())
-
-                items(vehicles) { vehicle ->
-                    VehicleRow(vehicle = vehicle)
-                    HorizontalDivider(
-                        modifier = Modifier.padding(vertical = 8.dp),
-                        thickness = 1.dp,
-                        color = Color.Gray
-                    )
-                }
+            items(vehicles) { vehicle ->
+                VehicleRow(
+                    vehicle = vehicle,
+                    onClick = {
+                        navController
+                            .navigate(
+//                            Screen.EventListScreen.route + "/${vehicle.id}"
+                                route = Screen.EventListScreen.route
+                            )
+                    }
+                )
+                HorizontalDivider(
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    thickness = 1.dp,
+                    color = Color.Gray
+                )
             }
         }
     }
-    navController.navigate(Screen.EventListScreen.route)
 }
 
 @Preview(showBackground = true)

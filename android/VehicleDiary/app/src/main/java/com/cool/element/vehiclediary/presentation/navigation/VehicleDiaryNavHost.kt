@@ -23,7 +23,7 @@ fun VehicleDiaryNavHost(
     ) {
         composable(Screen.VehiclesListScreen.route) {
             VehicleListView(
-                vehicles = Vehicle.sampleList,
+                viewModel = viewModel,
                 navController = navController
             )
         }
