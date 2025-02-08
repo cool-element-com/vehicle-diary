@@ -5,17 +5,17 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.cool.element.vehiclediary.presentation.Screen
 import com.cool.element.vehiclediary.presentation.event.EventListView
 import com.cool.element.vehiclediary.presentation.vehicle.VehicleListView
-import com.cool.element.vehiclediary.domain.Vehicle
 import com.cool.element.vehiclediary.domain.VEvent
 import com.cool.element.vehiclediary.presentation.vehicle.VehiclesListViewModel
 
 @Composable
 fun VehicleDiaryNavHost(
-    navController: NavHostController,
-    viewModel: VehiclesListViewModel = viewModel()
+    viewModel: VehiclesListViewModel = viewModel(),
+    navController: NavHostController = rememberNavController()
 ) {
     NavHost(
         navController = navController,
