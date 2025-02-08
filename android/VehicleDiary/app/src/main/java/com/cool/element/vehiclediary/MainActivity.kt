@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
-import com.cool.element.vehiclediary.domain.Vehicle
 import com.cool.element.vehiclediary.presentation.navigation.VehicleDiaryNavHost
 import com.cool.element.vehiclediary.presentation.vehicle.FakeVehiclesListViewModelImpl
 import com.cool.element.vehiclediary.presentation.vehicle.VehicleListView
@@ -22,8 +21,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            val navController = rememberNavController()
-            VehicleDiaryNavHost(navController = navController)
+//            val navController = rememberNavController()
+//            VehicleDiaryNavHost(navController = navController)
+            VehicleDiaryNavHost(
+                viewModel = FakeVehiclesListViewModelImpl(),
+                navController = rememberNavController()
+            )
         }
     }
 }

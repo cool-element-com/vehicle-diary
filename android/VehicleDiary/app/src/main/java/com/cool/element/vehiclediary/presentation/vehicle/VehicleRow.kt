@@ -32,7 +32,7 @@ import com.cool.element.vehiclediary.utils.Constants
 @Composable
 fun VehicleRow(
     vehicle: Vehicle,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -74,14 +74,7 @@ fun VehicleRow(
 @Composable
 fun VehicleRowPreview() {
     VehicleRow(
-        Vehicle(
-            id = 123,
-            name = "Car",
-            brand = "Toyota",
-            model = "Corolla",
-            year = 2021,
-            odometer = 10000,
-            image = null
-        )
+        vehicle = Vehicle.sample,
+        onClick = {}
     )
 }
