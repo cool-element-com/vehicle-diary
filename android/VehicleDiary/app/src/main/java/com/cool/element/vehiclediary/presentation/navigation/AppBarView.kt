@@ -9,14 +9,17 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.cool.element.vehiclediary.R
 import com.cool.element.vehiclediary.domain.Vehicle
+import com.cool.element.vehiclediary.presentation.vehicle.FakeVehiclesListViewModelImpl
 import com.cool.element.vehiclediary.presentation.vehicle.VehicleListView
 import com.cool.element.vehiclediary.utils.Constants
 
@@ -82,7 +85,8 @@ fun AppBarView(
 @Preview(showBackground = true)
 @Composable
 fun PreviewAppBarView() {
-    val vehicles = Vehicle.sampleList
-
-    VehicleListView(vehicles = vehicles)
+    VehicleListView(
+        viewModel = FakeVehiclesListViewModelImpl(),
+        navController = NavController(LocalContext.current)
+    )
 }

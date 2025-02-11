@@ -15,20 +15,25 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.cool.element.vehiclediary.domain.VEvent
+import com.cool.element.vehiclediary.presentation.Screen
 import com.cool.element.vehiclediary.presentation.navigation.AppBarView
 import com.cool.element.vehiclediary.utils.Constants
 
 @Composable
 fun EventListView(
-    events: List<VEvent>,
+    vehicleId: Long,
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
+    val events = VEvent.sampleList
     Scaffold(
         topBar = {
             AppBarView(
-                title = Constants.ViewTitle.vehicles,
+                title = "Vehicle ${vehicleId}",
                 onBackButtonTapped = {
                     Toast
                         .makeText(
@@ -61,12 +66,14 @@ fun EventListView(
             }
         }
     }
+    navController.navigate(Screen.VehiclesListScreen.route)
 }
 
 @Preview(showBackground = true)
 @Composable
 fun PreviewVehicleListView() {
-    val events = VEvent.sampleList
-
-    EventListView(events = events)
+    EventListView(
+        vehicleId = 1,
+        navController = NavController(LocalContext.current)
+    )
 }
