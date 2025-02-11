@@ -24,15 +24,16 @@ import com.cool.element.vehiclediary.utils.Constants
 
 @Composable
 fun EventListView(
-    events: List<VEvent>,
+    vehicleId: Long,
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
+    val events = VEvent.sampleList
     Scaffold(
         topBar = {
             AppBarView(
-                title = Constants.ViewTitle.vehicles,
+                title = "Vehicle ${vehicleId}",
                 onBackButtonTapped = {
                     Toast
                         .makeText(
@@ -71,7 +72,8 @@ fun EventListView(
 @Preview(showBackground = true)
 @Composable
 fun PreviewVehicleListView() {
-    val events = VEvent.sampleList
-
-    EventListView(events = events, navController = NavController(LocalContext.current))
+    EventListView(
+        vehicleId = 1,
+        navController = NavController(LocalContext.current)
+    )
 }

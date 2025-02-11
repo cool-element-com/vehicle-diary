@@ -63,8 +63,8 @@ fun VehicleListView(
                     onClick = {
                         navController
                             .navigate(
-//                                route =  Screen.EventsListScreen.route + "/${vehicle.id}"
-                                route = Screen.EventsListScreen.route
+                                route =  Screen.EventsListScreen.route + "/${vehicle.id}"
+//                                route = Screen.EventsListScreen.route
                             )
                     }
                 )
