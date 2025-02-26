@@ -173,7 +173,6 @@ obj/
 /out/
 
 # User-specific configurations
-workspace.xml
 .idea/caches/
 .idea/libraries/
 .idea/shelf/
@@ -229,5 +228,9 @@ fabric.properties
 ### AndroidStudio Patch ###
 
 !/gradle/wrapper/gradle-wrapper.jar
+
+### additional settings ###
+workspace.xml
+settings.json
 
 # End of https://www.toptal.com/developers/gitignore/api/androidstudio,kotlin,macos,visualstudiocode,gradle
