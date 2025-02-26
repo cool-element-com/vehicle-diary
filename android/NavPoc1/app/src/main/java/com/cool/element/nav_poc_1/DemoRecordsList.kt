@@ -14,7 +14,7 @@ import androidx.navigation.NavController
 
 @Composable
 fun DemoRecordsList(
-    records: List<DemoRecord>,
+    viewModel: DemoRecordsListViewModel,
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
@@ -24,7 +24,7 @@ fun DemoRecordsList(
             .padding(16.dp)
             .offset(y = 48.dp)
     ) {
-        items(records) { record ->
+        items(viewModel.recordsAsList()) { record ->
             SampleRow(
                 record = record,
                 onClick = {
@@ -42,13 +42,7 @@ fun DemoRecordsList(
 @Composable
 fun PreviewDemoRecordsList() {
     DemoRecordsList(
-        records = DemoRecord.sampleList,
+        viewModel = StubDemoRecordsListViewModel(),
         navController = NavController(LocalContext.current)
     )
-}
-
-// Application Screens
-sealed class Screen(val route: String) {
-    object RecordListScreen : Screen("record_list_screen")
-    object RecordDetailsScreen : Screen("record_details_screen")
 }
