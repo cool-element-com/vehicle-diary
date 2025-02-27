@@ -19,7 +19,7 @@ class MainActivity : ComponentActivity() {
             NavPoc1Theme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     AppNavigation(
-                        viewModel = StubDemoRecordsListViewModel(),
+                        viewModel = StubRecordsListViewModel(),
                         navController = rememberNavController(),
                         // TODO: INVESTIGATE: do we actually need this modifier injected at this level?
                         modifier = Modifier.padding(innerPadding)

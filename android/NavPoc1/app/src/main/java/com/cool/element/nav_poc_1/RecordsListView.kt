@@ -13,8 +13,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
 @Composable
-fun DemoRecordsList(
-    viewModel: DemoRecordsListViewModel,
+fun RecordsListView(
+    viewModel: RecordsListViewModel,
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
@@ -25,12 +25,14 @@ fun DemoRecordsList(
             .offset(y = 48.dp)
     ) {
         items(viewModel.recordsAsList()) { record ->
-            SampleRow(
+            RecordRow(
                 record = record,
                 onClick = {
                     navController
                         .navigate(
-                            route = Screen.RecordDetailsScreen.route + "/${record.id}"
+                            route = Screen.RecordDetailsScreen.route
+                            /// TODO: ISSUE #1 passing data to the newly navigated screen crashes the app
+//                                + "/${record.id}"
                         )
                 }
             )
@@ -41,8 +43,8 @@ fun DemoRecordsList(
 @Preview(showBackground = true)
 @Composable
 fun PreviewDemoRecordsList() {
-    DemoRecordsList(
-        viewModel = StubDemoRecordsListViewModel(),
+    RecordsListView(
+        viewModel = StubRecordsListViewModel(),
         navController = NavController(LocalContext.current)
     )
 }

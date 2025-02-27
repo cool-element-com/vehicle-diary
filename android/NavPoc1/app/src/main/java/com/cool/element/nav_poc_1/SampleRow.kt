@@ -1,10 +1,12 @@
 package com.cool.element.nav_poc_1
 
+import android.content.res.Resources.Theme
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,11 +19,9 @@ import androidx.compose.ui.unit.sp
 import java.util.logging.Logger
 
 @Composable
-fun SampleRow(
+fun RecordRow(
     record: DemoRecord,
-    onClick: () -> Unit = {
-        Logger.getLogger("SampleRow").info("SampleRow clicked - NOT IMPLEMENTED")
-    }
+    onClick: () -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -29,7 +29,7 @@ fun SampleRow(
             .padding(8.dp)
             .clickable {
                 onClick()
-                Logger.getLogger("SampleRow").info("SampleRow clicked")
+                Logger.getLogger("RecordRow").info("RecordRow clicked")
             },
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -42,12 +42,12 @@ fun SampleRow(
                 text = record.title,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color.Black
+                color = MaterialTheme.colorScheme.primary
             )
             Text(
                 text = record.description,
                 fontSize = 14.sp,
-                color = Color.Gray
+                color = MaterialTheme.colorScheme.secondary
             )
         }
     }
@@ -55,6 +55,11 @@ fun SampleRow(
 
 @Preview(showBackground = true)
 @Composable
-fun SampleRowPreview() {
-    SampleRow(record = DemoRecord(title = "Sample Title"))
+fun SampleRecordRowPreview() {
+    RecordRow(
+        record = DemoRecord.sample,
+        onClick = {
+            Logger.getLogger("RecordRow").info("RecordRow clicked")
+        }
+    )
 }

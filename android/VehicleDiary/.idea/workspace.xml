@@ -10,13 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3b3cd664-a449-4408-a2d3-2ce120132840" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../NavPoc1/app/src/main/java/com/cool/element/nav_poc_1/AppNavigation.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../NavPoc1/app/src/main/java/com/cool/element/nav_poc_1/AppViewModel.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../NavPoc1/app/src/main/java/com/cool/element/nav_poc_1/Screen.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../NavPoc1/app/src/main/java/com/cool/element/nav_poc_1/DemoRecordsList.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../NavPoc1/app/src/main/java/com/cool/element/nav_poc_1/DemoRecordsList.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../NavPoc1/app/src/main/java/com/cool/element/nav_poc_1/RecordDetailsView.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NavPoc1/app/src/main/java/com/cool/element/nav_poc_1/AppNavigation.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../NavPoc1/app/src/main/java/com/cool/element/nav_poc_1/AppNavigation.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NavPoc1/app/src/main/java/com/cool/element/nav_poc_1/AppViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../NavPoc1/app/src/main/java/com/cool/element/nav_poc_1/AppViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NavPoc1/app/src/main/java/com/cool/element/nav_poc_1/DemoRecordsList.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../NavPoc1/app/src/main/java/com/cool/element/nav_poc_1/RecordsListView.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../NavPoc1/app/src/main/java/com/cool/element/nav_poc_1/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../NavPoc1/app/src/main/java/com/cool/element/nav_poc_1/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NavPoc1/app/src/main/java/com/cool/element/nav_poc_1/SampleRow.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../NavPoc1/app/src/main/java/com/cool/element/nav_poc_1/SampleRow.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/presentation/navigation/VehicleDiaryNavHost.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/presentation/navigation/VehicleDiaryNavHost.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +26,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=/Users/boyan.yankov/.android/avd/Pixel_9_Pro_API_35.avd)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=PhysicalDevice, isTemplate=false, identifier=serial=43261FDJG00374)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
