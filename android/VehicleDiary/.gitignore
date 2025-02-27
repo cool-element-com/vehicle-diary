@@ -229,4 +229,8 @@ fabric.properties
 
 !/gradle/wrapper/gradle-wrapper.jar
 
+### additional settings ###
+workspace.xml
+settings.json
+
 # End of https://www.toptal.com/developers/gitignore/api/androidstudio,kotlin,macos,visualstudiocode,gradle
