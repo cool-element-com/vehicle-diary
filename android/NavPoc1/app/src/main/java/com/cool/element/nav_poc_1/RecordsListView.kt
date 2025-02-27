@@ -30,9 +30,7 @@ fun RecordsListView(
                 onClick = {
                     navController
                         .navigate(
-                            route = Screen.RecordDetailsScreen.route
-                            /// TODO: ISSUE #1 passing data to the newly navigated screen crashes the app
-//                                + "/${record.id}"
+                            route = Screen.RecordDetailsScreen.route + "/${record.id}"
                         )
                 }
             )

@@ -27,14 +27,22 @@ fun AppNavigation(
         }
 
         // navigate to the RecordDetailScreen
-        composable(Screen.RecordDetailsScreen.route) {
-            RecordDetailsView(
-                viewModel = viewModel as? RecordDetailsViewModel
-                    ?: StubRecordDetailsViewModel(
-                        record = DemoRecord.sample
-                    ),
-                navController = navController
-            )
+        composable(Screen.RecordDetailsScreen.route + "/{recordId}") { entry ->
+            entry
+                .arguments
+                ?.getLong("recordId")
+                ?.let { recordId ->
+                    val detailsViewModel = viewModel as? RecordDetailsViewModel
+                        ?: StubRecordDetailsViewModel(
+                            recordId = recordId
+                        )
+                    detailsViewModel.setRecordId(recordId)
+
+                    RecordDetailsView(
+                        viewModel = detailsViewModel,
+                        navController = navController
+                    )
+                }
         }
     }
 }

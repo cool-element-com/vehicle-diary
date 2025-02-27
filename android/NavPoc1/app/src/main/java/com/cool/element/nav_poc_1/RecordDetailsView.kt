@@ -84,7 +84,7 @@ fun RecordDetailsViewPreview() {
     ) {
         RecordDetailsView(
             viewModel = StubRecordDetailsViewModel(
-                record = DemoRecord.sample
+                recordId = DemoRecord.sample.id
             ),
             navController = NavController(LocalContext.current)
         )

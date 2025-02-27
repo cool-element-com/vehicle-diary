@@ -13,6 +13,11 @@ data class DemoRecord (
             title = "Test event",
             description = "Test event description"
         )
+        val unknown = DemoRecord(
+            id = -1L,
+            title = "Unknown event",
+            description = "This is an unknown event./nIDK what else to say."
+        )
         val sampleList: List<DemoRecord>
             get() {
                 val result = mutableListOf<DemoRecord>()
