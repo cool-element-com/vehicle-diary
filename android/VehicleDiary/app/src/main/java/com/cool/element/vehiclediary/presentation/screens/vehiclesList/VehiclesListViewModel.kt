@@ -1,7 +1,7 @@
 package com.cool.element.vehiclediary.presentation.screens.vehiclesList
 
 import androidx.lifecycle.ViewModel
-import com.cool.element.vehiclediary.data.FakeVehicleRepository
+import com.cool.element.vehiclediary.data.StubVehicleRepository
 import com.cool.element.vehiclediary.data.VehicleRepository
 import com.cool.element.vehiclediary.domain.Vehicle
 import kotlinx.coroutines.flow.Flow
@@ -15,7 +15,7 @@ interface VehiclesListViewModel {
 }
 
 class FakeVehiclesListViewModelImpl(
-    private val repository: VehicleRepository = FakeVehicleRepository()
+    private val repository: VehicleRepository = StubVehicleRepository()
 ) : VehiclesListViewModel, ViewModel() {
     override fun getAllVehicles() : Flow<List<Vehicle>> {
         return repository.getAllVehicles()

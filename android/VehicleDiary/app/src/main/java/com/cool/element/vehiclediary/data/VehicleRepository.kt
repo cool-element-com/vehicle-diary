@@ -12,7 +12,29 @@ interface VehicleRepository {
     suspend fun deleteVehicle(vehicle: Vehicle)
 }
 
-class AppVehicleRepository(
+class StubVehicleRepository : VehicleRepository {
+    override fun getAllVehicles(): Flow<List<Vehicle>> {
+        return flow { emit(Vehicle.sampleList) }
+    }
+
+    override fun getVehicleById(id: Long): Flow<Vehicle> {
+        return flow { emit(Vehicle.sampleList.first()) }
+    }
+
+    override suspend fun insertVehicle(vehicle: Vehicle) {
+        // no-op
+    }
+
+    override suspend fun updateVehicle(vehicle: Vehicle) {
+        // no-op
+    }
+
+    override suspend fun deleteVehicle(vehicle: Vehicle) {
+        // no-op
+    }
+}
+
+class VehicleDaoRepository(
     private val vehicleDao: VehicleDao
 ) : VehicleRepository {
     override fun getAllVehicles() : Flow<List<Vehicle>> {
