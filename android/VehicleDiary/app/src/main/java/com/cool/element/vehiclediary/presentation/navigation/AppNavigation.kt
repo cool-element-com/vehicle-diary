@@ -26,26 +26,38 @@ fun AppNavigation(
                 navController = navController
             )
         }
-        composable(
-            route = Screen.EventsListScreen.route + "/{vehicleId}",
-            arguments = listOf(
-                navArgument(name = "vehicleId") {
-                    type = NavType.LongType
-                    defaultValue = 0L
-                    nullable = false
+
+        composable(Screen.EventsListScreen.route + "/{vehicleUUID}") { entry ->
+            entry
+                .arguments
+                ?.getString("vehicleUUID")
+                ?.let { uuid ->
+                    EventsListView(
+                        vehicleUUID = uuid,
+                        navController = navController
+                    )
                 }
-            )
-        ) { entry ->
-            val vehicleId: Long
-            if (entry.arguments != null) {
-                vehicleId = entry.arguments!!.getLong("vehicleId")
-            } else {
-                vehicleId = 0L
-            }
-            EventsListView(
-                vehicleId = vehicleId,
-                navController = navController
-            )
         }
+//        composable(
+//            route = Screen.EventsListScreen.route + "/{vehivleUUID}",
+//            arguments = listOf(
+//                navArgument(name = "vehivleUUID") {
+//                    type = NavType.LongType
+//                    defaultValue = 0L
+//                    nullable = false
+//                }
+//            )
+//        ) { entry ->
+//            val vehicleId: Long
+//            if (entry.arguments != null) {
+//                vehicleId = entry.arguments!!.getLong("vehicleId")
+//            } else {
+//                vehicleId = 0L
+//            }
+//            EventsListView(
+//                vehicleId = vehicleId,
+//                navController = navController
+//            )
+//        }
     }
 }

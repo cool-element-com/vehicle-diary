@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.flow
 
 interface VehicleRepository {
     fun getAllVehicles() : Flow<List<Vehicle>>
-    fun getVehicleById(id: Long) : Flow<Vehicle>
+    fun getVehicleByUUID(uuid: String) : Flow<Vehicle>
     suspend fun insertVehicle(vehicle: Vehicle)
     suspend fun updateVehicle(vehicle: Vehicle)
     suspend fun deleteVehicle(vehicle: Vehicle)
@@ -14,11 +14,17 @@ interface VehicleRepository {
 
 class StubVehicleRepository : VehicleRepository {
     override fun getAllVehicles(): Flow<List<Vehicle>> {
-        return flow { emit(Vehicle.sampleList) }
+        return flow { emit(Vehicle.sampleList()) }
     }
 
-    override fun getVehicleById(id: Long): Flow<Vehicle> {
-        return flow { emit(Vehicle.sampleList.first()) }
+    override fun getVehicleByUUID(uuid: String): Flow<Vehicle> {
+        return flow {
+            emit(
+                Vehicle.sampleList().first {
+                    it.uuid == uuid
+                }
+            )
+        }
     }
 
     override suspend fun insertVehicle(vehicle: Vehicle) {
@@ -41,8 +47,8 @@ class VehicleDaoRepository(
         return vehicleDao.getAllVehicles()
     }
 
-    override fun getVehicleById(id: Long): Flow<Vehicle> {
-        return vehicleDao.getVehicleById(id)
+    override fun getVehicleByUUID(uuid: String): Flow<Vehicle> {
+        return vehicleDao.getVehicleByUUID(uuid)
     }
 
     override suspend fun insertVehicle(vehicle: Vehicle) {
@@ -59,19 +65,19 @@ class VehicleDaoRepository(
 }
 
 class FakeVehicleRepository : VehicleRepository {
-    private val vehicles = mutableListOf<Vehicle>().apply { addAll(Vehicle.sampleList) }
+    private val vehicles = mutableListOf<Vehicle>().apply { addAll(Vehicle.sampleList()) }
 
     override fun getAllVehicles(): Flow<List<Vehicle>> {
         return flow { emit(vehicles) }
     }
 
-    override fun getVehicleById(id: Long): Flow<Vehicle> {
+    override fun getVehicleByUUID(uuid: String): Flow<Vehicle> {
         return flow {
-            val vehicle = vehicles.firstOrNull { it.id == id }
+            val vehicle = vehicles.firstOrNull { it.uuid == uuid }
             if (vehicle != null) {
                 emit(vehicle)
             } else {
-                throw IllegalArgumentException("Vehicle not found id=$id")
+                throw IllegalArgumentException("Vehicle not found id=$uuid")
             }
         }
     }
@@ -81,11 +87,11 @@ class FakeVehicleRepository : VehicleRepository {
     }
 
     override suspend fun updateVehicle(vehicle: Vehicle) {
-        val index = vehicles.indexOfFirst { it.id == vehicle.id }
+        val index = vehicles.indexOfFirst { it.uuid == vehicle.uuid }
         if (index >= 0) {
             vehicles[index] = vehicle
         } else {
-            throw IllegalArgumentException("Vehicle not found id=${vehicle.id}")
+            throw IllegalArgumentException("Vehicle not found id=${vehicle.uuid}")
         }
     }
 

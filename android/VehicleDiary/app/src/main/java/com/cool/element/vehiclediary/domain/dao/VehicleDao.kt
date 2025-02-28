@@ -23,6 +23,6 @@ abstract class VehicleDao {
     @Delete
     abstract suspend fun deleteVehicle(entity: Vehicle)
 
-    @Query("Select * from `vehicle-table` where id=:id")
-    abstract fun getVehicleById(id: Long) : Flow<Vehicle>
+    @Query("Select * from `vehicle-table` where uuid=:uuid")
+    abstract fun getVehicleByUUID(uuid: String) : Flow<Vehicle>
 }

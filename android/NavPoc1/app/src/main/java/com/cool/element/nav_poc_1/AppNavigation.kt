@@ -11,7 +11,7 @@ import androidx.navigation.compose.NavHost
 fun AppNavigation(
     viewModel: AppViewModel,
     navController: NavHostController,
-    /// TOFO: INVESTIGATE: Do we need to inject modifier from here?
+    /// TODO: INVESTIGATE: Do we need to inject modifier from here?
     modifier: Modifier = Modifier
 ) {
     NavHost(
@@ -26,7 +26,6 @@ fun AppNavigation(
             )
         }
 
-        // navigate to the RecordDetailScreen
         composable(Screen.RecordDetailsScreen.route + "/{recordId}") { entry ->
             entry
                 .arguments

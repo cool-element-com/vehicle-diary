@@ -34,7 +34,7 @@ fun EventRow(event: VEvent) {
 @Preview(showBackground = true)
 @Composable
 fun EventRowPreview() {
-    val event = VEvent.sample
+    val event = VEvent.sampleForVehicle()
     EventRow(
         event = event
     )

@@ -40,7 +40,7 @@ fun VehicleRow(
             .clickable {
                 Log.d(
                     Constants.LogTag.debug,
-                    "VehicleRow: ${vehicle.name} ${vehicle.id} clicked"
+                    "VehicleRow: ${vehicle.name} ${vehicle.uuid} clicked"
                 )
                 onClick()
             },
@@ -73,7 +73,7 @@ fun VehicleRow(
 @Composable
 fun VehicleRowPreview() {
     VehicleRow(
-        vehicle = Vehicle.sample,
+        vehicle = Vehicle.sample(),
         onClick = {}
     )
 }

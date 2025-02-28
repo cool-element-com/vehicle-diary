@@ -5,10 +5,11 @@ import com.cool.element.vehiclediary.data.StubVehicleRepository
 import com.cool.element.vehiclediary.data.VehicleRepository
 import com.cool.element.vehiclediary.domain.Vehicle
 import kotlinx.coroutines.flow.Flow
+import java.util.UUID
 
 interface VehiclesListViewModel {
     fun getAllVehicles() : Flow<List<Vehicle>>
-    fun getVehicleById(id: Long) : Flow<Vehicle>
+    fun getVehicleByUUID(uuid: String) : Flow<Vehicle>
     suspend fun insertVehicle(vehicle: Vehicle)
     suspend fun updateVehicle(vehicle: Vehicle)
     suspend fun deleteVehicle(vehicle: Vehicle)
@@ -21,8 +22,8 @@ class FakeVehiclesListViewModelImpl(
         return repository.getAllVehicles()
     }
 
-    override fun getVehicleById(id: Long) : Flow<Vehicle> {
-        return repository.getVehicleById(id)
+    override fun getVehicleByUUID(uuid: String) : Flow<Vehicle> {
+        return repository.getVehicleByUUID(uuid)
     }
 
     override suspend fun insertVehicle(vehicle: Vehicle) {

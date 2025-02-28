@@ -61,10 +61,13 @@ fun VehicleListView(
                 VehicleRow(
                     vehicle = vehicle,
                     onClick = {
+                        Log.d(
+                            "VehicleListView",
+                            "VehicleRow: ${vehicle.name} clicked"
+                        )
                         navController
                             .navigate(
-                                route =  Screen.EventsListScreen.route + "/${vehicle.id}"
-//                                route = Screen.EventsListScreen.route
+                                route =  Screen.EventsListScreen.route + "/${vehicle.uuid}"
                             )
                     }
                 )
