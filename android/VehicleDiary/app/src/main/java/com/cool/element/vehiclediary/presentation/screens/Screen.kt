@@ -1,4 +1,4 @@
-package com.cool.element.vehiclediary.presentation
+package com.cool.element.vehiclediary.presentation.screens
 
 sealed class Screen(val route: String) {
     object VehiclesListScreen: Screen("VehiclesListScreen")

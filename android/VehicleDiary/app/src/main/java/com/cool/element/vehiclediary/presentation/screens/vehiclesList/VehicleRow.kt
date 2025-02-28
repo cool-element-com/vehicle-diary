@@ -1,7 +1,6 @@
-package com.cool.element.vehiclediary.presentation.vehicle
+package com.cool.element.vehiclediary.presentation.screens.vehiclesList
 
 import android.util.Log
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row

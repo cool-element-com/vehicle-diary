@@ -6,13 +6,13 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.cool.element.vehiclediary.presentation.Screen
-import com.cool.element.vehiclediary.presentation.event.EventListView
-import com.cool.element.vehiclediary.presentation.vehicle.VehicleListView
-import com.cool.element.vehiclediary.presentation.vehicle.VehiclesListViewModel
+import com.cool.element.vehiclediary.presentation.screens.Screen
+import com.cool.element.vehiclediary.presentation.screens.eventsList.EventsListView
+import com.cool.element.vehiclediary.presentation.screens.vehiclesList.VehicleListView
+import com.cool.element.vehiclediary.presentation.screens.vehiclesList.VehiclesListViewModel
 
 @Composable
-fun VehicleDiaryNavHost(
+fun AppNavigation(
     viewModel: VehiclesListViewModel,
     navController: NavHostController
 ) {
@@ -42,7 +42,7 @@ fun VehicleDiaryNavHost(
             } else {
                 vehicleId = 0L
             }
-            EventListView(
+            EventsListView(
                 vehicleId = vehicleId,
                 navController = navController
             )

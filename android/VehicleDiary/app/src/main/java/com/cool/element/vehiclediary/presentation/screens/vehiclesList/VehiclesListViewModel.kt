@@ -1,4 +1,4 @@
-package com.cool.element.vehiclediary.presentation.vehicle
+package com.cool.element.vehiclediary.presentation.screens.vehiclesList
 
 import androidx.lifecycle.ViewModel
 import com.cool.element.vehiclediary.data.FakeVehicleRepository

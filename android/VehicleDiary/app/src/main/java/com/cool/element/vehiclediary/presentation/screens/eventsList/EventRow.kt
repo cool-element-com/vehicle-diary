@@ -1,4 +1,4 @@
-package com.cool.element.vehiclediary.presentation.event
+package com.cool.element.vehiclediary.presentation.screens.eventsList
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth

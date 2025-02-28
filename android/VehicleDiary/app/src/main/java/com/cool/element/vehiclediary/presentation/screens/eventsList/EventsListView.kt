@@ -1,4 +1,4 @@
-package com.cool.element.vehiclediary.presentation.vehicle
+package com.cool.element.vehiclediary.presentation.screens.eventsList
 
 import android.util.Log
 import android.widget.Toast
@@ -10,31 +10,29 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.cool.element.vehiclediary.presentation.Screen
+import com.cool.element.vehiclediary.domain.VEvent
+import com.cool.element.vehiclediary.presentation.screens.Screen
 import com.cool.element.vehiclediary.presentation.navigation.AppBarView
 import com.cool.element.vehiclediary.utils.Constants
 
 @Composable
-fun VehicleListView(
-    viewModel: VehiclesListViewModel,
+fun EventsListView(
+    vehicleId: Long,
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
-    val vehicles by viewModel.getAllVehicles().collectAsState(initial = emptyList())
-
+    val events = VEvent.sampleList
     Scaffold(
         topBar = {
             AppBarView(
-                title = Constants.ViewTitle.vehicles,
+                title = "Vehicle ${vehicleId}",
                 onBackButtonTapped = {
                     Toast
                         .makeText(
@@ -57,17 +55,8 @@ fun VehicleListView(
                 .padding(16.dp)
                 .offset(y = 48.dp)
         ) {
-            items(vehicles) { vehicle ->
-                VehicleRow(
-                    vehicle = vehicle,
-                    onClick = {
-                        navController
-                            .navigate(
-                                route =  Screen.EventsListScreen.route + "/${vehicle.id}"
-//                                route = Screen.EventsListScreen.route
-                            )
-                    }
-                )
+            items(events) { event ->
+                EventRow(event = event)
                 HorizontalDivider(
                     modifier = Modifier.padding(vertical = 8.dp),
                     thickness = 1.dp,
@@ -76,15 +65,14 @@ fun VehicleListView(
             }
         }
     }
+    navController.navigate(Screen.VehiclesListScreen.route)
 }
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewVehicleListView() {
-    val viewModel = FakeVehiclesListViewModelImpl()
-
-    VehicleListView(
-        viewModel = viewModel,
+fun PreviewEventsListView() {
+    EventsListView(
+        vehicleId = 1,
         navController = NavController(LocalContext.current)
     )
 }

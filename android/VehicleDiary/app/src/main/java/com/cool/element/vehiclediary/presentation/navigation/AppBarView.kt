@@ -18,9 +18,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.cool.element.vehiclediary.R
-import com.cool.element.vehiclediary.domain.Vehicle
-import com.cool.element.vehiclediary.presentation.vehicle.FakeVehiclesListViewModelImpl
-import com.cool.element.vehiclediary.presentation.vehicle.VehicleListView
+import com.cool.element.vehiclediary.presentation.screens.vehiclesList.FakeVehiclesListViewModelImpl
+import com.cool.element.vehiclediary.presentation.screens.vehiclesList.VehicleListView
 import com.cool.element.vehiclediary.utils.Constants
 
 
