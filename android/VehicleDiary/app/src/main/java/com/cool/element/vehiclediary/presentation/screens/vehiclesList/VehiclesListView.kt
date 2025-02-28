@@ -31,26 +31,28 @@ fun VehicleListView(
     val context = LocalContext.current
     val vehicles by viewModel.getAllVehicles().collectAsState(initial = emptyList())
 
-    Scaffold(
-        topBar = {
-            AppBarView(
-                title = Constants.ViewTitle.vehicles,
-                onBackButtonTapped = {
-                    Toast
-                        .makeText(
-                            context,
-                            "Back button tapped",
-                            Toast.LENGTH_LONG
-                        )
-                        .show()
-                }
-            )
-        }
-    ) { paddingValues ->
-        Log.d(
-            Constants.LogTag.debug,
-            "paddingValues: $paddingValues"
-        )
+//    Scaffold(
+//        topBar = {
+//            AppBarView(
+//                title = Constants.ViewTitle.vehicles,
+//                onBackButtonTapped = {
+//                    Toast
+//                        .makeText(
+//                            context,
+//                            "Back button tapped",
+//                            Toast.LENGTH_LONG
+//                        )
+//                        .show()
+//                }
+//            )
+//        }
+//    )
+//    { paddingValues ->
+//        Log.d(
+//            Constants.LogTag.debug,
+//            "paddingValues: $paddingValues"
+//        )
+
         LazyColumn(
             modifier = modifier
                 .fillMaxSize()
@@ -67,7 +69,7 @@ fun VehicleListView(
                         )
                         navController
                             .navigate(
-                                route =  Screen.EventsListScreen.route + "/${vehicle.uuid}"
+                                route = Screen.EventsListScreen.route + "/${vehicle.uuid}"
                             )
                     }
                 )
@@ -78,7 +80,7 @@ fun VehicleListView(
                 )
             }
         }
-    }
+//    }
 }
 
 @Preview(showBackground = true)

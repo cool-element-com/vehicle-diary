@@ -50,29 +50,18 @@ android {
 
 dependencies {
 
-//    val compose_version = "1.7.5"
     val room_version = "2.6.1"
-    val nav_version = "2.8.4"
-    val room = "2.6.1"
-
-    implementation("androidx.room:room-runtime:$room_version")
-
-    // Kotlin Symbol Processing (KSP)
-    // See Add the KSP plugin to your project
-    ksp("androidx.room:room-compiler:$room_version")
+    val nav_version = "2.8.7"
+    val lifecycle_version = "2.8.7"
 
     implementation("androidx.navigation:navigation-compose:$nav_version")
-    // Kotlin Extensions and Coroutines support for Room
-    implementation("androidx.room:room-ktx:$room_version")
-
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
 
     // Room
     implementation("androidx.room:room-runtime:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
-    ksp("androidx.room:room-compiler")
     ksp("androidx.room:room-compiler:$room_version")
-
-
+    
     implementation("io.coil-kt:coil-compose:2.4.0")
 
     implementation(libs.androidx.core.ktx)

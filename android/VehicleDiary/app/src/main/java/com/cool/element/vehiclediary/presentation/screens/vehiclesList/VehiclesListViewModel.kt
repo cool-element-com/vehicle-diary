@@ -5,7 +5,6 @@ import com.cool.element.vehiclediary.data.StubVehicleRepository
 import com.cool.element.vehiclediary.data.VehicleRepository
 import com.cool.element.vehiclediary.domain.Vehicle
 import kotlinx.coroutines.flow.Flow
-import java.util.UUID
 
 interface VehiclesListViewModel {
     fun getAllVehicles() : Flow<List<Vehicle>>
