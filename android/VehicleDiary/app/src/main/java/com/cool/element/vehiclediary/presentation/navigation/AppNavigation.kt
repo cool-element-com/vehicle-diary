@@ -4,14 +4,16 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.cool.element.vehiclediary.domain.Vehicle
 import com.cool.element.vehiclediary.presentation.screens.Screen
 import com.cool.element.vehiclediary.presentation.screens.eventsList.EventsListView
-import com.cool.element.vehiclediary.presentation.screens.vehiclesList.VehicleListView
+import com.cool.element.vehiclediary.presentation.screens.vehiclesList.StubVehiclesListViewModel
+import com.cool.element.vehiclediary.presentation.screens.vehiclesList.VehiclesListView
 import com.cool.element.vehiclediary.presentation.screens.vehiclesList.VehiclesListViewModel
 
 @Composable
 fun AppNavigation(
-    viewModel: VehiclesListViewModel,
+    viewModel: AppViewModel,
     navController: NavHostController
 ) {
     NavHost(
@@ -19,19 +21,23 @@ fun AppNavigation(
         startDestination = Screen.VehiclesListScreen.route
     ) {
         composable(Screen.VehiclesListScreen.route) {
-            VehicleListView(
-                viewModel = viewModel,
+            VehiclesListView(
+                viewModel = viewModel as? VehiclesListViewModel
+                ?: StubVehiclesListViewModel(),
                 navController = navController
             )
         }
 
-        composable(Screen.EventsListScreen.route + "/{vehicleUUID}") { entry ->
+        composable(Screen.EventsListScreen.route + "/{uuid}") { entry ->
             entry
                 .arguments
-                ?.getString("vehicleUUID")
+                ?.getString("uuid")
                 ?.let { uuid ->
+                    val vehicle: Vehicle = Vehicle.sampleList()
+                        .firstOrNull { it.uuid == uuid }
+                        ?: Vehicle.unknown()
                     EventsListView(
-                        vehicleUUID = uuid,
+                        vehicle =      ,
                         navController = navController
                     )
                 }

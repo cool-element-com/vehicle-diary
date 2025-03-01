@@ -6,12 +6,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.cool.element.vehiclediary.presentation.navigation.AppNavigation
-import com.cool.element.vehiclediary.presentation.screens.vehiclesList.FakeVehiclesListViewModelImpl
+import com.cool.element.vehiclediary.presentation.screens.vehiclesList.StubVehiclesListViewModel
 import com.cool.element.vehiclediary.ui.theme.VehicleDiaryTheme
 
 class MainActivity : ComponentActivity() {
@@ -26,7 +25,7 @@ class MainActivity : ComponentActivity() {
                         "innerPadding: $innerPadding"
                     )
                     AppNavigation(
-                        viewModel = FakeVehiclesListViewModelImpl(),
+                        viewModel = StubVehiclesListViewModel(),
                         navController = rememberNavController()
                     )
                 }

@@ -54,7 +54,30 @@ data class Vehicle (
             )
             return vehicle
         }
+
+        fun unknown(): Vehicle {
+            val uuid = UUID.randomUUID().toString()
+            val title = "Unknown"
+            val vehicle = Vehicle(
+                uuid = uuid,
+                name = title,
+                brand = "$title brand",
+                model = "$title model",
+                year = 2021,
+                vin = "$title vin",
+                licensePlate = "$title license plate",
+                purchasedDate = java.time.LocalDateTime.now(),
+                image = null,
+                odometer = 1000,
+                createdAt = java.time.LocalDateTime.now(),
+                updatedAt = java.time.LocalDateTime.now(),
+                events = null
+            )
+            return vehicle
+        }
+
         private var stubVehicles = emptyList<Vehicle>()
+
         fun sampleList(quantity: Int = 10): List<Vehicle> {
             if (stubVehicles.isNotEmpty()) {
                 return stubVehicles

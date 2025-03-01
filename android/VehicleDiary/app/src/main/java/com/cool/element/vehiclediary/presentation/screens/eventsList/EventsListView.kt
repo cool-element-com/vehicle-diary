@@ -24,15 +24,10 @@ import com.cool.element.vehiclediary.utils.Constants
 
 @Composable
 fun EventsListView(
-    vehicleUUID: String,
+    vehicle: Vehicle,
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
-    val context = LocalContext.current
-    val vehicle: Vehicle = Vehicle.sampleList().firstOrNull {
-        it.uuid == vehicleUUID
-    } ?: Vehicle.sample()
-
     Scaffold(
         topBar = {
             AppBarView(
@@ -76,7 +71,7 @@ fun EventsListView(
 @Composable
 fun PreviewEventsListView() {
     EventsListView(
-        vehicleUUID = Vehicle.sampleList().first().uuid,
+        vehicle = Vehicle.sample(),
         navController = NavController(LocalContext.current)
     )
 }

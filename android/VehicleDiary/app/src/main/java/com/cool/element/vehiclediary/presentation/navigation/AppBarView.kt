@@ -18,8 +18,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.cool.element.vehiclediary.R
-import com.cool.element.vehiclediary.presentation.screens.vehiclesList.FakeVehiclesListViewModelImpl
-import com.cool.element.vehiclediary.presentation.screens.vehiclesList.VehicleListView
+import com.cool.element.vehiclediary.presentation.screens.vehiclesList.StubVehiclesListViewModel
+import com.cool.element.vehiclediary.presentation.screens.vehiclesList.VehiclesListView
 import com.cool.element.vehiclediary.utils.Constants
 
 
@@ -84,8 +84,8 @@ fun AppBarView(
 @Preview(showBackground = true)
 @Composable
 fun PreviewAppBarView() {
-    VehicleListView(
-        viewModel = FakeVehiclesListViewModelImpl(),
+    VehiclesListView(
+        viewModel = StubVehiclesListViewModel(),
         navController = NavController(LocalContext.current)
     )
 }

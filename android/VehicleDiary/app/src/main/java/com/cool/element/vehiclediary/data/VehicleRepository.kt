@@ -1,15 +1,17 @@
 package com.cool.element.vehiclediary.data
 import com.cool.element.vehiclediary.domain.Vehicle
 import com.cool.element.vehiclediary.domain.dao.VehicleDao
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 
 interface VehicleRepository {
     fun getAllVehicles() : Flow<List<Vehicle>>
     fun getVehicleByUUID(uuid: String) : Flow<Vehicle>
-    suspend fun insertVehicle(vehicle: Vehicle)
-    suspend fun updateVehicle(vehicle: Vehicle)
-    suspend fun deleteVehicle(vehicle: Vehicle)
+    fun insertVehicle(vehicle: Vehicle)
+    fun updateVehicle(vehicle: Vehicle)
+    fun deleteVehicle(vehicle: Vehicle)
 }
 
 class StubVehicleRepository : VehicleRepository {
@@ -27,15 +29,15 @@ class StubVehicleRepository : VehicleRepository {
         }
     }
 
-    override suspend fun insertVehicle(vehicle: Vehicle) {
+    override fun insertVehicle(vehicle: Vehicle) {
         // no-op
     }
 
-    override suspend fun updateVehicle(vehicle: Vehicle) {
+    override fun updateVehicle(vehicle: Vehicle) {
         // no-op
     }
 
-    override suspend fun deleteVehicle(vehicle: Vehicle) {
+    override fun deleteVehicle(vehicle: Vehicle) {
         // no-op
     }
 }
@@ -51,16 +53,22 @@ class VehicleDaoRepository(
         return vehicleDao.getVehicleByUUID(uuid)
     }
 
-    override suspend fun insertVehicle(vehicle: Vehicle) {
-        return vehicleDao.insertVehicle(vehicle)
+    override fun insertVehicle(vehicle: Vehicle) {
+        GlobalScope.launch {
+            vehicleDao.insertVehicle(vehicle)
+        }
     }
 
-    override suspend fun updateVehicle(vehicle: Vehicle) {
-        return vehicleDao.updateVehicle(vehicle)
+    override fun updateVehicle(vehicle: Vehicle) {
+        GlobalScope.launch {
+            vehicleDao.updateVehicle(vehicle)
+        }
     }
 
-    override suspend fun deleteVehicle(vehicle: Vehicle) {
-        return vehicleDao.deleteVehicle(vehicle)
+    override fun deleteVehicle(vehicle: Vehicle) {
+        GlobalScope.launch {
+            vehicleDao.deleteVehicle(vehicle)
+        }
     }
 }
 
@@ -82,11 +90,11 @@ class FakeVehicleRepository : VehicleRepository {
         }
     }
 
-    override suspend fun insertVehicle(vehicle: Vehicle) {
+    override fun insertVehicle(vehicle: Vehicle) {
         vehicles.add(vehicle)
     }
 
-    override suspend fun updateVehicle(vehicle: Vehicle) {
+    override fun updateVehicle(vehicle: Vehicle) {
         val index = vehicles.indexOfFirst { it.uuid == vehicle.uuid }
         if (index >= 0) {
             vehicles[index] = vehicle
@@ -95,7 +103,7 @@ class FakeVehicleRepository : VehicleRepository {
         }
     }
 
-    override suspend fun deleteVehicle(vehicle: Vehicle) {
+    override fun deleteVehicle(vehicle: Vehicle) {
         vehicles.remove(vehicle)
     }
 }

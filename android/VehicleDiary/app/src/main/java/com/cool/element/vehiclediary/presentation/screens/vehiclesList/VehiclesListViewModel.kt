@@ -4,36 +4,40 @@ import androidx.lifecycle.ViewModel
 import com.cool.element.vehiclediary.data.StubVehicleRepository
 import com.cool.element.vehiclediary.data.VehicleRepository
 import com.cool.element.vehiclediary.domain.Vehicle
+import com.cool.element.vehiclediary.presentation.navigation.AppViewModel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
-interface VehiclesListViewModel {
-    fun getAllVehicles() : Flow<List<Vehicle>>
-    fun getVehicleByUUID(uuid: String) : Flow<Vehicle>
-    suspend fun insertVehicle(vehicle: Vehicle)
-    suspend fun updateVehicle(vehicle: Vehicle)
-    suspend fun deleteVehicle(vehicle: Vehicle)
+interface VehiclesListViewModel : AppViewModel {
+    fun getAllVehicles(): List<Vehicle>
+    fun getVehicleByUUID(uuid: String): Vehicle
+    fun insertVehicle(vehicle: Vehicle)
+    fun updateVehicle(vehicle: Vehicle)
+    fun deleteVehicle(vehicle: Vehicle)
 }
 
-class FakeVehiclesListViewModelImpl(
-    private val repository: VehicleRepository = StubVehicleRepository()
+class StubVehiclesListViewModel(
+//    private val repository: VehicleRepository = StubVehicleRepository()
 ) : VehiclesListViewModel, ViewModel() {
-    override fun getAllVehicles() : Flow<List<Vehicle>> {
-        return repository.getAllVehicles()
+    override fun getAllVehicles(): List<Vehicle> {
+        return Vehicle.sampleList()
     }
 
-    override fun getVehicleByUUID(uuid: String) : Flow<Vehicle> {
-        return repository.getVehicleByUUID(uuid)
+    override fun getVehicleByUUID(uuid: String): Vehicle {
+        return Vehicle.sampleList().firstOrNull {
+            it.uuid == uuid
+        } ?: Vehicle.unknown()
     }
 
-    override suspend fun insertVehicle(vehicle: Vehicle) {
-        repository.insertVehicle(vehicle)
+    override fun insertVehicle(vehicle: Vehicle) {
+        // no op
     }
 
-    override suspend fun updateVehicle(vehicle: Vehicle) {
-        repository.updateVehicle(vehicle)
+    override fun updateVehicle(vehicle: Vehicle) {
+        // no op
     }
 
-    override suspend fun deleteVehicle(vehicle: Vehicle) {
-        repository.deleteVehicle(vehicle)
+    override fun deleteVehicle(vehicle: Vehicle) {
+        // no op
     }
 }

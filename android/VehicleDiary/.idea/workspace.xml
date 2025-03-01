@@ -10,8 +10,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3b3cd664-a449-4408-a2d3-2ce120132840" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../NavPoc1/app/src/main/java/com/cool/element/nav_poc_1/RecordsListView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../NavPoc1/app/src/main/java/com/cool/element/nav_poc_1/RecordsListView.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../NavPoc1/app/src/main/java/com/cool/element/nav_poc_1/SampleRow.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../NavPoc1/app/src/main/java/com/cool/element/nav_poc_1/RecordRow.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/presentation/navigation/AppViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/data/VehicleRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/data/VehicleRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/domain/Vehicle.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/domain/Vehicle.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/presentation/navigation/AppBarView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/presentation/navigation/AppBarView.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/presentation/navigation/AppNavigation.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/presentation/navigation/AppNavigation.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/presentation/screens/eventsList/EventsListView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/presentation/screens/eventsList/EventsListView.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/presentation/screens/vehiclesList/VehiclesListView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/presentation/screens/vehiclesList/VehiclesListView.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/presentation/screens/vehiclesList/VehiclesListViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/presentation/screens/vehiclesList/VehiclesListViewModel.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +34,13 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
@@ -56,20 +71,23 @@
     <option name="openDirectoriesWithSingleClick" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Android App.app.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/20/poc-navigation&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Color Scheme Font&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Android App.app.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "#22 on feature/20-android-basic-navigation-flow",
+    "kotlin-language-version-configured": "true",
+    "project.structure.last.edited": "Suggestions",
+    "project.structure.proportion": "0.17",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.keymap"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="VehicleDiary.app" />
@@ -128,11 +146,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/build.gradle.kts</url>
-          <line>30</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>jar://$APPLICATION_HOME_DIR$/jbr/Contents/Home/caches/modules-2/files-2.1/androidx.navigation/navigation-compose/2.8.4/e88bc5dce67d185113a30b291b92c18c6ac98ad6/navigation-compose-2.8.4-sources.jar!/androidx/navigation/compose/NavGraphBuilder.kt</url>
           <line>441</line>
