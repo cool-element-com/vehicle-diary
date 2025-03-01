@@ -1,4 +1,4 @@
-package com.cool.element.vehiclediary.presentation.event
+package com.cool.element.vehiclediary.presentation.screens.eventsList
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -34,7 +34,7 @@ fun EventRow(event: VEvent) {
 @Preview(showBackground = true)
 @Composable
 fun EventRowPreview() {
-    val event = VEvent.sample
+    val event = VEvent.sampleForVehicle()
     EventRow(
         event = event
     )

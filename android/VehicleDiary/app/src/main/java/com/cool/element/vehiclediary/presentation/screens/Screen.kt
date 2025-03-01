@@ -1,4 +1,4 @@
-package com.cool.element.vehiclediary.presentation
+package com.cool.element.vehiclediary.presentation.screens
 
 sealed class Screen(val route: String) {
     object VehiclesListScreen: Screen("VehiclesListScreen")
@@ -8,4 +8,5 @@ sealed class Screen(val route: String) {
     object AddEventScreen: Screen("AddEventScreen")
     object EditEventScreen: Screen("EditEventScreen")
     object SettingsScreen: Screen("SettingsScreen")
+    object EventScreen: Screen("EventScreen")
 }

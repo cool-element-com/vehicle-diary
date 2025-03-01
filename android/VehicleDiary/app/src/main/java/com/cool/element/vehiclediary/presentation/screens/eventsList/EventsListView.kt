@@ -1,4 +1,4 @@
-package com.cool.element.vehiclediary.presentation.vehicle
+package com.cool.element.vehiclediary.presentation.screens.eventsList
 
 import android.util.Log
 import android.widget.Toast
@@ -15,20 +15,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.cool.element.vehiclediary.domain.VEvent
 import com.cool.element.vehiclediary.domain.Vehicle
+import com.cool.element.vehiclediary.presentation.screens.Screen
 import com.cool.element.vehiclediary.presentation.navigation.AppBarView
 import com.cool.element.vehiclediary.utils.Constants
 
 @Composable
-fun VehicleListView(
-    vehicles: List<Vehicle>,
+fun EventsListView(
+    vehicle: Vehicle,
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
-    val context = LocalContext.current
     Scaffold(
         topBar = {
             AppBarView(
-                title = Constants.ViewTitle.vehicles,
+                title = "Vehicle ${vehicle.name}",
                 onBackButtonTapped = {
                     Toast
                         .makeText(
@@ -51,8 +54,8 @@ fun VehicleListView(
                 .padding(16.dp)
                 .offset(y = 48.dp)
         ) {
-            items(vehicles) { vehicle ->
-                VehicleRow(vehicle = vehicle)
+            items(vehicle.events ?: emptyArray()) { event ->
+                EventRow(event = event)
                 HorizontalDivider(
                     modifier = Modifier.padding(vertical = 8.dp),
                     thickness = 1.dp,
@@ -61,12 +64,14 @@ fun VehicleListView(
             }
         }
     }
+    navController.navigate(Screen.VehiclesListScreen.route)
 }
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewVehicleListView() {
-    val vehicles = Vehicle.sampleList
-
-    VehicleListView(vehicles = vehicles)
+fun PreviewEventsListView() {
+    EventsListView(
+        vehicle = Vehicle.sample(),
+        navController = NavController(LocalContext.current)
+    )
 }
