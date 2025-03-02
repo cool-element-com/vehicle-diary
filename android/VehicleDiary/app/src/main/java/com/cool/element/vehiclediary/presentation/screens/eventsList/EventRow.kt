@@ -1,5 +1,7 @@
 package com.cool.element.vehiclediary.presentation.screens.eventsList
 
+import android.util.Log
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -15,11 +17,21 @@ import com.cool.element.vehiclediary.domain.VEvent
 import java.time.format.DateTimeFormatter
 
 @Composable
-fun EventRow(event: VEvent) {
+fun EventRow(
+    event: VEvent,
+    onClick: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
+            .clickable {
+                Log.d(
+                    "EventRow",
+                    "${event.title} ${event.uuid} clicked"
+                )
+                onClick()
+            }
     ) {
         Text(text = event.title, fontWeight = FontWeight.Bold, fontSize = 16.sp)
         Text(text = "Location: ${event.location}", fontSize = 14.sp)
@@ -31,11 +43,16 @@ fun EventRow(event: VEvent) {
         }
     }
 }
+
+
 @Preview(showBackground = true)
 @Composable
 fun EventRowPreview() {
     val event = VEvent.sampleForVehicle()
     EventRow(
-        event = event
+        event = event,
+        onClick = {
+            Log.d("Row clicked", "EventRow clicked")
+        }
     )
 }

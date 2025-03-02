@@ -37,7 +37,7 @@ fun AppNavigation(
                         .firstOrNull { it.uuid == uuid }
                         ?: Vehicle.unknown()
                     EventsListView(
-                        vehicle =      ,
+                        vehicle = vehicle,
                         navController = navController
                     )
                 }

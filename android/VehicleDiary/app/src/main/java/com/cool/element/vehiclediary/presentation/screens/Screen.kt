@@ -5,6 +5,7 @@ sealed class Screen(val route: String) {
     object AddVehicleScreen: Screen("AddVehicleScreen")
     object EditVehicleScreen: Screen("EditVehicleScreen")
     object EventsListScreen: Screen("EventsListScreen")
+    object EventDetailsScreen: Screen("EventDetailsScreen")
     object AddEventScreen: Screen("AddEventScreen")
     object EditEventScreen: Screen("EditEventScreen")
     object SettingsScreen: Screen("SettingsScreen")

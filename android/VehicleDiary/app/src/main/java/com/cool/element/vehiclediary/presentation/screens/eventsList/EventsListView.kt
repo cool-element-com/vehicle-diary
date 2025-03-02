@@ -28,43 +28,51 @@ fun EventsListView(
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
-    Scaffold(
-        topBar = {
-            AppBarView(
-                title = "Vehicle ${vehicle.name}",
-                onBackButtonTapped = {
-                    Toast
-                        .makeText(
-                            context,
-                            "Back button tapped",
-                            Toast.LENGTH_LONG
-                        )
-                        .show()
+//    Scaffold(
+//        topBar = {
+//            AppBarView(
+//                title = "Vehicle ${vehicle.name}",
+//                onBackButtonTapped = {
+//                    Toast
+//                        .makeText(
+//                            context,
+//                            "Back button tapped",
+//                            Toast.LENGTH_LONG
+//                        )
+//                        .show()
+//                }
+//            )
+//        }
+//    )
+//    { paddingValues ->
+//        Log.d(
+//            Constants.LogTag.debug,
+//            "paddingValues: $paddingValues"
+//        )
+    LazyColumn(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp)
+            .offset(y = 48.dp)
+    ) {
+        items(vehicle.events ?: emptyArray()) { event ->
+            EventRow(
+                event = event,
+                onClick = {
+                    Log.w(
+                        "EventsListView",
+                        "${event.title} ${event.uuid} clicked"
+                    )
+//                        navController.navigate("${Screen.EventDetailsScreen.route}/${event.id}")
                 }
             )
-        }
-    ) { paddingValues ->
-        Log.d(
-            Constants.LogTag.debug,
-            "paddingValues: $paddingValues"
-        )
-        LazyColumn(
-            modifier = modifier
-                .fillMaxSize()
-                .padding(16.dp)
-                .offset(y = 48.dp)
-        ) {
-            items(vehicle.events ?: emptyArray()) { event ->
-                EventRow(event = event)
-                HorizontalDivider(
-                    modifier = Modifier.padding(vertical = 8.dp),
-                    thickness = 1.dp,
-                    color = Color.Gray
-                )
-            }
+            HorizontalDivider(
+                modifier = Modifier.padding(vertical = 8.dp),
+                thickness = 1.dp,
+                color = Color.Gray
+            )
         }
     }
-    navController.navigate(Screen.VehiclesListScreen.route)
 }
 
 @Preview(showBackground = true)
