@@ -62,7 +62,7 @@ fun VehiclesListView(
                     onClick = {
                         Log.d(
                             "VehiclesListView",
-                            "VehicleRow: ${vehicle.name} clicked"
+                            "Navigating to: ${vehicle.name} events..."
                         )
                         navController
                             .navigate(

@@ -1,5 +1,6 @@
 package com.cool.element.vehiclediary.presentation.navigation
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -10,6 +11,7 @@ import com.cool.element.vehiclediary.presentation.screens.eventsList.EventsListV
 import com.cool.element.vehiclediary.presentation.screens.vehiclesList.StubVehiclesListViewModel
 import com.cool.element.vehiclediary.presentation.screens.vehiclesList.VehiclesListView
 import com.cool.element.vehiclediary.presentation.screens.vehiclesList.VehiclesListViewModel
+import kotlin.math.log
 
 @Composable
 fun AppNavigation(
@@ -36,6 +38,10 @@ fun AppNavigation(
                     val vehicle: Vehicle = Vehicle.sampleList()
                         .firstOrNull { it.uuid == uuid }
                         ?: Vehicle.unknown()
+                    Log.d(
+                        "AppNavigation",
+                        "Navigating to: ${vehicle.name} events screen"
+                    )
                     EventsListView(
                         vehicle = vehicle,
                         navController = navController
