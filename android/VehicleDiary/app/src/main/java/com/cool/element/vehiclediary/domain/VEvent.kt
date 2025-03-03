@@ -1,5 +1,7 @@
 package com.cool.element.vehiclediary.domain
 
+import java.util.UUID
+
 /**
  *
  * @param id
@@ -18,7 +20,7 @@ package com.cool.element.vehiclediary.domain
  * @param vehicle
  */
 data class VEvent (
-    val id: kotlin.Long,
+    val uuid: kotlin.String,
     val title: kotlin.String,
     val amount: kotlin.Double? = null,
     val quantity: kotlin.Int? = null,
@@ -34,45 +36,40 @@ data class VEvent (
     val vehicle: Vehicle
 ) {
     companion object {
-        val sample = VEvent(
-            id = 1000L,
-            title = "Test event",
-            amount = 100.0,
-            quantity = 1,
-            description = "Test event description",
-            location = "Test location",
-            recordedDate = java.time.LocalDateTime.now(),
-            recordedMileage = 1000,
-            upcomingDate = java.time.LocalDateTime.now(),
-            upcomingMileage = 2000,
-            completedDate = java.time.LocalDateTime.now(),
-            completedMileage = 1500,
-            isCompleted = false,
-            vehicle = Vehicle.sample
-        )
-        val sampleList: List<VEvent>
-            get() {
-                val result = mutableListOf<VEvent>()
-                for (i in 0..10) {
-                    val event = VEvent(
-                        id = i.toLong(),
-                        title = "Event $i Title",
-                        amount = 100.0,
-                        quantity = 1,
-                        description = "Event $i Description",
-                        location = "Event $i Location",
-                        recordedDate = java.time.LocalDateTime.now(),
-                        recordedMileage = 1000,
-                        upcomingDate = java.time.LocalDateTime.now(),
-                        upcomingMileage = 2000,
-                        completedDate = java.time.LocalDateTime.now(),
-                        completedMileage = 1500,
-                        isCompleted = false,
-                        vehicle = Vehicle.sample
-                    )
-                    result.add(event)
-                }
-                return result
+        fun sampleForVehicle(
+            vehicle: Vehicle = Vehicle.sample()
+        ): VEvent {
+            val uuid = UUID.randomUUID().toString()
+            val title = uuid.substring(0, 5)
+            val event = VEvent(
+                uuid = uuid,
+                title = "Event $title ",
+                amount = 100.0,
+                quantity = 1,
+                description = "Event $title description",
+                location = "Event $title location",
+                recordedDate = java.time.LocalDateTime.now(),
+                recordedMileage = 1000,
+                upcomingDate = java.time.LocalDateTime.now(),
+                upcomingMileage = 2000,
+                completedDate = java.time.LocalDateTime.now(),
+                completedMileage = 1500,
+                isCompleted = false,
+                vehicle = vehicle
+            )
+            return event
+        }
+
+        fun sampleListForVehicle(
+            vehicle: Vehicle = Vehicle.sample(),
+            quantity: Int = 10
+        ): List<VEvent> {
+            val result = mutableListOf<VEvent>()
+            for (i in 0..quantity) {
+                val event = sampleForVehicle(vehicle)
+                result.add(event)
             }
+            return result
+        }
     }
 }
