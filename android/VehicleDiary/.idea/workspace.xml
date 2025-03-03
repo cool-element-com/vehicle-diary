@@ -11,9 +11,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3b3cd664-a449-4408-a2d3-2ce120132840" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/presentation/navigation/AppNavigation.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/presentation/navigation/AppNavigation.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/presentation/screens/vehiclesList/VehiclesListView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/presentation/screens/vehiclesList/VehiclesListView.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/presentation/screens/eventsList/EventsListView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/presentation/screens/eventsList/EventsListView.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +65,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Android App.app.executor": "Debug",
+    "Android App.app.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
