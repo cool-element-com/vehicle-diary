@@ -18,9 +18,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.cool.element.vehiclediary.domain.VEvent
 import com.cool.element.vehiclediary.domain.Vehicle
-import com.cool.element.vehiclediary.presentation.screens.Screen
-import com.cool.element.vehiclediary.presentation.navigation.AppBarView
-import com.cool.element.vehiclediary.utils.Constants
 
 @Composable
 fun EventsListView(

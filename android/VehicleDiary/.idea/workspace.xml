@@ -10,7 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3b3cd664-a449-4408-a2d3-2ce120132840" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/presentation/screens/poc/MainScreen.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/MainActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/presentation/screens/eventsList/EventsListView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/presentation/screens/eventsList/EventsListView.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -31,6 +33,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin Class" />
+        <option value="Kotlin File" />
       </list>
     </option>
   </component>
@@ -80,6 +83,12 @@
     "settings.editor.selected.configurable": "preferences.keymap"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/presentation/screens/poc" />
+      <recent name="$PROJECT_DIR$/app/src/main/java/com/cool/element/vehiclediary/presentation/screens" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="VehicleDiary.app" />

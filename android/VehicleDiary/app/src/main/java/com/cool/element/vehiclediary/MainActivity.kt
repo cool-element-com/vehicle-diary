@@ -1,5 +1,6 @@
 package com.cool.element.vehiclediary
 
+import MainScreenWithTopAndBottomNav
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -19,16 +20,19 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             VehicleDiaryTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Log.d(
-                        "MainActivity",
-                        "innerPadding: $innerPadding"
-                    )
-                    AppNavigation(
-                        viewModel = StubVehiclesListViewModel(),
-                        navController = rememberNavController()
-                    )
-                }
+
+                MainScreenWithTopAndBottomNav()
+
+//                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+//                    Log.d(
+//                        "MainActivity",
+//                        "innerPadding: $innerPadding"
+//                    )
+//                    AppNavigation(
+//                        viewModel = StubVehiclesListViewModel(),
+//                        navController = rememberNavController()
+//                    )
+//                }
             }
         }
     }
