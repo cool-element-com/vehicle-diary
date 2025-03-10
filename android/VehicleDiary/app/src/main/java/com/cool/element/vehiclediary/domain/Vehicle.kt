@@ -1,5 +1,7 @@
 package com.cool.element.vehiclediary.domain
 
+import java.util.UUID
+
 /**
  *
  * @param id
@@ -17,14 +19,14 @@ package com.cool.element.vehiclediary.domain
  * @param events
  */
 data class Vehicle (
-    val id: Long,
+    val uuid: String = UUID.randomUUID().toString(),
     val name: String,
     val brand: String,
     val model: String,
     val year: Int,
     val vin: String? = null,
     val licensePlate: String? = null,
-    val purchaseDate: java.time.LocalDateTime? = null,
+    val purchasedDate: java.time.LocalDateTime? = null,
     val image: String? = null,
     val odometer: Int,
     val createdAt: java.time.LocalDateTime? = null,
@@ -32,44 +34,62 @@ data class Vehicle (
     val events: Array<VEvent>? = null
 ) {
     companion object {
-        val sample = Vehicle(
-            id = 1000L,
-            name = "Test vehicle",
-            brand = "Test brand",
-            model = "Test model",
-            year = 2021,
-            vin = "Test vin",
-            licensePlate = "Test license plate",
-            purchaseDate = java.time.LocalDateTime.now(),
-            image = null,
-            odometer = 1000,
-            createdAt = java.time.LocalDateTime.now(),
-            updatedAt = java.time.LocalDateTime.now(),
-            events = null
-        )
-        val sampleList: List<Vehicle>
-            get() {
-                val result = mutableListOf<Vehicle>()
-                for (i in 0..10) {
-                    val vehicle = Vehicle(
-                        id = i.toLong(),
-                        name = "Vehicle $i Name",
-                        brand = "Vehicle $i Brand",
-                        model = "Vehicle $i Model",
-                        year = 2021,
-                        vin = "Vehicle $i Vin",
-                        licensePlate = "Vehicle $i License Plate",
-                        purchaseDate = java.time.LocalDateTime.now(),
-                        image = null,
-                        odometer = 1000,
-                        createdAt = java.time.LocalDateTime.now(),
-                        updatedAt = java.time.LocalDateTime.now(),
-                        events = null
-                    )
-                    result.add(vehicle)
-                }
-                return result
+        fun sample(): Vehicle {
+            val uuid = UUID.randomUUID().toString()
+            val title = uuid.substring(0, 8)
+            val vehicle = Vehicle(
+                uuid = uuid,
+                name = title,
+                brand = "$title brand",
+                model = "$title model",
+                year = 2021,
+                vin = "$title vin",
+                licensePlate = "$title license plate",
+                purchasedDate = java.time.LocalDateTime.now(),
+                image = null,
+                odometer = 1000,
+                createdAt = java.time.LocalDateTime.now(),
+                updatedAt = java.time.LocalDateTime.now(),
+                events = null
+            )
+            return vehicle
+        }
+
+        fun unknown(): Vehicle {
+            val uuid = UUID.randomUUID().toString()
+            val title = "Unknown"
+            val vehicle = Vehicle(
+                uuid = uuid,
+                name = title,
+                brand = "$title brand",
+                model = "$title model",
+                year = 2021,
+                vin = "$title vin",
+                licensePlate = "$title license plate",
+                purchasedDate = java.time.LocalDateTime.now(),
+                image = null,
+                odometer = 1000,
+                createdAt = java.time.LocalDateTime.now(),
+                updatedAt = java.time.LocalDateTime.now(),
+                events = null
+            )
+            return vehicle
+        }
+
+        private var stubVehicles = emptyList<Vehicle>()
+
+        fun sampleList(quantity: Int = 10): List<Vehicle> {
+            if (stubVehicles.isNotEmpty()) {
+                return stubVehicles
             }
+            val result = mutableListOf<Vehicle>()
+            for (i in 0..quantity) {
+                val vehicle = Vehicle.sample()
+                result.add(vehicle)
+            }
+            stubVehicles = result
+            return result
+        }
     }
 
     override fun equals(other: Any?): Boolean {

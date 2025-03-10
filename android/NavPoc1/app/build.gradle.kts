@@ -2,26 +2,20 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    id("androidx.room")
-    id("com.google.devtools.ksp")
 }
 
 android {
-    namespace = "com.cool.element.vehiclediary"
+    namespace = "com.cool.element.nav_poc_1"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.cool.element.vehiclediary"
+        applicationId = "com.cool.element.nav_poc_1"
         minSdk = 29
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    room {
-        schemaDirectory("$projectDir/schemas")
     }
 
     buildTypes {
@@ -40,9 +34,6 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.15"
-    }
     buildFeatures {
         compose = true
     }
@@ -50,19 +41,13 @@ android {
 
 dependencies {
 
-    val room_version = "2.6.1"
     val nav_version = "2.8.7"
+    implementation("androidx.navigation:navigation-compose:$nav_version")
+
     val lifecycle_version = "2.8.7"
 
-    implementation("androidx.navigation:navigation-compose:$nav_version")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
 
-    // Room
-    implementation("androidx.room:room-runtime:$room_version")
-    implementation("androidx.room:room-ktx:$room_version")
-    ksp("androidx.room:room-compiler:$room_version")
-    
-    implementation("io.coil-kt:coil-compose:2.4.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -72,6 +57,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.navigation.runtime.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
