@@ -232,5 +232,6 @@ fabric.properties
 ### additional settings ###
 workspace.xml
 settings.json
+AndroidProjectSystem.xml
 
 # End of https://www.toptal.com/developers/gitignore/api/androidstudio,kotlin,macos,visualstudiocode,gradle
